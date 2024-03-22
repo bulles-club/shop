@@ -56,14 +56,17 @@ function Logo({ single = false, sx }) {
     >
       <Box
         sx={{
-          width: single ? 64 : 75,
+          // width: single ? 64 : 75,
+          width: 140,
           lineHeight: 0,
           cursor: 'pointer',
           display: 'inline-flex',
           ...sx,
         }}
+        component="img"
+        src="/assets/logo/logo-no-background.svg"
       >
-        {single ? singleLogo : fullLogo}
+        {/* {single ? singleLogo : fullLogo} */}
       </Box>
     </Link>
   );

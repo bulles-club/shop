@@ -1,11 +1,11 @@
-import HomeView from 'src/sections/_home/view/home-view';
+import EcommerceLandingView from 'src/sections/_ecommerce/view/ecommerce-landing-view';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'The starting point for your next project',
+  title: 'E-commerce: Home',
 };
 
-export default function HomePage() {
-  return <HomeView />;
+export default function EcommerceLandingPage() {
+  return <EcommerceLandingView />;
 }
