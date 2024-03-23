@@ -1,8 +1,7 @@
 {
-  "name": "@zone-kit/next-ts",
-  "author": "Minimals",
-  "version": "2.4.0",
-  "description": "Next & JavaScript",
+  "name": "@cobulles/shop",
+  "author": "Benoit Quette",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3002",
