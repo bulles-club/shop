@@ -23,10 +23,8 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: 'Zone UI Kit',
-  description:
-    'The ZONE is built on top of MUI, a powerful library that provides flexible, customizable, and easy-to-use components.',
-  keywords: 'react,material,kit,application,dashboard,admin,template',
+  title: 'Cobulles',
+  description: 'La bibliothèque en-ligne du 9e art',
   manifest: '/manifest.json',
   icons: [
     { rel: 'icon', url: '/favicon/favicon.ico' },

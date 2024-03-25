@@ -3,7 +3,7 @@ import EcommerceLandingView from 'src/sections/_ecommerce/view/ecommerce-landing
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'E-commerce: Home',
+  title: 'Cobulles',
 };
 
 export default function EcommerceLandingPage() {

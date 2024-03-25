@@ -6,6 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import { alpha, styled, useTheme } from '@mui/material/styles';
 
 import { bgGradient } from 'src/theme/css';
+import { STRAPI_URL } from 'src/config-global';
 
 import Image from 'src/components/image';
 import Lightbox, { useLightbox } from 'src/components/lightbox';
@@ -115,11 +116,11 @@ export default function EcommerceProductDetailsCarousel({ images }) {
         >
           {slides.map((slide) => (
             <Image
-              key={slide.src}
+              key={slide.attributes.url}
               alt="product"
-              src={slide.src}
+              src={STRAPI_URL + slide.attributes.url}
               ratio="1/1"
-              onClick={() => lightbox.onOpen(slide.src)}
+              onClick={() => lightbox.onOpen(STRAPI_URL + slide.attributes.url)}
               sx={{ cursor: 'zoom-in' }}
             />
           ))}
@@ -138,9 +139,9 @@ export default function EcommerceProductDetailsCarousel({ images }) {
         {slides.map((item, index) => (
           <Box key={item.src} sx={{ px: 1 }}>
             <Avatar
-              key={item.src}
+              key={item.attributes.url}
               alt={item.src}
-              src={item.src}
+              src={STRAPI_URL + item.attributes.url}
               variant="rounded"
               sx={{
                 width: THUMB_SIZE,

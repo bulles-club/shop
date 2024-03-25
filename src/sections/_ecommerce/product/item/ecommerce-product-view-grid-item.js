@@ -8,12 +8,13 @@ import Stack from '@mui/material/Stack';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { STRAPI_URL } from 'src/config-global';
+
 import Label from 'src/components/label';
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import ProductPrice from '../../common/product-price';
 import ProductRating from '../../common/product-rating';
 
 // ----------------------------------------------------------------------
@@ -45,7 +46,7 @@ export default function EcommerceProductViewGridItem({ product, sx, ...other }) 
       <Box sx={{ position: 'relative', mb: 2 }}>
         <Fab
           component={RouterLink}
-          href={paths.eCommerce.product}
+          href={`${paths.eCommerce.product}/${product.id}`}
           className="add-to-cart"
           color="primary"
           size="small"
@@ -66,7 +67,7 @@ export default function EcommerceProductViewGridItem({ product, sx, ...other }) 
         </Fab>
 
         <Image
-          src={product.coverUrl}
+          src={`${STRAPI_URL}${product.attributes.Images.data[0].attributes.url}`}
           sx={{
             flexShrink: 0,
             borderRadius: 1.5,
@@ -82,13 +83,16 @@ export default function EcommerceProductViewGridItem({ product, sx, ...other }) 
 
         <Link component={RouterLink} href={paths.eCommerce.product} color="inherit">
           <TextMaxLine variant="body2" line={1} sx={{ fontWeight: 'fontWeightMedium' }}>
-            {product.name}
+            {product.attributes.Title}
           </TextMaxLine>
         </Link>
 
-        <ProductPrice price={product.price} priceSale={product.priceSale} />
+        {/* <ProductPrice price={product.price} priceSale={product.priceSale} /> */}
 
-        <ProductRating ratingNumber={product.ratingNumber} label={`${product.sold} sold`} />
+        <ProductRating
+          ratingNumber={product.ratingNumber}
+          // label={`${product.sold} sold`}
+        />
       </Stack>
     </Stack>
   );

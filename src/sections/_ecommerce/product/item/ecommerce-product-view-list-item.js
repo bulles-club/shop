@@ -7,12 +7,13 @@ import Stack from '@mui/material/Stack';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { STRAPI_URL } from 'src/config-global';
+
 import Image from 'src/components/image';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
-import ProductPrice from '../../common/product-price';
 import ProductRating from '../../common/product-rating';
 
 // ----------------------------------------------------------------------
@@ -43,7 +44,7 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
 
       <Fab
         component={RouterLink}
-        href={paths.eCommerce.product}
+        href={`${paths.eCommerce.product}/${product.id}`}
         className="add-to-cart"
         color="primary"
         size="small"
@@ -64,7 +65,7 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
       </Fab>
 
       <Image
-        src={product.coverUrl}
+        src={`${STRAPI_URL}${product.attributes.Images.data[0].attributes.url}`}
         sx={{
           mr: 2,
           width: 160,
@@ -82,22 +83,25 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
 
           <Link component={RouterLink} href={paths.eCommerce.product} color="inherit">
             <TextMaxLine variant="h6" line={1}>
-              {product.name}
+              {product.attributes.Title}
             </TextMaxLine>
           </Link>
         </Stack>
 
-        <ProductRating ratingNumber={product.ratingNumber} label={`${product.sold} sold`} />
+        <ProductRating
+          ratingNumber={product.ratingNumber}
+          // label={`${product.sold} sold`}
+        />
 
-        <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
-          {product.caption}
+        <TextMaxLine variant="body2" line={3} sx={{ color: 'text.secondary' }}>
+          {product.attributes.Description[0].children[0].text}
         </TextMaxLine>
 
-        <ProductPrice
+        {/* <ProductPrice
           price={product.price}
           priceSale={product.priceSale}
           sx={{ typography: 'h6' }}
-        />
+        /> */}
       </Stack>
     </Stack>
   );

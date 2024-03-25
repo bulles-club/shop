@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
+import { gql, useQuery } from '@apollo/client';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -14,15 +15,13 @@ import FormControl from '@mui/material/FormControl';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
+import { useClient } from 'src/hooks/use-client';
 import { useBoolean } from 'src/hooks/use-boolean';
-
-import { _products } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
 import EcommerceFilters from '../product/filters/ecommerce-filters';
 import EcommerceProductList from '../product/list/ecommerce-product-list';
-import EcommerceProductListBestSellers from '../product/list/ecommerce-product-list-best-sellers';
 
 // ----------------------------------------------------------------------
 
@@ -37,24 +36,38 @@ const SORT_OPTIONS = [
   { value: 'popular', label: 'Popular' },
 ];
 
+const QUERY = gql`
+  query Books {
+    books {
+      data {
+        id
+        attributes {
+          Title
+          Description
+          Images {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductsView() {
+  const client = useClient();
+  const { loading, error, data } = useQuery(QUERY, { client });
+
   const mobileOpen = useBoolean();
 
   const [sort, setSort] = useState('latest');
 
-  const loading = useBoolean(true);
-
   const [viewMode, setViewMode] = useState('grid');
-
-  useEffect(() => {
-    const fakeLoading = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      loading.onFalse();
-    };
-    fakeLoading();
-  }, [loading]);
 
   const handleChangeViewMode = useCallback((event, newAlignment) => {
     if (newAlignment !== null) {
@@ -100,7 +113,7 @@ export default function EcommerceProductsView() {
       >
         <Stack spacing={5} divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
           <EcommerceFilters open={mobileOpen.value} onClose={mobileOpen.onFalse} />
-          <EcommerceProductListBestSellers products={_products.slice(0, 3)} />
+          {/* <EcommerceProductListBestSellers products={_products.slice(0, 3)} /> */}
         </Stack>
 
         <Box
@@ -137,9 +150,9 @@ export default function EcommerceProductsView() {
           </Stack>
 
           <EcommerceProductList
-            loading={loading.value}
+            loading={loading}
             viewMode={viewMode}
-            products={_products.slice(0, 16)}
+            products={data?.books.data} // {_products.slice(0, 16)}
           />
         </Box>
       </Stack>

@@ -1,13 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { gql, useQuery } from '@apollo/client';
 
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-
-import { _products } from 'src/_mock';
+import { useClient } from 'src/hooks/use-client';
 
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
@@ -19,20 +18,79 @@ import EcommerceProductDetailsDescription from '../product/details/ecommerce-pro
 
 // ----------------------------------------------------------------------
 
-const _mockProduct = _products[0];
+const QUERY = gql`
+  query ($id: ID!) {
+    book(id: $id) {
+      data {
+        id
+        attributes {
+          Title
+          Description
+          SeriesVolume
+          PageCount
+          ISBN10
+          ISBN13
+          AgeGroup
+          Type
+          PublicationYear
+          Images {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Artists {
+            data {
+              attributes {
+                Name
+                Bio
+                Photo {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          Genre {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Publisher {
+            data {
+              attributes {
+                Name
+                Country
+              }
+              id
+            }
+          }
+          Series {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default function EcommerceProductView() {
-  const loading = useBoolean(true);
+  const router = useRouter();
+  const client = useClient();
+  const { loading, error, data } = useQuery(QUERY, { client, variables: { id: router.query.id } });
 
-  useEffect(() => {
-    const fakeLoading = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      loading.onFalse();
-    };
-    fakeLoading();
-  }, [loading]);
-
-  if (loading.value) {
+  if (loading) {
     return <SplashScreen />;
   }
 
@@ -56,17 +114,17 @@ export default function EcommerceProductView() {
 
         <Grid container spacing={{ xs: 5, md: 8 }}>
           <Grid xs={12} md={6} lg={7}>
-            <EcommerceProductDetailsCarousel images={_mockProduct.images} />
+            <EcommerceProductDetailsCarousel images={data.book.data.attributes.Images.data} />
           </Grid>
 
           <Grid xs={12} md={6} lg={5}>
             <EcommerceProductDetailsInfo
-              name={_mockProduct.name}
-              price={_mockProduct.price}
-              caption={_mockProduct.caption}
-              priceSale={_mockProduct.priceSale}
-              ratingNumber={_mockProduct.ratingNumber}
-              totalReviews={_mockProduct.totalReviews}
+              name={data.book.data.attributes.Title}
+              // price={_mockProduct.price}
+              caption={data.book.data.attributes.Description}
+              // priceSale={_mockProduct.priceSale}
+              // ratingNumber={_mockProduct.ratingNumber}
+              // totalReviews={_mockProduct.totalReviews}
             />
           </Grid>
         </Grid>
@@ -74,7 +132,7 @@ export default function EcommerceProductView() {
         <Grid container columnSpacing={{ md: 8 }}>
           <Grid xs={12} md={6} lg={7}>
             <EcommerceProductDetailsDescription
-              description={_mockProduct.description}
+              description={data.book.data.attributes.Description}
               specifications={[
                 { label: 'Category', value: 'Mobile' },
                 { label: 'Manufacturer', value: 'Apple' },
