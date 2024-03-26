@@ -2,6 +2,8 @@
 
 import { useState, useCallback } from 'react';
 import { gql, useQuery } from '@apollo/client';
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch } from 'react-instantsearch';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -18,12 +20,16 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useClient } from 'src/hooks/use-client';
 import { useBoolean } from 'src/hooks/use-boolean';
 
+import { ALGOLIA_APP_ID, ALGOLIA_API_KEY } from 'src/config-global';
+
 import Iconify from 'src/components/iconify';
 
 import EcommerceFilters from '../product/filters/ecommerce-filters';
 import EcommerceProductList from '../product/list/ecommerce-product-list';
 
 // ----------------------------------------------------------------------
+
+const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 
 const VIEW_OPTIONS = [
   { value: 'list', icon: <Iconify icon="carbon:list-boxes" /> },
@@ -80,82 +86,84 @@ export default function EcommerceProductsView() {
   }, []);
 
   return (
-    <Container>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{
-          py: 5,
-        }}
-      >
-        <Typography variant="h3">Catalog</Typography>
-
-        <Button
-          color="inherit"
-          variant="contained"
-          startIcon={<Iconify icon="carbon:filter" width={18} />}
-          onClick={mobileOpen.onTrue}
+    <InstantSearch searchClient={searchClient} indexName="books">
+      <Container>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
           sx={{
-            display: { md: 'none' },
+            py: 5,
           }}
         >
-          Filters
-        </Button>
-      </Stack>
+          <Typography variant="h3">Catalog</Typography>
 
-      <Stack
-        direction={{
-          xs: 'column-reverse',
-          md: 'row',
-        }}
-        sx={{ mb: { xs: 8, md: 10 } }}
-      >
-        <Stack spacing={5} divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
-          <EcommerceFilters open={mobileOpen.value} onClose={mobileOpen.onFalse} />
-          {/* <EcommerceProductListBestSellers products={_products.slice(0, 3)} /> */}
+          <Button
+            color="inherit"
+            variant="contained"
+            startIcon={<Iconify icon="carbon:filter" width={18} />}
+            onClick={mobileOpen.onTrue}
+            sx={{
+              display: { md: 'none' },
+            }}
+          >
+            Filters
+          </Button>
         </Stack>
 
-        <Box
-          sx={{
-            flexGrow: 1,
-            pl: { md: 8 },
-            width: { md: `calc(100% - ${280}px)` },
+        <Stack
+          direction={{
+            xs: 'column-reverse',
+            md: 'row',
           }}
+          sx={{ mb: { xs: 8, md: 10 } }}
         >
-          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 5 }}>
-            <ToggleButtonGroup
-              exclusive
-              size="small"
-              value={viewMode}
-              onChange={handleChangeViewMode}
-              sx={{ borderColor: 'transparent' }}
-            >
-              {VIEW_OPTIONS.map((option) => (
-                <ToggleButton key={option.value} value={option.value}>
-                  {option.icon}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-
-            <FormControl size="small" hiddenLabel sx={{ width: 120 }}>
-              <Select value={sort} onChange={handleChangeSort}>
-                {SORT_OPTIONS.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+          <Stack spacing={5} divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
+            <EcommerceFilters open={mobileOpen.value} onClose={mobileOpen.onFalse} />
           </Stack>
 
-          <EcommerceProductList
-            loading={loading}
-            viewMode={viewMode}
-            products={data?.books.data} // {_products.slice(0, 16)}
-          />
-        </Box>
-      </Stack>
-    </Container>
+          <Box
+            sx={{
+              flexGrow: 1,
+              pl: { md: 8 },
+              width: { md: `calc(100% - ${280}px)` },
+            }}
+          >
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{ mb: 5 }}
+            >
+              <ToggleButtonGroup
+                exclusive
+                size="small"
+                value={viewMode}
+                onChange={handleChangeViewMode}
+                sx={{ borderColor: 'transparent' }}
+              >
+                {VIEW_OPTIONS.map((option) => (
+                  <ToggleButton key={option.value} value={option.value}>
+                    {option.icon}
+                  </ToggleButton>
+                ))}
+              </ToggleButtonGroup>
+
+              <FormControl size="small" hiddenLabel sx={{ width: 120 }}>
+                <Select value={sort} onChange={handleChangeSort}>
+                  {SORT_OPTIONS.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Stack>
+
+            <EcommerceProductList loading={loading} viewMode={viewMode} />
+          </Box>
+        </Stack>
+      </Container>
+    </InstantSearch>
   );
 }

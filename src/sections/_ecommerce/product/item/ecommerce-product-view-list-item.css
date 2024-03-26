@@ -1,0 +1,11 @@
+.hits-listview {}
+
+.hits-listview-list {
+  list-style: none;
+  display: grid;
+  row-gap: 30px;
+  padding: 0px;
+  columns: 1;
+}
+
+hits-listview-list-item {}

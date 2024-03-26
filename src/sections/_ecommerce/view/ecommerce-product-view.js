@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import { gql, useQuery } from '@apollo/client';
 
 import Grid from '@mui/material/Unstable_Grid2';
@@ -85,10 +85,9 @@ const QUERY = gql`
   }
 `;
 
-export default function EcommerceProductView() {
-  const router = useRouter();
+export default function EcommerceProductView({ id }) {
   const client = useClient();
-  const { loading, error, data } = useQuery(QUERY, { client, variables: { id: router.query.id } });
+  const { loading, error, data } = useQuery(QUERY, { client, variables: { id } });
 
   if (loading) {
     return <SplashScreen />;
@@ -113,11 +112,11 @@ export default function EcommerceProductView() {
         />
 
         <Grid container spacing={{ xs: 5, md: 8 }}>
-          <Grid xs={12} md={6} lg={7}>
+          <Grid xs={12} md={5} lg={5}>
             <EcommerceProductDetailsCarousel images={data.book.data.attributes.Images.data} />
           </Grid>
 
-          <Grid xs={12} md={6} lg={5}>
+          <Grid xs={12} md={7} lg={7}>
             <EcommerceProductDetailsInfo
               name={data.book.data.attributes.Title}
               // price={_mockProduct.price}
@@ -132,7 +131,7 @@ export default function EcommerceProductView() {
         <Grid container columnSpacing={{ md: 8 }}>
           <Grid xs={12} md={6} lg={7}>
             <EcommerceProductDetailsDescription
-              description={data.book.data.attributes.Description}
+              // description={data.book.data.attributes}
               specifications={[
                 { label: 'Category', value: 'Mobile' },
                 { label: 'Manufacturer', value: 'Apple' },
@@ -149,3 +148,7 @@ export default function EcommerceProductView() {
     </>
   );
 }
+
+EcommerceProductView.propTypes = {
+  id: PropTypes.string.isRequired,
+};

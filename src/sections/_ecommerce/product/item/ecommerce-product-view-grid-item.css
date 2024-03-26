@@ -1,0 +1,33 @@
+.hits-gridview {}
+
+.hits-gridview-list {
+  list-style: none;
+  display: grid;
+  row-gap: 30px;
+  column-gap: 50px;
+  padding: 0px;
+  justify-items: start;
+  align-items: start;
+}
+
+@media (min-width: 0) {
+  .hits-gridview-list {
+    grid-template-columns: repeat(2, 160px);
+  }
+}
+
+@media (min-width: 600px) {
+  .hits-gridview-list {
+    grid-template-columns: repeat(3, 160px);
+  }
+}
+
+@media (min-width: 900) {
+  .hits-gridview-list {
+    grid-template-columns: repeat(4, 160px);
+  }
+}
+
+hits-gridview-list-item {
+  justify-self: start;
+}

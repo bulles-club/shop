@@ -66,7 +66,7 @@ export default function EcommerceProductDetailsCarousel({ images }) {
   const theme = useTheme();
 
   const slides = images.map((slide) => ({
-    src: slide,
+    src: STRAPI_URL + slide.attributes.url,
   }));
 
   const lightbox = useLightbox(slides);
@@ -116,11 +116,11 @@ export default function EcommerceProductDetailsCarousel({ images }) {
         >
           {slides.map((slide) => (
             <Image
-              key={slide.attributes.url}
+              key={slide.src}
               alt="product"
-              src={STRAPI_URL + slide.attributes.url}
+              src={slide.src}
               ratio="1/1"
-              onClick={() => lightbox.onOpen(STRAPI_URL + slide.attributes.url)}
+              onClick={() => lightbox.onOpen(slide.src)}
               sx={{ cursor: 'zoom-in' }}
             />
           ))}
@@ -139,9 +139,9 @@ export default function EcommerceProductDetailsCarousel({ images }) {
         {slides.map((item, index) => (
           <Box key={item.src} sx={{ px: 1 }}>
             <Avatar
-              key={item.attributes.url}
+              key={item.src}
               alt={item.src}
-              src={STRAPI_URL + item.attributes.url}
+              src={item.src}
               variant="rounded"
               sx={{
                 width: THUMB_SIZE,
@@ -171,7 +171,7 @@ export default function EcommerceProductDetailsCarousel({ images }) {
       >
         {renderLargeImg}
 
-        {renderThumbnails}
+        {slides?.length > 1 && renderThumbnails}
       </Box>
 
       <Lightbox

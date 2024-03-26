@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 
@@ -12,7 +11,6 @@ import { STRAPI_URL } from 'src/config-global';
 
 import Label from 'src/components/label';
 import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
 import ProductRating from '../../common/product-rating';
@@ -20,13 +18,11 @@ import ProductRating from '../../common/product-rating';
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductViewGridItem({ product, sx, ...other }) {
+  const pathToProduct = `${paths.eCommerce.product}/${product.objectID}`;
   return (
     <Stack
       sx={{
         position: 'relative',
-        '&:hover .add-to-cart': {
-          opacity: 1,
-        },
         ...sx,
       }}
       {...other}
@@ -43,57 +39,41 @@ export default function EcommerceProductViewGridItem({ product, sx, ...other }) 
         </Label>
       )}
 
-      <Box sx={{ position: 'relative', mb: 2 }}>
-        <Fab
-          component={RouterLink}
-          href={`${paths.eCommerce.product}/${product.id}`}
-          className="add-to-cart"
-          color="primary"
-          size="small"
-          sx={{
-            right: 8,
-            zIndex: 9,
-            bottom: 8,
-            opacity: 0,
-            position: 'absolute',
-            transition: (theme) =>
-              theme.transitions.create('opacity', {
-                easing: theme.transitions.easing.easeIn,
-                duration: theme.transitions.duration.shortest,
-              }),
-          }}
-        >
-          <Iconify icon="carbon:shopping-cart-plus" />
-        </Fab>
+      <Link component={RouterLink} href={pathToProduct} color="inherit">
+        <Box sx={{ position: 'relative', mb: 2 }}>
+          <Image
+            src={`${STRAPI_URL}${product.images[0]}`}
+            sx={{
+              flexShrink: 0,
+              borderRadius: 1.5,
+              bgcolor: 'background.neutral',
+              float: 'left',
+              width: 160,
+              height: 200,
+              objectFit: 'cover',
+            }}
+          />
+        </Box>
+      </Link>
 
-        <Image
-          src={`${STRAPI_URL}${product.attributes.Images.data[0].attributes.url}`}
-          sx={{
-            flexShrink: 0,
-            borderRadius: 1.5,
-            bgcolor: 'background.neutral',
-          }}
-        />
-      </Box>
-
-      <Stack spacing={0.5}>
-        <TextMaxLine variant="caption" line={1} sx={{ color: 'text.disabled' }}>
-          {product.category}
-        </TextMaxLine>
-
-        <Link component={RouterLink} href={paths.eCommerce.product} color="inherit">
-          <TextMaxLine variant="body2" line={1} sx={{ fontWeight: 'fontWeightMedium' }}>
-            {product.attributes.Title}
+      <Link component={RouterLink} href={pathToProduct} color="inherit">
+        <Stack spacing={0.5}>
+          <TextMaxLine variant="caption" line={1} sx={{ color: 'text.disabled' }}>
+            {product.category}
           </TextMaxLine>
-        </Link>
 
-        {/* <ProductPrice price={product.price} priceSale={product.priceSale} /> */}
+          <TextMaxLine variant="body2" line={2} sx={{ fontWeight: 'fontWeightMedium' }}>
+            {product.title}
+          </TextMaxLine>
 
-        <ProductRating
-          ratingNumber={product.ratingNumber}
-          // label={`${product.sold} sold`}
-        />
-      </Stack>
+          {/* <ProductPrice price={product.price} priceSale={product.priceSale} /> */}
+
+          <ProductRating
+            ratingNumber={product.ratingNumber}
+            // label={`${product.sold} sold`}
+          />
+        </Stack>
+      </Link>
     </Stack>
   );
 }

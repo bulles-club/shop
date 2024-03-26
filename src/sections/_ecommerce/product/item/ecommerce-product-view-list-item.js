@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import Fab from '@mui/material/Fab';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 
@@ -11,7 +10,6 @@ import { STRAPI_URL } from 'src/config-global';
 
 import Image from 'src/components/image';
 import Label from 'src/components/label';
-import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
 import ProductRating from '../../common/product-rating';
@@ -19,6 +17,7 @@ import ProductRating from '../../common/product-rating';
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductViewListItem({ product, ...other }) {
+  const pathToProduct = `${paths.eCommerce.product}/${product.objectID}`;
   return (
     <Stack
       direction="row"
@@ -42,38 +41,21 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
         </Label>
       )}
 
-      <Fab
-        component={RouterLink}
-        href={`${paths.eCommerce.product}/${product.id}`}
-        className="add-to-cart"
-        color="primary"
-        size="small"
-        sx={{
-          right: 8,
-          zIndex: 9,
-          top: 8,
-          opacity: 0,
-          position: 'absolute',
-          transition: (theme) =>
-            theme.transitions.create('opacity', {
-              easing: theme.transitions.easing.easeIn,
-              duration: theme.transitions.duration.shortest,
-            }),
-        }}
-      >
-        <Iconify icon="carbon:shopping-cart-plus" />
-      </Fab>
-
-      <Image
-        src={`${STRAPI_URL}${product.attributes.Images.data[0].attributes.url}`}
-        sx={{
-          mr: 2,
-          width: 160,
-          flexShrink: 0,
-          borderRadius: 1.5,
-          bgcolor: 'background.neutral',
-        }}
-      />
+      <Link component={RouterLink} href={pathToProduct} color="inherit">
+        <Image
+          src={`${STRAPI_URL}${product.images[0]}`}
+          sx={{
+            mr: 2,
+            flexShrink: 0,
+            borderRadius: 1.5,
+            bgcolor: 'background.neutral',
+            float: 'left',
+            width: 160,
+            height: 200,
+            objectFit: 'cover',
+          }}
+        />
+      </Link>
 
       <Stack spacing={1}>
         <Stack spacing={0.5}>
@@ -81,9 +63,9 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
             {product.category}
           </TextMaxLine>
 
-          <Link component={RouterLink} href={paths.eCommerce.product} color="inherit">
+          <Link component={RouterLink} href={pathToProduct} color="inherit">
             <TextMaxLine variant="h6" line={1}>
-              {product.attributes.Title}
+              {product.title}
             </TextMaxLine>
           </Link>
         </Stack>
@@ -94,14 +76,8 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
         />
 
         <TextMaxLine variant="body2" line={3} sx={{ color: 'text.secondary' }}>
-          {product.attributes.Description[0].children[0].text}
+          {product.description}
         </TextMaxLine>
-
-        {/* <ProductPrice
-          price={product.price}
-          priceSale={product.priceSale}
-          sx={{ typography: 'h6' }}
-        /> */}
       </Stack>
     </Stack>
   );

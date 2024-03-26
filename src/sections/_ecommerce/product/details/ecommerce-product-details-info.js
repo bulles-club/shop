@@ -16,7 +16,6 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
-import ProductPrice from '../../common/product-price';
 import ProductColorPicker from '../../common/product-color-picker';
 import ProductOptionPicker from '../../common/product-option-picker';
 
@@ -38,14 +37,7 @@ const MEMORY_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsInfo({
-  name,
-  price,
-  ratingNumber,
-  totalReviews,
-  priceSale,
-  caption,
-}) {
+export default function EcommerceProductDetailsInfo({ name, ratingNumber, totalReviews, caption }) {
   const mdUp = useResponsive('up', 'md');
 
   const [color, setColor] = useState('red');
@@ -79,11 +71,13 @@ export default function EcommerceProductDetailsInfo({
       </Stack>
 
       <Stack spacing={2}>
-        <ProductPrice price={price} priceSale={priceSale} sx={{ typography: 'h5' }} />
-
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {caption}
-        </Typography>
+        {/* <ProductPrice price={price} priceSale={priceSale} sx={{ typography: 'h5' }} /> */}
+        {caption.map((item, index) => (
+          <Typography key={index} variant="body2" sx={{ color: 'text.secondary' }}>
+            {item.text}
+          </Typography>
+          // TODO: use https://github.com/strapi/blocks-react-renderer
+        ))}
       </Stack>
 
       <Stack spacing={3} sx={{ my: 5 }}>
@@ -166,10 +160,10 @@ export default function EcommerceProductDetailsInfo({
 }
 
 EcommerceProductDetailsInfo.propTypes = {
-  caption: PropTypes.string,
+  caption: PropTypes.array,
   name: PropTypes.string,
-  price: PropTypes.number,
-  priceSale: PropTypes.number,
+  // price: PropTypes.number,
+  // priceSale: PropTypes.number,
   ratingNumber: PropTypes.number,
   totalReviews: PropTypes.number,
 };

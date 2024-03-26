@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
+import { RefinementList } from 'react-instantsearch';
 
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
@@ -12,34 +13,13 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-import FilterTag from './filter-tag';
-import FilterBrand from './filter-brand';
-import FilterPrice from './filter-price';
 import FilterStock from './filter-stock';
 import FilterRating from './filter-rating';
-import FilterCategory from './filter-category';
-import FilterShipping from './filter-shipping';
-
-// ----------------------------------------------------------------------
-
-const BRAND_OPTIONS = ['Apple', 'Samsung', 'Xiaomi', 'Honor'];
-
-const CATEGORY_OPTIONS = [
-  'Apple iPhone',
-  'Samsung Galaxy',
-  'Nike Air Max',
-  'Adidas Ultraboost',
-  'Sony PlayStation',
-];
-
-const SHIPPING_OPTIONS = ['Fast', 'Saving', 'Free'];
-
-const TAG_OPTIONS = ['Books and Media', 'Pet', 'Electronics', 'Food', 'Automotive and Industrial'];
 
 // ----------------------------------------------------------------------
 
 const defaultValues = {
-  filterBrand: [BRAND_OPTIONS[1]],
+  filterBrand: [],
   filterCategories: '',
   filterRating: null,
   filterStock: false,
@@ -61,36 +41,6 @@ export default function EcommerceFilters({ open, onClose }) {
       ? selectedItems.filter((value) => value !== item)
       : [...selectedItems, item];
 
-  const handleChangeCategories = useCallback(
-    (name) => {
-      setFilters({
-        ...filters,
-        filterCategories: name,
-      });
-    },
-    [filters]
-  );
-
-  const handleChangeBrand = useCallback(
-    (name) => {
-      setFilters({
-        ...filters,
-        filterBrand: getSelected(filters.filterBrand, name),
-      });
-    },
-    [filters]
-  );
-
-  const handleChangeShipping = useCallback(
-    (name) => {
-      setFilters({
-        ...filters,
-        filterShipping: getSelected(filters.filterShipping, name),
-      });
-    },
-    [filters]
-  );
-
   const handleChangeTag = useCallback(
     (name) => {
       setFilters({
@@ -106,32 +56,6 @@ export default function EcommerceFilters({ open, onClose }) {
       setFilters({
         ...filters,
         filterRating: event.target.value,
-      });
-    },
-    [filters]
-  );
-
-  const handleChangeStartPrice = useCallback(
-    (event) => {
-      setFilters({
-        ...filters,
-        filterPrice: {
-          ...filters.filterPrice,
-          start: Number(event.target.value),
-        },
-      });
-    },
-    [filters]
-  );
-
-  const handleChangeEndPrice = useCallback(
-    (event) => {
-      setFilters({
-        ...filters,
-        filterPrice: {
-          ...filters.filterPrice,
-          end: Number(event.target.value),
-        },
       });
     },
     [filters]
@@ -160,40 +84,24 @@ export default function EcommerceFilters({ open, onClose }) {
         width: { xs: 1, md: 280 },
       }}
     >
-      <Block title="Category">
-        <FilterCategory
-          filterCategories={filters.filterCategories}
-          onChangeCategories={handleChangeCategories}
-          options={CATEGORY_OPTIONS}
-          sx={{ mt: 2 }}
-        />
+      <Block title="Genre">
+        <RefinementList attribute="genre" classNames={{ root: 'checkbox-wrapper-13' }} />
       </Block>
 
-      <Block title="Brand">
-        <FilterBrand
-          filterBrand={filters.filterBrand}
-          onChangeBrand={handleChangeBrand}
-          options={BRAND_OPTIONS}
-          sx={{ mt: 1 }}
-        />
+      <Block title="Série">
+        <RefinementList attribute="series" classNames={{ root: 'checkbox-wrapper-13' }} />
       </Block>
 
-      <Block title="Price">
-        <FilterPrice
-          filterPrice={filters.filterPrice}
-          onChangeStartPrice={handleChangeStartPrice}
-          onChangeEndPrice={handleChangeEndPrice}
-          sx={{ mt: 2 }}
-        />
+      <Block title="Type">
+        <RefinementList attribute="type" classNames={{ root: 'checkbox-wrapper-13' }} />
       </Block>
 
-      <Block title="Shipping">
-        <FilterShipping
-          filterShipping={filters.filterShipping}
-          onChangeShipping={handleChangeShipping}
-          options={SHIPPING_OPTIONS}
-          sx={{ mt: 1 }}
-        />
+      <Block title="Age">
+        <RefinementList attribute="ageGroup" classNames={{ root: 'checkbox-wrapper-13' }} />
+      </Block>
+
+      <Block title="Editeur">
+        <RefinementList attribute="publisher" classNames={{ root: 'checkbox-wrapper-13' }} />
       </Block>
 
       <Block title="Ratings">
@@ -205,15 +113,6 @@ export default function EcommerceFilters({ open, onClose }) {
       </Block>
 
       <FilterStock filterStock={filters.filterStock} onChangeStock={handleChangeStock} />
-
-      <Block title="Tags">
-        <FilterTag
-          filterTag={filters.filterTag}
-          onChangeTag={handleChangeTag}
-          options={TAG_OPTIONS}
-          sx={{ mt: 2 }}
-        />
-      </Block>
 
       <Button
         fullWidth

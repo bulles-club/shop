@@ -12,3 +12,7 @@
 @import 'yet-another-react-lightbox/styles.css';
 @import 'yet-another-react-lightbox/plugins/captions.css';
 @import 'yet-another-react-lightbox/plugins/thumbnails.css';
+
+@import "./sections/_ecommerce/product/filters/ecommerce-filters.css";
+@import "src/sections/_ecommerce/product/item/ecommerce-product-view-grid-item.css";
+@import "src/sections/_ecommerce/product/item/ecommerce-product-view-list-item.css";

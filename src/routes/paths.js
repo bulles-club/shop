@@ -48,7 +48,7 @@ export const paths = {
   eCommerce: {
     root: '/e-commerce',
     products: '/e-commerce/products',
-    product: `/e-commerce/product/:id`,
+    product: `/e-commerce/product`,
     cart: '/e-commerce/cart',
     checkout: `/e-commerce/checkout`,
     orderCompleted: '/e-commerce/order-completed',
