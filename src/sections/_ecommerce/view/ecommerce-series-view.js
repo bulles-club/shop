@@ -19,6 +19,15 @@ const QUERY = gql`
           Name
           Ended
           FirstPublicationYear
+          Description
+          Creators {
+            data {
+              attributes {
+                Name
+              }
+              id
+            }
+          }
         }
       }
     }

@@ -102,13 +102,10 @@ export default function EcommerceProductView({ id }) {
         <CustomBreadcrumbs
           links={[
             {
-              name: 'Home',
+              name: data.book.data.attributes.Genre.data.attributes.Title,
             },
             {
-              name: 'Mobile Phones',
-            },
-            {
-              name: 'Apple iPhone 14',
+              name: data.book.data.attributes.Title,
             },
           ]}
           sx={{ my: 5 }}
@@ -122,8 +119,6 @@ export default function EcommerceProductView({ id }) {
           <Grid xs={12} md={7} lg={7}>
             <EcommerceProductDetailsInfo
               name={data.book.data.attributes.Title}
-              // price={_mockProduct.price}
-              // priceSale={_mockProduct.priceSale}
               // ratingNumber={_mockProduct.ratingNumber}
               // totalReviews={_mockProduct.totalReviews}
               scriptWriters={data.book.data.attributes.ScriptWriters.data}

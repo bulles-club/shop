@@ -59,7 +59,11 @@ export default function EcommerceProductDetailsInfo({
           label="Illustration"
           value={artists.map((item) => item.attributes.Name)}
         />
-        <EcommerceProductDetailsItem label="Série" value={series?.data.attributes.Name} />
+        <EcommerceProductDetailsItem
+          label="Série"
+          value={series?.data.attributes.Name}
+          link={`${paths.library.series}/${series?.data.id}`}
+        />
         <EcommerceProductDetailsItem label="Volume" value={seriesVolume} />
         <EcommerceProductDetailsItem label="Type" value={type} />
         <EcommerceProductDetailsItem label="Genre" value={genre} />
