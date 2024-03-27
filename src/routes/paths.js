@@ -100,6 +100,15 @@ export const paths = {
     player: '/components/player',
     textMaxLine: '/components/text-max-line',
   },
+  corporate: '/qui-sommes-nous',
+  subscriptions: '/les-abonnements',
+  news: {
+    root: '/actualites',
+  },
+  library: {
+    root: '/bibliotheque',
+    book: '/bibliotheque/livre',
+  },
   // Others
   pages: '/pages',
   docs: 'https://zone-docs.vercel.app',

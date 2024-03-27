@@ -17,7 +17,7 @@ import ProductRating from '../../common/product-rating';
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductViewListItem({ product, ...other }) {
-  const pathToProduct = `${paths.eCommerce.product}/${product.objectID}`;
+  const pathToProduct = `${paths.library.book}/${product.objectID}`;
   return (
     <Stack
       direction="row"
