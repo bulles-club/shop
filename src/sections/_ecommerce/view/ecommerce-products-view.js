@@ -1,8 +1,7 @@
 'use client';
 
+import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch } from 'react-instantsearch';
 
 import Box from '@mui/material/Box';
@@ -17,10 +16,9 @@ import FormControl from '@mui/material/FormControl';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import { useClient } from 'src/hooks/use-client';
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useSearchClient } from 'src/routes/hooks/use-search-client';
 
-import { ALGOLIA_APP_ID, ALGOLIA_API_KEY } from 'src/config-global';
+import { useBoolean } from 'src/hooks/use-boolean';
 
 import Iconify from 'src/components/iconify';
 
@@ -28,8 +26,6 @@ import EcommerceFilters from '../product/filters/ecommerce-filters';
 import EcommerceProductList from '../product/list/ecommerce-product-list';
 
 // ----------------------------------------------------------------------
-
-const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 
 const VIEW_OPTIONS = [
   { value: 'list', icon: <Iconify icon="carbon:list-boxes" /> },
@@ -42,34 +38,11 @@ const SORT_OPTIONS = [
   { value: 'popular', label: 'Popular' },
 ];
 
-const QUERY = gql`
-  query Books {
-    books {
-      data {
-        id
-        attributes {
-          Title
-          Description
-          Images {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductsView() {
-  const client = useClient();
-  const { loading, error, data } = useQuery(QUERY, { client });
-
   const mobileOpen = useBoolean();
+  const searchClient = useSearchClient();
 
   const [sort, setSort] = useState('latest');
 
@@ -160,10 +133,14 @@ export default function EcommerceProductsView() {
               </FormControl>
             </Stack>
 
-            <EcommerceProductList loading={loading} viewMode={viewMode} />
+            <EcommerceProductList viewMode={viewMode} />
           </Box>
         </Stack>
       </Container>
     </InstantSearch>
   );
 }
+
+EcommerceProductsView.propTypes = {
+  id: PropTypes.string.isRequired,
+};
