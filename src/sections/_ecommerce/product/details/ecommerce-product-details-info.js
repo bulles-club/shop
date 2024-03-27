@@ -1,11 +1,8 @@
 import PropTypes from 'prop-types';
-import { useState, useCallback } from 'react';
 
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import { paths } from 'src/routes/paths';
@@ -16,41 +13,24 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
-import ProductColorPicker from '../../common/product-color-picker';
-import ProductOptionPicker from '../../common/product-option-picker';
+import EcommerceProductDetailsItem from './ecommerce-product-details-item';
 
 // ----------------------------------------------------------------------
 
-const COLOR_OPTIONS = [
-  { label: '#FA541C', value: 'red' },
-  { label: '#754FFE', value: 'violet' },
-  { label: '#00B8D9', value: 'cyan' },
-  { label: '#36B37E', value: 'green' },
-];
-
-const MEMORY_OPTIONS = [
-  { label: '128GB', value: '128gb' },
-  { label: '256GB', value: '256gb' },
-  { label: '512GB', value: '512gb' },
-  { label: '1TB', value: '1tb' },
-];
-
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsInfo({ name, ratingNumber, totalReviews, caption }) {
+export default function EcommerceProductDetailsInfo({
+  name,
+  ratingNumber,
+  totalReviews,
+  scriptWriters,
+  artists,
+  series,
+  seriesVolume,
+  type,
+  genre,
+}) {
   const mdUp = useResponsive('up', 'md');
-
-  const [color, setColor] = useState('red');
-
-  const [memory, setMemory] = useState('128gb');
-
-  const handleChangeColor = useCallback((event) => {
-    setColor(event.target.value);
-  }, []);
-
-  const handleChangeMemory = useCallback((event) => {
-    setMemory(event.target.value);
-  }, []);
 
   return (
     <>
@@ -70,63 +50,23 @@ export default function EcommerceProductDetailsInfo({ name, ratingNumber, totalR
         </Stack>
       </Stack>
 
-      <Stack spacing={2}>
-        {/* <ProductPrice price={price} priceSale={priceSale} sx={{ typography: 'h5' }} /> */}
-        {caption.map((item, index) => (
-          <Typography key={index} variant="body2" sx={{ color: 'text.secondary' }}>
-            {item.text}
-          </Typography>
-          // TODO: use https://github.com/strapi/blocks-react-renderer
-        ))}
-      </Stack>
-
-      <Stack spacing={3} sx={{ my: 5 }}>
-        <Stack spacing={2}>
-          <Typography variant="subtitle2">Color</Typography>
-          <ProductColorPicker value={color} onChange={handleChangeColor} options={COLOR_OPTIONS} />
-        </Stack>
-
-        <Stack spacing={2}>
-          <Typography variant="subtitle2">Memory</Typography>
-          <ProductOptionPicker
-            value={memory}
-            onChange={handleChangeMemory}
-            options={MEMORY_OPTIONS}
-          />
-        </Stack>
+      <Stack spacing={2} sx={{ mb: 3 }}>
+        <EcommerceProductDetailsItem
+          label="Scénario"
+          value={scriptWriters.map((item) => item.attributes.Name)}
+        />
+        <EcommerceProductDetailsItem
+          label="Illustration"
+          value={artists.map((item) => item.attributes.Name)}
+        />
+        <EcommerceProductDetailsItem label="Série" value={series?.data.attributes.Name} />
+        <EcommerceProductDetailsItem label="Volume" value={seriesVolume} />
+        <EcommerceProductDetailsItem label="Type" value={type} />
+        <EcommerceProductDetailsItem label="Genre" value={genre} />
       </Stack>
 
       <Stack spacing={2} direction={{ xs: 'column', md: 'row' }} alignItems={{ md: 'center' }}>
-        <TextField
-          select
-          hiddenLabel
-          SelectProps={{
-            native: true,
-          }}
-          sx={{
-            minWidth: 100,
-          }}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </TextField>
-
         <Stack direction="row" spacing={2}>
-          <Button
-            component={RouterLink}
-            href={paths.eCommerce.cart}
-            fullWidth={!mdUp}
-            size="large"
-            color="inherit"
-            variant="contained"
-            startIcon={<Iconify icon="carbon:shopping-cart-plus" />}
-          >
-            Add to Cart
-          </Button>
-
           <Button
             component={RouterLink}
             href={paths.eCommerce.cart}
@@ -134,25 +74,22 @@ export default function EcommerceProductDetailsInfo({ name, ratingNumber, totalR
             size="large"
             color="primary"
             variant="contained"
+            startIcon={<Iconify icon="carbon:shopping-cart-plus" />}
           >
-            Buy Now
+            Emprunter
           </Button>
-        </Stack>
-      </Stack>
 
-      <Divider sx={{ borderStyle: 'dashed', my: 3 }} />
-
-      <Stack spacing={3} direction="row" justifyContent={{ xs: 'center', md: 'unset' }}>
-        <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
-          <Iconify icon="carbon:add-alt" sx={{ mr: 1 }} /> Compare
-        </Stack>
-
-        <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
-          <Iconify icon="carbon:favorite" sx={{ mr: 1 }} /> Compare
-        </Stack>
-
-        <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle2' }}>
-          <Iconify icon="carbon:share" sx={{ mr: 1 }} /> Compare
+          <Button
+            component={RouterLink}
+            href={paths.eCommerce.cart}
+            fullWidth={!mdUp}
+            size="large"
+            color="inherit"
+            variant="contained"
+            startIcon={<Iconify icon="carbon:favorite" />}
+          >
+            Sauvegarder
+          </Button>
         </Stack>
       </Stack>
     </>
@@ -160,10 +97,15 @@ export default function EcommerceProductDetailsInfo({ name, ratingNumber, totalR
 }
 
 EcommerceProductDetailsInfo.propTypes = {
-  caption: PropTypes.array,
   name: PropTypes.string,
   // price: PropTypes.number,
   // priceSale: PropTypes.number,
   ratingNumber: PropTypes.number,
   totalReviews: PropTypes.number,
+  scriptWriters: PropTypes.array,
+  artists: PropTypes.array,
+  series: PropTypes.object,
+  seriesVolume: PropTypes.number,
+  type: PropTypes.string,
+  genre: PropTypes.string,
 };

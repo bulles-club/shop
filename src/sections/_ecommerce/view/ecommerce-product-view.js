@@ -15,6 +15,7 @@ import ReviewEcommerce from '../../review/ecommerce/review-ecommerce';
 import EcommerceProductDetailsInfo from '../product/details/ecommerce-product-details-info';
 import EcommerceProductDetailsCarousel from '../product/details/ecommerce-product-details-carousel';
 import EcommerceProductDetailsDescription from '../product/details/ecommerce-product-details-description';
+import EcommerceProductDetailsSpecifications from '../product/details/ecommerce-product-details-specifications';
 
 // ----------------------------------------------------------------------
 
@@ -44,15 +45,8 @@ const QUERY = gql`
             data {
               attributes {
                 Name
-                Bio
-                Photo {
-                  data {
-                    attributes {
-                      url
-                    }
-                  }
-                }
               }
+              id
             }
           }
           Genre {
@@ -79,15 +73,24 @@ const QUERY = gql`
               }
             }
           }
+          ScriptWriters {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
         }
       }
     }
   }
 `;
 
+// ----------------------------------------------------------------------
 export default function EcommerceProductView({ id }) {
   const client = useClient();
-  const { loading, error, data } = useQuery(QUERY, { client, variables: { id } });
+  const { loading, data } = useQuery(QUERY, { client, variables: { id } });
 
   if (loading) {
     return <SplashScreen />;
@@ -120,25 +123,30 @@ export default function EcommerceProductView({ id }) {
             <EcommerceProductDetailsInfo
               name={data.book.data.attributes.Title}
               // price={_mockProduct.price}
-              caption={data.book.data.attributes.Description}
               // priceSale={_mockProduct.priceSale}
               // ratingNumber={_mockProduct.ratingNumber}
               // totalReviews={_mockProduct.totalReviews}
+              scriptWriters={data.book.data.attributes.ScriptWriters.data}
+              artists={data.book.data.attributes.Artists.data}
+              series={data.book.data.attributes.Series}
+              seriesVolume={data.book.data.attributes.SeriesVolume}
+              type={data.book.data.attributes.Type}
+              genre={data.book.data.attributes.Genre.data.attributes.Title}
             />
           </Grid>
         </Grid>
 
         <Grid container columnSpacing={{ md: 8 }}>
-          <Grid xs={12} md={6} lg={7}>
+          <Grid xs={12}>
             <EcommerceProductDetailsDescription
-              // description={data.book.data.attributes}
-              specifications={[
-                { label: 'Category', value: 'Mobile' },
-                { label: 'Manufacturer', value: 'Apple' },
-                { label: 'Warranty', value: '12 Months' },
-                { label: 'Serial number', value: '358607726380311' },
-                { label: 'Ships From', value: 'United States' },
-              ]}
+              description={data.book.data.attributes.Description}
+            />
+            <EcommerceProductDetailsSpecifications
+              ageGroup={data.book.data.attributes.AgeGroup}
+              pageCount={data.book.data.attributes.PageCount}
+              publicationYear={data.book.data.attributes.PublicationYear}
+              isbn10={data.book.data.attributes.ISBN10}
+              isbn13={data.book.data.attributes.ISBN13}
             />
           </Grid>
         </Grid>

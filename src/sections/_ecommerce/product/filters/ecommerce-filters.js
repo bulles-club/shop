@@ -88,10 +88,6 @@ export default function EcommerceFilters({ open, onClose }) {
         <RefinementList attribute="genre" classNames={{ root: 'checkbox-wrapper-13' }} />
       </Block>
 
-      <Block title="Série">
-        <RefinementList attribute="series" classNames={{ root: 'checkbox-wrapper-13' }} />
-      </Block>
-
       <Block title="Type">
         <RefinementList attribute="type" classNames={{ root: 'checkbox-wrapper-13' }} />
       </Block>
