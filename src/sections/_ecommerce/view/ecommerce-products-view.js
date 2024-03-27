@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
-import { InstantSearch } from 'react-instantsearch';
+import { Configure, InstantSearch } from 'react-instantsearch';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -16,9 +16,8 @@ import FormControl from '@mui/material/FormControl';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import { useSearchClient } from 'src/routes/hooks/use-search-client';
-
 import { useBoolean } from 'src/hooks/use-boolean';
+import { useSearchClient } from 'src/hooks/use-search-client';
 
 import Iconify from 'src/components/iconify';
 
@@ -40,13 +39,19 @@ const SORT_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductsView() {
+export default function EcommerceProductsView({
+  header,
+  productsViewMode = 'grid',
+  facets = null,
+  showViewAndSortOptions = false,
+  filters = '',
+}) {
   const mobileOpen = useBoolean();
   const searchClient = useSearchClient();
 
   const [sort, setSort] = useState('latest');
 
-  const [viewMode, setViewMode] = useState('grid');
+  const [viewMode, setViewMode] = useState(productsViewMode);
 
   const handleChangeViewMode = useCallback((event, newAlignment) => {
     if (newAlignment !== null) {
@@ -60,6 +65,7 @@ export default function EcommerceProductsView() {
 
   return (
     <InstantSearch searchClient={searchClient} indexName="books">
+      <Configure analytics={false} facetFilters={filters} hitsPerPage={16} />
       <Container>
         <Stack
           direction="row"
@@ -69,19 +75,21 @@ export default function EcommerceProductsView() {
             py: 5,
           }}
         >
-          <Typography variant="h3">Catalog</Typography>
+          <Typography variant="h3">{header}</Typography>
 
-          <Button
-            color="inherit"
-            variant="contained"
-            startIcon={<Iconify icon="carbon:filter" width={18} />}
-            onClick={mobileOpen.onTrue}
-            sx={{
-              display: { md: 'none' },
-            }}
-          >
-            Filters
-          </Button>
+          {facets && (
+            <Button
+              color="inherit"
+              variant="contained"
+              startIcon={<Iconify icon="carbon:filter" width={18} />}
+              onClick={mobileOpen.onTrue}
+              sx={{
+                display: { md: 'none' },
+              }}
+            >
+              Filters
+            </Button>
+          )}
         </Stack>
 
         <Stack
@@ -91,9 +99,15 @@ export default function EcommerceProductsView() {
           }}
           sx={{ mb: { xs: 8, md: 10 } }}
         >
-          <Stack spacing={5} divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
-            <EcommerceFilters open={mobileOpen.value} onClose={mobileOpen.onFalse} />
-          </Stack>
+          {facets && (
+            <Stack spacing={5} divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
+              <EcommerceFilters
+                open={mobileOpen.value}
+                onClose={mobileOpen.onFalse}
+                facets={facets}
+              />
+            </Stack>
+          )}
 
           <Box
             sx={{
@@ -102,36 +116,38 @@ export default function EcommerceProductsView() {
               width: { md: `calc(100% - ${280}px)` },
             }}
           >
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{ mb: 5 }}
-            >
-              <ToggleButtonGroup
-                exclusive
-                size="small"
-                value={viewMode}
-                onChange={handleChangeViewMode}
-                sx={{ borderColor: 'transparent' }}
+            {showViewAndSortOptions && (
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                sx={{ mb: 5 }}
               >
-                {VIEW_OPTIONS.map((option) => (
-                  <ToggleButton key={option.value} value={option.value}>
-                    {option.icon}
-                  </ToggleButton>
-                ))}
-              </ToggleButtonGroup>
-
-              <FormControl size="small" hiddenLabel sx={{ width: 120 }}>
-                <Select value={sort} onChange={handleChangeSort}>
-                  {SORT_OPTIONS.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
+                <ToggleButtonGroup
+                  exclusive
+                  size="small"
+                  value={viewMode}
+                  onChange={handleChangeViewMode}
+                  sx={{ borderColor: 'transparent' }}
+                >
+                  {VIEW_OPTIONS.map((option) => (
+                    <ToggleButton key={option.value} value={option.value}>
+                      {option.icon}
+                    </ToggleButton>
                   ))}
-                </Select>
-              </FormControl>
-            </Stack>
+                </ToggleButtonGroup>
+
+                <FormControl size="small" hiddenLabel sx={{ width: 120 }}>
+                  <Select value={sort} onChange={handleChangeSort}>
+                    {SORT_OPTIONS.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Stack>
+            )}
 
             <EcommerceProductList viewMode={viewMode} />
           </Box>
@@ -142,5 +158,9 @@ export default function EcommerceProductsView() {
 }
 
 EcommerceProductsView.propTypes = {
-  id: PropTypes.string.isRequired,
+  header: PropTypes.string,
+  facets: PropTypes.array,
+  showViewAndSortOptions: PropTypes.bool,
+  productsViewMode: PropTypes.string,
+  filters: PropTypes.array,
 };

@@ -6,7 +6,7 @@ import { gql, useQuery } from '@apollo/client';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 
-import { useClient } from 'src/hooks/use-client';
+import { useContentClient } from 'src/hooks/use-content-client';
 
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
@@ -89,7 +89,7 @@ const QUERY = gql`
 
 // ----------------------------------------------------------------------
 export default function EcommerceProductView({ id }) {
-  const client = useClient();
+  const client = useContentClient();
   const { loading, data } = useQuery(QUERY, { client, variables: { id } });
 
   if (loading) {

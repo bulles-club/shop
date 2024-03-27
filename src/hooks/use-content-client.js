@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 import { STRAPI_URL } from 'src/config-global';
 
-export const useClient = () => {
+export const useContentClient = () => {
   const client = useMemo(
     () =>
       new ApolloClient({

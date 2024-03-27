@@ -1,11 +1,10 @@
-import EcommerceProductsView from 'src/sections/_ecommerce/view/ecommerce-products-view';
-
+import EcommerceCatalogView from 'src/sections/_ecommerce/view/ecommerce-catalog-view';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'E-commerce: Products',
+  title: 'Serie',
 };
 
-export default function EcommerceProductsPage() {
-  return <EcommerceProductsView />;
+export default function LibraryPage() {
+  return <EcommerceCatalogView />;
 }

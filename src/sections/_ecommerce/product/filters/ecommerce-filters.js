@@ -19,37 +19,15 @@ import FilterRating from './filter-rating';
 // ----------------------------------------------------------------------
 
 const defaultValues = {
-  filterBrand: [],
-  filterCategories: '',
   filterRating: null,
   filterStock: false,
-  filterShipping: [],
   filterTag: [],
-  filterPrice: {
-    start: 0,
-    end: 0,
-  },
 };
 
-export default function EcommerceFilters({ open, onClose }) {
+export default function EcommerceFilters({ open, onClose, facets }) {
   const mdUp = useResponsive('up', 'md');
 
   const [filters, setFilters] = useState(defaultValues);
-
-  const getSelected = (selectedItems, item) =>
-    selectedItems.includes(item)
-      ? selectedItems.filter((value) => value !== item)
-      : [...selectedItems, item];
-
-  const handleChangeTag = useCallback(
-    (name) => {
-      setFilters({
-        ...filters,
-        filterTag: getSelected(filters.filterTag, name),
-      });
-    },
-    [filters]
-  );
 
   const handleChangeRating = useCallback(
     (event) => {
@@ -84,21 +62,11 @@ export default function EcommerceFilters({ open, onClose }) {
         width: { xs: 1, md: 280 },
       }}
     >
-      <Block title="Genre">
-        <RefinementList attribute="genre" classNames={{ root: 'checkbox-wrapper-13' }} />
-      </Block>
-
-      <Block title="Type">
-        <RefinementList attribute="type" classNames={{ root: 'checkbox-wrapper-13' }} />
-      </Block>
-
-      <Block title="Age">
-        <RefinementList attribute="ageGroup" classNames={{ root: 'checkbox-wrapper-13' }} />
-      </Block>
-
-      <Block title="Editeur">
-        <RefinementList attribute="publisher" classNames={{ root: 'checkbox-wrapper-13' }} />
-      </Block>
+      {facets.map((facet) => (
+        <Block title={facet.label} key={facet.name}>
+          <RefinementList attribute={facet.name} classNames={{ root: 'checkbox-wrapper-13' }} />
+        </Block>
+      ))}
 
       <Block title="Ratings">
         <FilterRating
@@ -148,6 +116,7 @@ export default function EcommerceFilters({ open, onClose }) {
 }
 
 EcommerceFilters.propTypes = {
+  facets: PropTypes.array,
   onClose: PropTypes.func,
   open: PropTypes.bool,
 };
