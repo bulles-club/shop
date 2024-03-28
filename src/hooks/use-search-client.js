@@ -4,10 +4,8 @@ import { ALGOLIA_APP_ID, ALGOLIA_API_KEY } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
-const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
-
-// ----------------------------------------------------------------------
+const algoliaClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 
 export function useSearchClient() {
-  return searchClient;
+  return algoliaClient;
 }

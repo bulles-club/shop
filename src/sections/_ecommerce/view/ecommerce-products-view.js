@@ -2,7 +2,8 @@
 
 import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
-import { Configure, InstantSearch } from 'react-instantsearch';
+import { Configure } from 'react-instantsearch';
+import { InstantSearchNext } from 'react-instantsearch-nextjs';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -64,7 +65,7 @@ export default function EcommerceProductsView({
   }, []);
 
   return (
-    <InstantSearch searchClient={searchClient} indexName="books">
+    <InstantSearchNext searchClient={searchClient} indexName="books">
       <Configure analytics={false} facetFilters={filters} hitsPerPage={16} />
       <Container>
         <Stack
@@ -153,7 +154,7 @@ export default function EcommerceProductsView({
           </Box>
         </Stack>
       </Container>
-    </InstantSearch>
+    </InstantSearchNext>
   );
 }
 

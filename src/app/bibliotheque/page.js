@@ -5,6 +5,8 @@ export const metadata = {
   title: 'Serie',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function LibraryPage() {
   return <EcommerceCatalogView />;
 }
