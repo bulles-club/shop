@@ -94,5 +94,9 @@ EcommerceProductViewListItem.propTypes = {
     priceSale: PropTypes.number,
     sold: PropTypes.number,
     ratingNumber: PropTypes.number,
+    objectID: PropTypes.string,
+    images: PropTypes.array,
+    title: PropTypes.string,
+    description: PropTypes.string,
   }),
 };
