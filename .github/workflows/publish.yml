@@ -10,6 +10,7 @@ jobs:
   push_to_registries:
     name: Push Docker image to Github Container Repository
     runs-on: ubuntu-latest
+    environment: kilchoman
     permissions:
       packages: write
       contents: read
@@ -42,3 +43,7 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NEXT_PUBLIC_STRAPI_URL=${{ vars.NEXT_PUBLIC_STRAPI_URL }}
+            NEXT_PUBLIC_ALGOLIA_APP_ID=${{ vars.NEXT_PUBLIC_ALGOLIA_APP_ID }}
+            NEXT_PUBLIC_ALGOLIA_API_KEY=${{ vars.NEXT_PUBLIC_ALGOLIA_API_KEY }}

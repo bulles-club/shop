@@ -1,4 +1,8 @@
 FROM node:alpine as BUILD_IMAGE
+ARG NEXT_PUBLIC_STRAPI_URL
+ARG NEXT_PUBLIC_ALGOLIA_APP_ID
+ARG NEXT_PUBLIC_ALGOLIA_API_KEY
+
 WORKDIR /app
 COPY package.json yarn.lock ./
 # install dependencies
