@@ -10,6 +10,7 @@ RUN yarn build
 RUN npm prune --production
 
 FROM node:alpine
+ENV NODE_ENV=production
 WORKDIR /app
 # copy from build image
 COPY --from=BUILD_IMAGE /app/package.json ./package.json
