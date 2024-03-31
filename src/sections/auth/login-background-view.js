@@ -1,8 +1,12 @@
 'use client';
 
 import * as Yup from 'yup';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { signIn, getCsrfToken } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -21,16 +25,33 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
+import AuthError from './AuthError';
+
 // ----------------------------------------------------------------------
 
-export default function LoginBackgroundView() {
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      csrfToken: await getCsrfToken(context),
+    },
+  };
+}
+
+// ----------------------------------------------------------------------
+
+export default function LoginBackgroundView({ csrfToken }) {
   const passwordShow = useBoolean();
+  const [error, setError] = useState({});
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl');
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('That is not an email'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password should be of minimum 6 characters length'),
+    email: Yup.string()
+      .required("L'adresse email est manquante")
+      .email("Le format de l'adresse email est invalide"),
+    password: Yup.string().required('Mot de passe manquant'),
   });
 
   const defaultValues = {
@@ -51,11 +72,20 @@ export default function LoginBackgroundView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const { email, password } = data;
+      const res = await signIn('credentials', {
+        redirect: Boolean(false),
+        email,
+        password,
+        callbackUrl: callbackUrl || '/',
+      });
       reset();
-      console.log('DATA', data);
-    } catch (error) {
-      console.error(error);
+      if (!res.ok && res.error === 'CredentialsSignin')
+        setError({ message: "L'adresse email ou le mot est invalide" });
+      if (res.ok && res.url) router.push(res.url);
+    } catch (err) {
+      console.error(err);
+      setError({ message: error.message });
     }
   });
 
@@ -66,14 +96,14 @@ export default function LoginBackgroundView() {
       </Typography>
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-        {`Don’t have an account? `}
+        {`Vous n'avez pas de compte? `}
         <Link
           component={RouterLink}
           href={paths.registerBackground}
           variant="subtitle2"
           color="primary"
         >
-          Get started
+          Inscrivez-vous
         </Link>
       </Typography>
     </div>
@@ -98,11 +128,11 @@ export default function LoginBackgroundView() {
   const renderForm = (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack spacing={2.5} alignItems="flex-end">
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name="email" label="Adresse email" />
 
         <RHFTextField
           name="password"
-          label="Password"
+          label="Mot de passe"
           type={passwordShow.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -122,8 +152,10 @@ export default function LoginBackgroundView() {
           underline="always"
           color="text.secondary"
         >
-          Forgot password?
+          Mot de passe oublié?
         </Link>
+
+        {error?.message && <AuthError error={error} setError={setError} />}
 
         <LoadingButton
           fullWidth
@@ -147,7 +179,7 @@ export default function LoginBackgroundView() {
 
       <Divider>
         <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-          or continue with
+          ou continuez avec
         </Typography>
       </Divider>
 
@@ -155,3 +187,7 @@ export default function LoginBackgroundView() {
     </>
   );
 }
+
+LoginBackgroundView.propTypes = {
+  csrfToken: PropTypes.string,
+};
