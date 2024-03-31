@@ -94,7 +94,7 @@ export default function Header({ headerOnDark }) {
 
         <IconButton
           component={RouterLink}
-          href={paths.eCommerce.account.personal}
+          href={paths.account.personal}
           size="small"
           color="inherit"
           sx={{ p: 0 }}
