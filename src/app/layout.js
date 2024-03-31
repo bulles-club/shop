@@ -11,7 +11,7 @@ import { LocalizationProvider } from 'src/locales';
 
 import ProgressBar from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
-import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
+import { SettingsProvider } from 'src/components/settings';
 
 // ----------------------------------------------------------------------
 
@@ -49,7 +49,6 @@ export default function RootLayout({ children }) {
             <ThemeProvider>
               <MotionLazy>
                 <ProgressBar />
-                <SettingsDrawer />
                 {children}
               </MotionLazy>
             </ThemeProvider>
