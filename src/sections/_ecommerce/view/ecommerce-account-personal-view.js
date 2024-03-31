@@ -1,6 +1,7 @@
 'use client';
 
 import * as Yup from 'yup';
+import { useSession } from 'next-auth/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -27,6 +28,7 @@ const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
 
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
+  const { data: session } = useSession();
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -43,7 +45,7 @@ export default function EcommerceAccountPersonalView() {
   const defaultValues = {
     firstName: 'Jayvion',
     lastName: 'Simon',
-    emailAddress: 'nannie_abernathy70@yahoo.com',
+    emailAddress: session?.user.email,
     phoneNumber: '365-374-4961',
     birthday: null,
     gender: 'Male',
@@ -80,7 +82,7 @@ export default function EcommerceAccountPersonalView() {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Typography variant="h5" sx={{ mb: 3 }}>
-        Personal
+        Données personnelles
       </Typography>
 
       <Box
@@ -89,13 +91,13 @@ export default function EcommerceAccountPersonalView() {
         display="grid"
         gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
       >
-        <RHFTextField name="firstName" label="First Name" />
+        <RHFTextField name="firstName" label="Prénom" />
 
-        <RHFTextField name="lastName" label="Last Name" />
+        <RHFTextField name="lastName" label="Nom de famille" />
 
-        <RHFTextField name="emailAddress" label="Email Address" />
+        <RHFTextField name="emailAddress" label="Adresse email" />
 
-        <RHFTextField name="phoneNumber" label="Phone Number" />
+        <RHFTextField name="phoneNumber" label="Téléphone" />
 
         <Controller
           name="birthday"

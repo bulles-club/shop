@@ -76,12 +76,7 @@ export default function RegisterBackgroundView() {
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
         {`Already have an account? `}
-        <Link
-          component={RouterLink}
-          href={paths.loginBackground}
-          variant="subtitle2"
-          color="primary"
-        >
+        <Link component={RouterLink} href={paths.login} variant="subtitle2" color="primary">
           Login
         </Link>
       </Typography>

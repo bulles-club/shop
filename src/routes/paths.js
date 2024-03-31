@@ -58,18 +58,15 @@ export const paths = {
   account: {
     root: `/account`,
     personal: `/account/personal`,
+    addresses: `/account/addresses`,
     wishlist: `/account/wishlist`,
     vouchers: `/account/vouchers`,
     orders: `/account/orders`,
     payment: `/account/payment`,
   },
   // Auth
-  loginCover: '/auth/login-cover',
-  loginBackground: '/auth/login-background',
-  loginIllustration: '/auth/login-illustration',
-  registerCover: '/auth/register-cover',
-  registerBackground: '/auth/register-background',
-  registerIllustration: '/auth/register-illustration',
+  login: '/auth/login',
+  register: '/auth/register',
   forgotPassword: '/auth/forgot-password',
   verify: '/auth/verify',
   // Common

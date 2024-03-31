@@ -97,12 +97,7 @@ export default function LoginBackgroundView({ csrfToken }) {
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
         {`Vous n'avez pas de compte? `}
-        <Link
-          component={RouterLink}
-          href={paths.registerBackground}
-          variant="subtitle2"
-          color="primary"
-        >
+        <Link component={RouterLink} href={paths.register} variant="subtitle2" color="primary">
           Inscrivez-vous
         </Link>
       </Typography>

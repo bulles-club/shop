@@ -24,7 +24,7 @@ export default function AccountLayout({ children }) {
     <>
       {mdUp ? (
         <Container sx={{ my: 5 }}>
-          <Typography variant="h3">Account</Typography>
+          <Typography variant="h3">Mon compte</Typography>
         </Container>
       ) : (
         <Box

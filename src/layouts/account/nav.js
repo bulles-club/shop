@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
+import { signOut, useSession } from 'next-auth/react';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
-import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import { alpha } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';
@@ -16,8 +16,6 @@ import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _mock } from 'src/_mock';
-
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 
@@ -25,27 +23,32 @@ import TextMaxLine from 'src/components/text-max-line';
 
 const navigations = [
   {
-    title: 'Personal Info',
+    title: 'Informations personnelles',
     path: paths.account.personal,
     icon: <Iconify icon="carbon:user" />,
   },
   {
-    title: 'Wishlist',
+    title: 'Adresses',
+    path: paths.account.addresses,
+    icon: <Iconify icon="carbon:catalog" />,
+  },
+  {
+    title: 'Favoris',
     path: paths.account.wishlist,
     icon: <Iconify icon="carbon:favorite" />,
   },
   {
-    title: 'Vouchers',
+    title: 'Coupons',
     path: paths.account.vouchers,
     icon: <Iconify icon="carbon:cut-out" />,
   },
   {
-    title: 'Orders',
+    title: 'Commandes',
     path: paths.account.orders,
     icon: <Iconify icon="carbon:document" />,
   },
   {
-    title: 'Payment',
+    title: 'Paiement',
     path: paths.account.payment,
     icon: <Iconify icon="carbon:purchase" />,
   },
@@ -55,6 +58,7 @@ const navigations = [
 
 export default function Nav({ open, onClose }) {
   const mdUp = useResponsive('up', 'md');
+  const { data: session } = useSession();
 
   const renderContent = (
     <Stack
@@ -69,7 +73,7 @@ export default function Nav({ open, onClose }) {
       }}
     >
       <Stack spacing={2} sx={{ p: 3, pb: 2 }}>
-        <Stack spacing={2} direction="row" alignItems="center">
+        {/* <Stack spacing={2} direction="row" alignItems="center">
           <Avatar src={_mock.image.avatar(0)} sx={{ width: 64, height: 64 }} />
           <Stack
             direction="row"
@@ -83,14 +87,14 @@ export default function Nav({ open, onClose }) {
             <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
             Change photo
           </Stack>
-        </Stack>
+        </Stack> */}
 
         <Stack spacing={0.5}>
           <TextMaxLine variant="subtitle1" line={1}>
             Jayvion Simon
           </TextMaxLine>
           <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
-            nannie_abernathy70@yahoo.com
+            {session?.user.email}
           </TextMaxLine>
         </Stack>
       </Stack>
@@ -112,12 +116,13 @@ export default function Nav({ open, onClose }) {
             height: 44,
             borderRadius: 1,
           }}
+          onClick={() => signOut()}
         >
           <ListItemIcon>
             <Iconify icon="carbon:logout" />
           </ListItemIcon>
           <ListItemText
-            primary="Logout"
+            primary="Déconnexion"
             primaryTypographyProps={{
               typography: 'body2',
             }}
