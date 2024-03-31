@@ -2,8 +2,6 @@ FROM node:alpine as BUILD_IMAGE
 ARG NEXT_PUBLIC_STRAPI_URL
 ARG NEXT_PUBLIC_ALGOLIA_APP_ID
 ARG NEXT_PUBLIC_ALGOLIA_API_KEY
-ARG NEXTAUTH_URL
-ARG NEXTAUTH_SECRET
 
 WORKDIR /app
 COPY package.json yarn.lock ./
@@ -17,8 +15,6 @@ RUN npm prune --production
 
 FROM node:alpine
 ENV NODE_ENV=production
-ENV NEXTAUTH_URL=${NEXTAUTH_URL}
-ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
 WORKDIR /app
 # copy from build image
 COPY --from=BUILD_IMAGE /app/package.json ./package.json
