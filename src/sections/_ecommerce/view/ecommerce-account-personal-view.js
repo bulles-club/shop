@@ -15,14 +15,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { countries } from 'src/assets/data';
-
 import Iconify from 'src/components/iconify';
-import FormProvider, { RHFSelect, RHFTextField, RHFAutocomplete } from 'src/components/hook-form';
-
-// ----------------------------------------------------------------------
-
-const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
+import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -31,28 +25,18 @@ export default function EcommerceAccountPersonalView() {
   const { data: session } = useSession();
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required'),
-    lastName: Yup.string().required('Last name is required'),
-    emailAddress: Yup.string().required('Email address is required'),
+    firstName: Yup.string().required('Le prénom est obligatoire'),
+    lastName: Yup.string().required('Le nom de famille est obligatoire'),
+    emailAddress: Yup.string().required("L'adresse email est obligatoire"),
     phoneNumber: Yup.string().required('Phone number is required'),
-    birthday: Yup.mixed().nullable().required('Birthday is required'),
-    gender: Yup.string().required('Gender is required'),
-    streetAddress: Yup.string().required('Street address is required'),
-    city: Yup.string().required('City is required'),
-    zipCode: Yup.string().required('Zip code is required'),
   });
 
   const defaultValues = {
-    firstName: 'Jayvion',
-    lastName: 'Simon',
+    firstName: session?.user.firstname,
+    lastName: session?.user.lastname,
     emailAddress: session?.user.email,
-    phoneNumber: '365-374-4961',
-    birthday: null,
-    gender: 'Male',
-    streetAddress: '',
-    zipCode: '',
-    city: '',
-    country: 'United States',
+    phoneNumber: session?.user.phonenumber || '',
+    dateofbirth: session?.user.dateofbirth,
     oldPassword: '',
     newPassword: '',
     confirmNewPassword: '',
@@ -100,10 +84,10 @@ export default function EcommerceAccountPersonalView() {
         <RHFTextField name="phoneNumber" label="Téléphone" />
 
         <Controller
-          name="birthday"
+          name="dateofbirth"
           render={({ field, fieldState: { error } }) => (
             <DatePicker
-              label="Birthday"
+              label="Date de naissance"
               slotProps={{
                 textField: {
                   helperText: error?.message,
@@ -116,21 +100,7 @@ export default function EcommerceAccountPersonalView() {
           )}
         />
 
-        <RHFSelect native name="gender" label="Gender">
-          {GENDER_OPTIONS.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </RHFSelect>
-
-        <RHFTextField name="streetAddress" label="Street Address" />
-
-        <RHFTextField name="zipCode" label="Zip Code" />
-
-        <RHFTextField name="city" label="City" />
-
-        <RHFAutocomplete
+        {/* <RHFAutocomplete
           name="country"
           type="country"
           label="Country"
@@ -138,7 +108,7 @@ export default function EcommerceAccountPersonalView() {
           fullWidth
           options={countries.map((option) => option.label)}
           getOptionLabel={(option) => option}
-        />
+        /> */}
       </Box>
       <Stack spacing={3} sx={{ my: 5 }}>
         <Typography variant="h5"> Change Password </Typography>
