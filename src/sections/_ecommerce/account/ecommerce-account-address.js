@@ -123,7 +123,7 @@ EcommerceAccountAddress.propTypes = {
     line1: PropTypes.string,
     line2: PropTypes.string,
     postalCode: PropTypes.string,
-    isDefault: PropTypes.string,
+    isDefault: PropTypes.bool,
     city: PropTypes.string,
     country: PropTypes.string,
   }),
