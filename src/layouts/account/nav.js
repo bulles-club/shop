@@ -91,7 +91,7 @@ export default function Nav({ open, onClose }) {
 
         <Stack spacing={0.5}>
           <TextMaxLine variant="subtitle1" line={1}>
-            Jayvion Simon
+            {session?.user.firstname} {session?.user.lastname}
           </TextMaxLine>
           <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
             {session?.user.email}

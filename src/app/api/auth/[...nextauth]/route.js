@@ -40,18 +40,22 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    session: async ({ session, token }) => {
-      session.id = token.id;
-      session.jwt = token.jwt;
-      return Promise.resolve(session);
-    },
     jwt: async ({ token, user }) => {
       const isSignIn = !!user;
       if (isSignIn) {
         token.id = user.id;
         token.jwt = user.jwt;
+        token.firstname = user.firstname;
+        token.lastname = user.lastname;
       }
       return Promise.resolve(token);
+    },
+    session: async ({ session, token }) => {
+      session.id = token.id;
+      session.jwt = token.jwt;
+      session.user.firstname = token.firstname;
+      session.user.lastname = token.lastname;
+      return Promise.resolve(session);
     },
   },
   pages: {
