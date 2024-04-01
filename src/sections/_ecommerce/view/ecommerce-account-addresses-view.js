@@ -42,7 +42,7 @@ export default function EcommerceAccountAddressesView() {
   return (
     <Stack spacing={5}>
       <Stack spacing={3}>
-        <Typography variant="h5">Carnet d'adresses</Typography>
+        <Typography variant="h5">Carnet d&apos;adresses</Typography>
 
         <Box gap={3} display="grid" gridTemplateColumns="repeat(1, 1fr)">
           {ADDRESSES.map((address) => (
