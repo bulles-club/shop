@@ -42,10 +42,12 @@ export async function getServerSideProps(context) {
 export default function LoginBackgroundView({ csrfToken }) {
   const passwordShow = useBoolean();
   const [error, setError] = useState({});
+  let registerPath = paths.register;
 
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
+  if (callbackUrl) registerPath += `?callbackUrl=${encodeURIComponent(callbackUrl)}`;
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -77,12 +79,11 @@ export default function LoginBackgroundView({ csrfToken }) {
         redirect: Boolean(false),
         email,
         password,
-        callbackUrl: callbackUrl || '/',
       });
       reset();
       if (!res.ok && res.error === 'CredentialsSignin')
         setError({ message: "L'adresse email ou le mot est invalide" });
-      if (res.ok && res.url) router.push(res.url);
+      if (res.ok) router.push(callbackUrl || '/');
     } catch (err) {
       console.error(err);
       setError({ message: error.message });
@@ -97,7 +98,7 @@ export default function LoginBackgroundView({ csrfToken }) {
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
         {`Vous n'avez pas de compte? `}
-        <Link component={RouterLink} href={paths.register} variant="subtitle2" color="primary">
+        <Link component={RouterLink} href={registerPath} variant="subtitle2" color="primary">
           Inscrivez-vous
         </Link>
       </Typography>

@@ -1,7 +1,10 @@
 'use client';
 
 import * as Yup from 'yup';
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'next/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
@@ -18,30 +21,39 @@ import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
+import { register } from 'src/services/auth';
+
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+
+import AuthError from './AuthError';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterBackgroundView() {
   const passwordShow = useBoolean();
+  const [error, setError] = useState({});
+
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl');
 
   const RegisterSchema = Yup.object().shape({
-    fullName: Yup.string()
-      .required('Full name is required')
-      .min(6, 'Mininum 6 characters')
-      .max(15, 'Maximum 15 characters'),
-    email: Yup.string().required('Email is required').email('That is not an email'),
+    firstname: Yup.string().required('Le prénom est obligatoire').max(50, '50 charactères maximum'),
+    lastname: Yup.string()
+      .required('Le nom de famille est obligatoire')
+      .max(50, '50 charactères maximum'),
+    email: Yup.string().required("L'adresse email est obligatoire").email('Adresse email invalide'),
     password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password should be of minimum 6 characters length'),
+      .required('Le mot de passe est obligatoire')
+      .min(6, 'Le mot de passe doit faire 6 charactères au minimum'),
     confirmPassword: Yup.string()
-      .required('Confirm password is required')
-      .oneOf([Yup.ref('password')], "Password's not match"),
+      .required('La confirmation du mot de passe est obligatoire')
+      .oneOf([Yup.ref('password')], 'Les mots de passe ne correspondent pas'),
   });
 
   const defaultValues = {
-    fullName: '',
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -60,22 +72,32 @@ export default function RegisterBackgroundView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      console.log('DATA', data);
-    } catch (error) {
-      console.error(error);
+      const res = await register(data);
+      if (res.jwt) {
+        reset();
+        await signIn('credentials', {
+          redirect: Boolean(true),
+          email: data.email,
+          password: data.password,
+          callbackUrl: callbackUrl || '/',
+        });
+      } else setError({ message: res.error });
+    } catch (err) {
+      console.error(err);
+      if (err.response.data.error.message === 'Email or Username are already taken')
+        setError({ message: 'Cette addresse email est déjà utilisée' });
+      else setError({ message: err.message });
     }
   });
 
   const renderHead = (
     <div>
       <Typography variant="h3" paragraph>
-        Get Started
+        Création de compte
       </Typography>
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-        {`Already have an account? `}
+        {`Vous avez déjà un compte? `}
         <Link component={RouterLink} href={paths.login} variant="subtitle2" color="primary">
           Login
         </Link>
@@ -102,13 +124,15 @@ export default function RegisterBackgroundView() {
   const renderForm = (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack spacing={2.5}>
-        <RHFTextField name="fullName" label="Full Name" />
+        <RHFTextField name="firstname" label="Prénom" />
 
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name="lastname" label="Nom de famille" />
+
+        <RHFTextField name="email" label="Adresse email" />
 
         <RHFTextField
           name="password"
-          label="Password"
+          label="Mot de passe"
           type={passwordShow.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -123,7 +147,7 @@ export default function RegisterBackgroundView() {
 
         <RHFTextField
           name="confirmPassword"
-          label="Confirm Password"
+          label="Confirmation du mot de passe"
           type={passwordShow.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -136,6 +160,8 @@ export default function RegisterBackgroundView() {
           }}
         />
 
+        {error?.message && <AuthError error={error} setError={setError} />}
+
         <LoadingButton
           fullWidth
           color="inherit"
@@ -144,17 +170,17 @@ export default function RegisterBackgroundView() {
           variant="contained"
           loading={isSubmitting}
         >
-          Register
+          Inscription
         </LoadingButton>
 
         <Typography variant="caption" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-          {`I agree to `}
+          {`Je valide les `}
           <Link color="text.primary" href="#" underline="always">
-            Terms of Service
+            Conditions générales de vente
           </Link>
-          {` and `}
+          {` et la `}
           <Link color="text.primary" href="#" underline="always">
-            Privacy Policy.
+            Politique de confidentialité.
           </Link>
         </Typography>
       </Stack>
@@ -169,7 +195,7 @@ export default function RegisterBackgroundView() {
 
       <Divider>
         <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-          or continue with
+          ou continuez avec
         </Typography>
       </Divider>
 
