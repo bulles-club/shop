@@ -26,7 +26,7 @@ export const viewport = {
 export const metadata = {
   title: 'Cobulles',
   description: 'Le neuvième art partagé',
-  manifest: '/manifest.json',
+  // manifest: '/manifest.json',
   icons: [
     { rel: 'icon', url: '/favicon/favicon.ico' },
     { rel: 'icon', type: 'image/png', sizes: '16x16', url: '/favicon/favicon-16x16.png' },
