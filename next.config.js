@@ -1,5 +1,4 @@
 module.exports = {
-  crossOrigin: 'use-credentials',
   trailingSlash: true,
   modularizeImports: {
     '@mui/icons-material': {
