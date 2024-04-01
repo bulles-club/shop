@@ -8,38 +8,31 @@ import Typography from '@mui/material/Typography';
 
 import { _mock } from 'src/_mock';
 
-import EcommerceAccountPaymentCard from '../account/ecommerce-account-payment-card';
-import EcommerceAccountNewCardForm from '../account/ecommerce-account-new-card-form';
+import EcommerceAccountAddress from '../account/ecommerce-account-address';
+import EcommerceAccountNewAddressForm from '../account/ecommerce-account-new-address-form';
 
 // ----------------------------------------------------------------------
 
-const CARD_OPTIONS = [
+const ADDRESSES = [
   {
     id: _mock.id(1),
-    value: 'paypal',
-    label: 'Paypal',
-    cardNumber: '2904 1902 1802 1234',
-    cardHolder: _mock.fullName(1),
-    expirationDate: '08/24',
-    isPrimary: false,
+    isDefault: true,
+    label: 'Maison',
+    line1: 'calle Sicilia 236',
+    line2: 'Entresuelo 1A',
+    postalCode: '08013',
+    city: 'Barcelona',
+    country: 'France',
   },
   {
     id: _mock.id(2),
-    value: 'mastercard',
-    label: 'Mastercard',
-    cardNumber: '2904 1902 1802 5678',
-    cardHolder: _mock.fullName(2),
-    expirationDate: '08/24',
-    isPrimary: true,
-  },
-  {
-    id: _mock.id(3),
-    value: 'visa',
-    label: 'Visa',
-    cardNumber: '2904 1902 1802 7890',
-    cardHolder: _mock.fullName(3),
-    expirationDate: '08/24',
-    isPrimary: false,
+    isDefault: false,
+    label: 'Bureau',
+    line1: 'calle Sicilia 236',
+    line2: 'Entresuelo 1A',
+    postalCode: '08013',
+    city: 'Barcelona',
+    country: 'France',
   },
 ];
 
@@ -49,15 +42,11 @@ export default function EcommerceAccountAddressesView() {
   return (
     <Stack spacing={5}>
       <Stack spacing={3}>
-        <Typography variant="h5">Payment Method</Typography>
+        <Typography variant="h5">Carnet d'adresses</Typography>
 
-        <Box
-          gap={3}
-          display="grid"
-          gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
-        >
-          {CARD_OPTIONS.map((card) => (
-            <EcommerceAccountPaymentCard key={card.id} card={card} />
+        <Box gap={3} display="grid" gridTemplateColumns="repeat(1, 1fr)">
+          {ADDRESSES.map((address) => (
+            <EcommerceAccountAddress key={address.id} address={address} />
           ))}
         </Box>
       </Stack>
@@ -65,12 +54,12 @@ export default function EcommerceAccountAddressesView() {
       <Divider sx={{ borderStyle: 'dashed', my: 5 }} />
 
       <Stack spacing={3}>
-        <Typography variant="h5">Add New Card</Typography>
+        <Typography variant="h5">Ajouter une nouvelle adresse</Typography>
 
-        <EcommerceAccountNewCardForm />
+        <EcommerceAccountNewAddressForm />
 
         <Button color="inherit" size="large" variant="contained" sx={{ alignSelf: 'flex-end' }}>
-          Save
+          Enregistrer
         </Button>
       </Stack>
     </Stack>
