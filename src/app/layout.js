@@ -26,7 +26,6 @@ export const viewport = {
 export const metadata = {
   title: 'Cobulles',
   description: 'Le neuvième art partagé',
-  // manifest: '/manifest.json',
   icons: [
     { rel: 'icon', url: '/favicon/favicon.ico' },
     { rel: 'icon', type: 'image/png', sizes: '16x16', url: '/favicon/favicon-16x16.png' },
@@ -38,6 +37,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={primaryFont.className}>
+      <head>
+        <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials" />
+      </head>
       <body>
         <SessionProvider>
           <LocalizationProvider>
