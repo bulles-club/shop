@@ -65,7 +65,13 @@ export default function EcommerceProductsView({
   }, []);
 
   return (
-    <InstantSearchNext searchClient={searchClient} indexName="books">
+    <InstantSearchNext
+      searchClient={searchClient}
+      indexName="books"
+      future={{
+        preserveSharedStateOnUnmount: true,
+      }}
+    >
       <Configure analytics={false} facetFilters={filters} hitsPerPage={16} />
       <Container>
         <Stack
