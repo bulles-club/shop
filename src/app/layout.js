@@ -32,6 +32,9 @@ export const metadata = {
     { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/favicon/favicon-32x32.png' },
     { rel: 'apple-touch-icon', sizes: '180x180', url: '/favicon/apple-touch-icon.png' },
   ],
+  verification: {
+    google: 'kSHZinDGYV8LvFIzZpJz8cF_U_pTxtrJjmbUmo6uNn4',
+  },
 };
 
 export default function RootLayout({ children }) {
