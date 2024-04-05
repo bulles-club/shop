@@ -1,12 +1,14 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 
 import { useContentClient } from 'src/hooks/use-content-client';
+
+import { bookQuery } from 'src/services/queries';
 
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
@@ -19,78 +21,9 @@ import EcommerceProductDetailsSpecifications from '../product/details/ecommerce-
 
 // ----------------------------------------------------------------------
 
-const QUERY = gql`
-  query ($id: ID!) {
-    book(id: $id) {
-      data {
-        id
-        attributes {
-          Title
-          Description
-          SeriesVolume
-          PageCount
-          ISBN10
-          ISBN13
-          AgeGroup
-          Type
-          PublicationYear
-          Images {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-          Artists {
-            data {
-              attributes {
-                Name
-              }
-              id
-            }
-          }
-          Genre {
-            data {
-              attributes {
-                Title
-              }
-            }
-          }
-          Publisher {
-            data {
-              attributes {
-                Name
-                Country
-              }
-              id
-            }
-          }
-          Series {
-            data {
-              id
-              attributes {
-                Name
-              }
-            }
-          }
-          ScriptWriters {
-            data {
-              id
-              attributes {
-                Name
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-// ----------------------------------------------------------------------
 export default function EcommerceProductView({ id }) {
   const client = useContentClient();
-  const { loading, data } = useQuery(QUERY, { client, variables: { id } });
+  const { loading, data } = useQuery(bookQuery, { client, variables: { id } });
 
   if (loading) {
     return <SplashScreen />;

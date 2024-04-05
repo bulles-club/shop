@@ -1,43 +1,21 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import { useContentClient } from 'src/hooks/use-content-client';
+
+import { seriesQuery } from 'src/services/queries';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
 import EcommerceProductsView from './ecommerce-products-view';
-// ----------------------------------------------------------------------
 
-const QUERY = gql`
-  query ($id: ID!) {
-    serie(id: $id) {
-      data {
-        id
-        attributes {
-          Name
-          Ended
-          FirstPublicationYear
-          Description
-          Creators {
-            data {
-              attributes {
-                Name
-              }
-              id
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 // ----------------------------------------------------------------------
 
 export default function EcommerceSeriesView({ id }) {
   const client = useContentClient();
-  const { loading, data } = useQuery(QUERY, { client, variables: { id } });
+  const { loading, data } = useQuery(seriesQuery, { client, variables: { id } });
 
   if (loading) {
     return <SplashScreen />;
