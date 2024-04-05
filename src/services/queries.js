@@ -93,3 +93,48 @@ export const seriesQuery = gql`
     }
   }
 `;
+
+export const meQuery = gql`
+  query Me {
+    me {
+      id
+      username
+      email
+      confirmed
+      blocked
+      firstname
+      lastname
+      dateofbirth
+      addresses
+      cart {
+        data {
+          attributes {
+            books {
+              data {
+                attributes {
+                  Title
+                  Images {
+                    data {
+                      attributes {
+                        url
+                      }
+                    }
+                  }
+                  ScriptWriters {
+                    data {
+                      attributes {
+                        Name
+                      }
+                    }
+                  }
+                }
+                id
+              }
+            }
+          }
+        }
+      }
+      phonenumber
+    }
+  }
+`;

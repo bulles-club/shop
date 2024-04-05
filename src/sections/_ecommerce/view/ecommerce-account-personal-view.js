@@ -1,7 +1,7 @@
 'use client';
 
 import * as Yup from 'yup';
-import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -14,6 +14,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { useBoolean } from 'src/hooks/use-boolean';
+import useAuthorizedQuery from 'src/hooks/use-authorized-query';
+
+import { meQuery } from 'src/services/queries';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
@@ -22,21 +25,21 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
-  const { data: session } = useSession();
+  const { data: { me } = {} } = useAuthorizedQuery(meQuery);
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
-    firstName: Yup.string().required('Le prénom est obligatoire'),
-    lastName: Yup.string().required('Le nom de famille est obligatoire'),
-    emailAddress: Yup.string().required("L'adresse email est obligatoire"),
-    phoneNumber: Yup.string().required('Phone number is required'),
+    firstname: Yup.string().required('Le prénom est obligatoire'),
+    lastname: Yup.string().required('Le nom de famille est obligatoire'),
+    emailaddress: Yup.string().required("L'adresse email est obligatoire"),
+    phonenumber: Yup.string().required('Phone number is required'),
   });
 
   const defaultValues = {
-    firstName: session?.user.firstname,
-    lastName: session?.user.lastname,
-    emailAddress: session?.user.email,
-    phoneNumber: session?.user.phonenumber || '',
-    dateofbirth: session?.user.dateofbirth,
+    email: '',
+    firstname: '',
+    lastname: '',
+    dateofbirth: '',
+    phonenumber: '',
     oldPassword: '',
     newPassword: '',
     confirmNewPassword: '',
@@ -52,6 +55,10 @@ export default function EcommerceAccountPersonalView() {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+
+  useEffect(() => {
+    if (me) reset(me);
+  }, [me, reset]);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -75,19 +82,20 @@ export default function EcommerceAccountPersonalView() {
         display="grid"
         gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
       >
-        <RHFTextField name="firstName" label="Prénom" />
+        <RHFTextField name="firstname" label="Prénom" />
 
-        <RHFTextField name="lastName" label="Nom de famille" />
+        <RHFTextField name="lastname" label="Nom de famille" />
 
-        <RHFTextField name="emailAddress" label="Adresse email" />
+        <RHFTextField name="email" label="Adresse email" />
 
-        <RHFTextField name="phoneNumber" label="Téléphone" />
+        <RHFTextField name="phonenumber" label="Téléphone" />
 
         <Controller
           name="dateofbirth"
           render={({ field, fieldState: { error } }) => (
             <DatePicker
               label="Date de naissance"
+              format="dd/MM/yyyy"
               slotProps={{
                 textField: {
                   helperText: error?.message,
@@ -95,7 +103,7 @@ export default function EcommerceAccountPersonalView() {
                 },
               }}
               {...field}
-              value={field.value}
+              value={new Date(field.value)}
             />
           )}
         />
@@ -167,7 +175,7 @@ export default function EcommerceAccountPersonalView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Save Changes
+        Enregister
       </LoadingButton>
     </FormProvider>
   );
