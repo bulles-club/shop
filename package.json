@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.9.9",
+    "@apollo/experimental-nextjs-app-support": "^0.10.0",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
@@ -28,6 +29,7 @@
     "@mui/x-date-pickers": "^7.0.0",
     "@strapi/blocks-react-renderer": "^1.0.1",
     "algoliasearch": "^4.23.0",
+    "apollo3-cache-persist": "^0.15.0",
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.10",

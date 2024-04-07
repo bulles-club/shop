@@ -2,8 +2,8 @@ const { gql } = require('@apollo/client');
 
 // ----------------------------------------------------------------------
 
-export const bookQuery = gql`
-  query ($id: ID!) {
+export const GET_BOOK = gql`
+  query GetBook($id: ID!) {
     book(id: $id) {
       data {
         id
@@ -70,8 +70,8 @@ export const bookQuery = gql`
   }
 `;
 
-export const seriesQuery = gql`
-  query ($id: ID!) {
+export const GET_SERIES = gql`
+  query GetSeries($id: ID!) {
     serie(id: $id) {
       data {
         id
@@ -94,7 +94,7 @@ export const seriesQuery = gql`
   }
 `;
 
-export const meQuery = gql`
+export const ME = gql`
   query Me {
     me {
       id
@@ -106,35 +106,56 @@ export const meQuery = gql`
       lastname
       dateofbirth
       addresses
+      phonenumber
       cart {
         data {
-          attributes {
-            books {
-              data {
-                attributes {
-                  Title
-                  Images {
-                    data {
-                      attributes {
-                        url
-                      }
-                    }
-                  }
-                  ScriptWriters {
-                    data {
-                      attributes {
-                        Name
-                      }
+          id
+        }
+      }
+    }
+  }
+`;
+
+export const GET_CART = gql`
+  query GetCart($id: ID!) {
+    cart(id: $id) {
+      data {
+        attributes {
+          books {
+            data {
+              id
+              attributes {
+                Title
+                Images {
+                  data {
+                    attributes {
+                      url
                     }
                   }
                 }
-                id
+                ScriptWriters {
+                  data {
+                    attributes {
+                      Name
+                    }
+                  }
+                }
               }
             }
           }
         }
+        id
       }
-      phonenumber
+    }
+  }
+`;
+
+export const SET_CART = gql`
+  mutation UpdateCart($id: ID!, $books: [ID!]!) {
+    updateCart(data: { books: $books }, id: $id) {
+      data {
+        id
+      }
     }
   }
 `;

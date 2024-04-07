@@ -66,7 +66,7 @@ export default function EcommerceProductDetailsCarousel({ images }) {
   const theme = useTheme();
 
   const slides = images.map((slide) => ({
-    src: STRAPI_URL + slide.attributes.url,
+    src: STRAPI_URL + slide.url,
   }));
 
   const lightbox = useLightbox(slides);

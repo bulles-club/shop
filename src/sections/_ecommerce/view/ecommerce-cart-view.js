@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { _products } from 'src/_mock';
+import useCart from 'src/hooks/use-cart';
 
 import Iconify from 'src/components/iconify';
 
@@ -18,6 +18,12 @@ import EcommerceCartSummary from '../cart/ecommerce-cart-summary';
 // ----------------------------------------------------------------------
 
 export default function EcommerceCartView() {
+  const { cart, removeBook } = useCart();
+
+  const handleRemoveFromCart = (id) => {
+    removeBook(id);
+  };
+
   return (
     <Container
       sx={{
@@ -27,12 +33,16 @@ export default function EcommerceCartView() {
       }}
     >
       <Typography variant="h3" sx={{ mb: 5 }}>
-        Shopping Cart
+        Panier
       </Typography>
 
       <Grid container spacing={{ xs: 5, md: 8 }}>
         <Grid xs={12} md={8}>
-          <EcommerceCartList products={_products.slice(0, 4)} />
+          <EcommerceCartList
+            id={cart?.id}
+            products={cart?.books}
+            onRemoveItem={handleRemoveFromCart}
+          />
         </Grid>
 
         <Grid xs={12} md={4}>
@@ -48,12 +58,12 @@ export default function EcommerceCartView() {
 
       <Button
         component={RouterLink}
-        href={paths.eCommerce.products}
+        href={paths.library.root}
         color="inherit"
         startIcon={<Iconify icon="carbon:chevron-left" />}
         sx={{ mt: 3 }}
       >
-        Continue Shopping
+        Retour à la bibliothèque
       </Button>
     </Container>
   );

@@ -8,7 +8,7 @@ import EcommerceCartItem from './ecommerce-cart-item';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceCartList({ products, wishlist = false }) {
+export default function EcommerceCartList({ id, products, wishlist = false, onRemoveItem }) {
   return (
     <Scrollbar>
       <Stack
@@ -16,26 +16,32 @@ export default function EcommerceCartList({ products, wishlist = false }) {
         alignItems="center"
         sx={{
           py: 2,
-          minWidth: 720,
           typography: 'subtitle2',
           borderBottom: (theme) => `solid 1px ${theme.palette.divider}`,
         }}
       >
-        <Stack flexGrow={1}>Item</Stack>
-        <Stack sx={{ width: 120 }}>Qty</Stack>
-        <Stack sx={{ width: 120 }}>Subtotal</Stack>
         <Stack sx={{ width: 36 }} />
         {wishlist && <Stack sx={{ width: 36 }} />}
       </Stack>
 
-      {products.map((product) => (
-        <EcommerceCartItem key={product.id} product={product} wishlist={wishlist} />
+      {products?.map((product) => (
+        <EcommerceCartItem
+          key={product.id}
+          id={product.id}
+          coverUrl={product.coverUrl}
+          name={product.name}
+          author={product.author}
+          wishlist={wishlist}
+          onRemoveItem={onRemoveItem}
+        />
       ))}
     </Scrollbar>
   );
 }
 
 EcommerceCartList.propTypes = {
+  id: PropTypes.string,
   products: PropTypes.array,
   wishlist: PropTypes.bool,
+  onRemoveItem: PropTypes.func,
 };

@@ -1,14 +1,16 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/client';
 
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 
-import { useContentClient } from 'src/hooks/use-content-client';
+import useCart from 'src/hooks/use-cart';
+import useStrapiQuery from 'src/hooks/use-strapi-query';
 
-import { bookQuery } from 'src/services/queries';
+import { transformBook } from 'src/utils/transformers';
+
+import { GET_BOOK } from 'src/services/queries';
 
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
@@ -22,8 +24,13 @@ import EcommerceProductDetailsSpecifications from '../product/details/ecommerce-
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductView({ id }) {
-  const client = useContentClient();
-  const { loading, data } = useQuery(bookQuery, { client, variables: { id } });
+  const { loading, data } = useStrapiQuery(GET_BOOK, { id });
+  const book = data ? transformBook(data) : null;
+  const { addBook } = useCart();
+
+  const handleAddToCart = () => {
+    addBook(book.id, book.name, book.images[0].url, book.scriptWriters[0].name);
+  };
 
   if (loading) {
     return <SplashScreen />;
@@ -35,10 +42,10 @@ export default function EcommerceProductView({ id }) {
         <CustomBreadcrumbs
           links={[
             {
-              name: data.book.data.attributes.Genre.data.attributes.Title,
+              name: book.name,
             },
             {
-              name: data.book.data.attributes.Title,
+              name: book.name,
             },
           ]}
           sx={{ my: 5 }}
@@ -46,20 +53,21 @@ export default function EcommerceProductView({ id }) {
 
         <Grid container spacing={{ xs: 5, md: 8 }}>
           <Grid xs={12} md={5} lg={5}>
-            <EcommerceProductDetailsCarousel images={data.book.data.attributes.Images.data} />
+            <EcommerceProductDetailsCarousel images={book.images} />
           </Grid>
 
           <Grid xs={12} md={7} lg={7}>
             <EcommerceProductDetailsInfo
-              name={data.book.data.attributes.Title}
+              name={book.name}
               // ratingNumber={_mockProduct.ratingNumber}
               // totalReviews={_mockProduct.totalReviews}
-              scriptWriters={data.book.data.attributes.ScriptWriters.data}
-              artists={data.book.data.attributes.Artists.data}
-              series={data.book.data.attributes.Series}
-              seriesVolume={data.book.data.attributes.SeriesVolume}
-              type={data.book.data.attributes.Type}
-              genre={data.book.data.attributes.Genre.data.attributes.Title}
+              scriptWriters={book.scriptWriters}
+              artists={book.artists}
+              series={book.series}
+              seriesVolume={book.seriesVolume}
+              type={book.type}
+              genre={book.genre}
+              onAddToCart={handleAddToCart}
             />
           </Grid>
         </Grid>
@@ -70,11 +78,11 @@ export default function EcommerceProductView({ id }) {
               description={data.book.data.attributes.Description}
             />
             <EcommerceProductDetailsSpecifications
-              ageGroup={data.book.data.attributes.AgeGroup}
-              pageCount={data.book.data.attributes.PageCount}
-              publicationYear={data.book.data.attributes.PublicationYear}
-              isbn10={data.book.data.attributes.ISBN10}
-              isbn13={data.book.data.attributes.ISBN13}
+              ageGroup={book.ageGroup}
+              pageCount={book.pageCount}
+              publicationYear={book.publicationYear}
+              isbn10={book.isbn10}
+              isbn13={book.isbn13}
             />
           </Grid>
         </Grid>

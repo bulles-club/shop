@@ -1,11 +1,10 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/client';
 
-import { useContentClient } from 'src/hooks/use-content-client';
+import useStrapiQuery from 'src/hooks/use-strapi-query';
 
-import { seriesQuery } from 'src/services/queries';
+import { GET_SERIES } from 'src/services/queries';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
@@ -14,8 +13,7 @@ import EcommerceProductsView from './ecommerce-products-view';
 // ----------------------------------------------------------------------
 
 export default function EcommerceSeriesView({ id }) {
-  const client = useContentClient();
-  const { loading, data } = useQuery(seriesQuery, { client, variables: { id } });
+  const { loading, data } = useStrapiQuery(GET_SERIES, { id });
 
   if (loading) {
     return <SplashScreen />;

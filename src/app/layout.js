@@ -13,6 +13,7 @@ import ProgressBar from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsProvider } from 'src/components/settings';
 import { SessionProvider } from 'src/context/next-auth';
+import { ApolloWrapper } from 'src/components/apollo-wrapper/ApolloWrapper';
 
 // ----------------------------------------------------------------------
 
@@ -44,24 +45,26 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials" />
       </head>
       <body>
-        <SessionProvider>
-          <LocalizationProvider>
-            <SettingsProvider
-              defaultSettings={{
-                themeMode: 'light', // 'light' | 'dark'
-                themeDirection: 'ltr', //  'rtl' | 'ltr'
-                themeColorPresets: 'default', // 'default' | 'preset01' | 'preset02' | 'preset03' | 'preset04' | 'preset05'
-              }}
-            >
-              <ThemeProvider>
-                <MotionLazy>
-                  <ProgressBar />
-                  {children}
-                </MotionLazy>
-              </ThemeProvider>
-            </SettingsProvider>
-          </LocalizationProvider>
-        </SessionProvider>
+        <ApolloWrapper>
+          <SessionProvider>
+            <LocalizationProvider>
+              <SettingsProvider
+                defaultSettings={{
+                  themeMode: 'light', // 'light' | 'dark'
+                  themeDirection: 'ltr', //  'rtl' | 'ltr'
+                  themeColorPresets: 'default', // 'default' | 'preset01' | 'preset02' | 'preset03' | 'preset04' | 'preset05'
+                }}
+              >
+                <ThemeProvider>
+                  <MotionLazy>
+                    <ProgressBar />
+                    {children}
+                  </MotionLazy>
+                </ThemeProvider>
+              </SettingsProvider>
+            </LocalizationProvider>
+          </SessionProvider>
+        </ApolloWrapper>
       </body>
     </html>
   );

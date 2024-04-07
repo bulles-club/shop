@@ -29,6 +29,7 @@ export default function EcommerceProductDetailsInfo({
   seriesVolume,
   type,
   genre,
+  onAddToCart,
 }) {
   const mdUp = useResponsive('up', 'md');
 
@@ -53,16 +54,16 @@ export default function EcommerceProductDetailsInfo({
       <Stack spacing={2} sx={{ mb: 3 }}>
         <EcommerceProductDetailsItem
           label="Scénario"
-          value={scriptWriters.map((item) => item.attributes.Name)}
+          value={scriptWriters.map((item) => item.name)}
         />
         <EcommerceProductDetailsItem
           label="Illustration"
-          value={artists.map((item) => item.attributes.Name)}
+          value={artists.map((item) => item.name)}
         />
         <EcommerceProductDetailsItem
           label="Série"
-          value={series?.data.attributes.Name}
-          link={`${paths.library.series}/${series?.data.id}`}
+          value={series?.name}
+          link={`${paths.library.series}/${series?.id}`}
         />
         <EcommerceProductDetailsItem label="Volume" value={seriesVolume} />
         <EcommerceProductDetailsItem label="Type" value={type} />
@@ -72,15 +73,18 @@ export default function EcommerceProductDetailsInfo({
       <Stack spacing={2} direction={{ xs: 'column', md: 'row' }} alignItems={{ md: 'center' }}>
         <Stack direction="row" spacing={2}>
           <Button
-            component={RouterLink}
-            href={paths.eCommerce.cart}
+            // component={RouterLink}
+            // href={paths.eCommerce.cart}
             fullWidth={!mdUp}
             size="large"
             color="primary"
             variant="contained"
             startIcon={<Iconify icon="carbon:shopping-cart-plus" />}
+            onClick={() => {
+              onAddToCart();
+            }}
           >
-            Emprunter
+            Ajouter
           </Button>
 
           <Button
@@ -112,4 +116,5 @@ EcommerceProductDetailsInfo.propTypes = {
   seriesVolume: PropTypes.number,
   type: PropTypes.string,
   genre: PropTypes.string,
+  onAddToCart: PropTypes.func,
 };

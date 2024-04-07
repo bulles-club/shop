@@ -13,10 +13,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
+import useMe from 'src/hooks/use-me';
 import { useBoolean } from 'src/hooks/use-boolean';
-import useAuthorizedQuery from 'src/hooks/use-authorized-query';
-
-import { meQuery } from 'src/services/queries';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
@@ -25,7 +23,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 export default function EcommerceAccountPersonalView() {
   const passwordShow = useBoolean();
-  const { data: { me } = {} } = useAuthorizedQuery(meQuery);
+  const me = useMe();
 
   const EcommerceAccountPersonalSchema = Yup.object().shape({
     firstname: Yup.string().required('Le prénom est obligatoire'),
