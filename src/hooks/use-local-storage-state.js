@@ -61,7 +61,7 @@ export default function useLocalStorageState(key, initialValue) {
     }
   }, [key, initialValue]);
   return {
-    current: store ? JSON.parse(store) : initialValue,
+    current: store && store.length > 0 ? JSON.parse(store) : initialValue,
     setItemValue: setState,
     removeItem: () => removeLocalStorageItem(key),
   };
