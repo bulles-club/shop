@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <ApolloWrapper>
-          <SessionProvider>
+          <SessionProvider refetchInterval={1 * 60 * 60}>
             <LocalizationProvider>
               <SettingsProvider
                 defaultSettings={{
