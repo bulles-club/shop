@@ -41,26 +41,6 @@ export default function EcommerceCartItem({ id, coverUrl, name, author, wishlist
         </Stack>
       </Stack>
 
-      {/* <Stack sx={{ width: 120 }}>
-        <TextField
-          select
-          size="small"
-          variant="outlined"
-          SelectProps={{
-            native: true,
-          }}
-          sx={{ width: 80 }}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </TextField>
-      </Stack> */}
-
-      {/* <Stack sx={{ width: 120, typography: 'subtitle2' }}> {fCurrency(product.price)} </Stack> */}
-
       <IconButton onClick={() => onRemoveItem(id)}>
         <Iconify icon="carbon:trash-can" />
       </IconButton>

@@ -110,7 +110,7 @@ export const pageLinks = [
 export const navConfig = [
   { title: 'Accueil', path: '/' },
   { title: 'Actualités', path: paths.news.root },
-  { title: 'Les livres', path: paths.library.root },
+  { title: 'Blibliothèque', path: paths.library.root },
   { title: 'Qui sommes nous', path: paths.corporate },
-  { title: 'Les abonnements', path: paths.subscriptions },
+  { title: 'Abonnements', path: paths.subscriptions },
 ];

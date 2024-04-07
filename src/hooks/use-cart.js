@@ -1,38 +1,21 @@
-import { useLocalStorage } from './use-local-storage';
+import useLocalStorageState from './use-local-storage-state';
 
 // ----------------------------------------------------------------------
 
 export default function useCart() {
-  const { state, update } = useLocalStorage('cart', { books: [] });
-  //   const me = useMe();
-  //   const { data } = useStrapiQuery(GET_CART, { id: me?.cart.data.id }, true);
-  //   const [setCart] = useStrapiMutation(SET_CART);
+  const { current, setItemValue } = useLocalStorageState('cart', []);
 
-  //   useEffect(() => {
-  //     if (data) {
-  //       console.log('updating state');
-  //       update('id', data.cart.data.id);
-  //       update(
-  //         'books',
-  //         data.cart.data.attributes.books.data.map((book) => ({
-  //           id: book.id,
-  //           coverUrl: book.attributes.Images.data[0].attributes.url,
-  //           name: book.attributes.Title,
-  //           author: book.attributes.ScriptWriters.data[0].attributes.Name,
-  //         }))
-  //       );
-  //     }
-  //   }, [data, update]);
+  const updateBooksInCart = (newBooks) => {
+    setItemValue(newBooks);
+  };
 
   const addBook = (id, name, coverUrl, author) => {
-    const newBooks = state.books.concat([{ id, coverUrl, name, author }]);
-    // setCart({ variables: { id: state.id, books: newBooks.map((book) => book.id) } });
-    update('books', newBooks);
+    if (!current.reduce((found, book) => (book.id === id ? true : found), false))
+      updateBooksInCart(current.concat([{ id, coverUrl, name, author }]));
   };
   const removeBook = (id) => {
-    const newBooks = state.books.filter((book) => book.id !== id);
-    // setCart({ variables: { id: state.id, books: newBooks.map((book) => book.id) } });
-    update('books', newBooks);
+    updateBooksInCart(current.filter((book) => book.id !== id));
   };
-  return { cart: state, addBook, removeBook };
+
+  return { books: current, addBook, removeBook };
 }

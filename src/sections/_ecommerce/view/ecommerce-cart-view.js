@@ -13,12 +13,11 @@ import useCart from 'src/hooks/use-cart';
 import Iconify from 'src/components/iconify';
 
 import EcommerceCartList from '../cart/ecommerce-cart-list';
-import EcommerceCartSummary from '../cart/ecommerce-cart-summary';
 
 // ----------------------------------------------------------------------
 
 export default function EcommerceCartView() {
-  const { cart, removeBook } = useCart();
+  const { books, removeBook } = useCart();
 
   const handleRemoveFromCart = (id) => {
     removeBook(id);
@@ -38,21 +37,22 @@ export default function EcommerceCartView() {
 
       <Grid container spacing={{ xs: 5, md: 8 }}>
         <Grid xs={12} md={8}>
-          <EcommerceCartList
-            id={cart?.id}
-            products={cart?.books}
-            onRemoveItem={handleRemoveFromCart}
-          />
+          <EcommerceCartList products={books} onRemoveItem={handleRemoveFromCart} />
         </Grid>
 
         <Grid xs={12} md={4}>
-          <EcommerceCartSummary
-            tax={7}
-            total={357.09}
-            subtotal={89.09}
-            shipping={55.47}
-            discount={16.17}
-          />
+          <Button
+            sx={{ mt: 4 }}
+            component={RouterLink}
+            href={paths.eCommerce.checkout}
+            size="large"
+            fullWidth
+            variant="contained"
+            color="inherit"
+            disabled={books.length === 0}
+          >
+            Checkout
+          </Button>
         </Grid>
       </Grid>
 
@@ -63,7 +63,7 @@ export default function EcommerceCartView() {
         startIcon={<Iconify icon="carbon:chevron-left" />}
         sx={{ mt: 3 }}
       >
-        Retour à la bibliothèque
+        Bibliothèque
       </Button>
     </Container>
   );

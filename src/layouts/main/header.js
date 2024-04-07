@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import useCart from 'src/hooks/use-cart';
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
 
@@ -30,6 +31,7 @@ import HeaderShadow from '../common/header-shadow';
 // ----------------------------------------------------------------------
 
 export default function Header({ headerOnDark }) {
+  const { books } = useCart();
   const theme = useTheme();
   const offset = useOffSetTop();
   const mdUp = useResponsive('up', 'md');
@@ -80,7 +82,7 @@ export default function Header({ headerOnDark }) {
           </IconButton>
         </Badge>
 
-        <Badge badgeContent={4} color="error">
+        <Badge badgeContent={books.length} color="error">
           <IconButton
             component={RouterLink}
             href={paths.eCommerce.cart}
