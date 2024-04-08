@@ -1,4 +1,4 @@
-import EcommerceAccountPersonalView from 'src/sections/_ecommerce/view/ecommerce-account-personal-view';
+import EcommerceAccountPersonalView from 'src/containers/ecommerce-account-personal-view';
 
 // ----------------------------------------------------------------------
 

@@ -22,8 +22,8 @@ import { useSearchClient } from 'src/hooks/use-search-client';
 
 import Iconify from 'src/components/iconify';
 
-import EcommerceFilters from '../product/filters/ecommerce-filters';
-import EcommerceProductList from '../product/list/ecommerce-product-list';
+import EcommerceFilters from './filters/ecommerce-filters';
+import EcommerceProductList from './ecommerce-product-list';
 
 // ----------------------------------------------------------------------
 

@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-
-import { RouterLink } from 'src/routes/components';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsItem({ label, value, link }) {
+export default function EcommerceProductDetailsItem({ label, value }) {
   return (
     <>
       {value && (
@@ -22,15 +19,7 @@ export default function EcommerceProductDetailsItem({ label, value, link }) {
             <Box component="span" sx={{ width: 160, color: 'text.secondary' }}>
               {label}
             </Box>
-            <Box component="span">
-              {link ? (
-                <Link component={RouterLink} href={link} color="inherit" underline="always">
-                  {value}
-                </Link>
-              ) : (
-                <>{value}</>
-              )}
-            </Box>
+            <Box component="span">{value}</Box>
           </Stack>
         </Stack>
       )}
@@ -41,5 +30,4 @@ export default function EcommerceProductDetailsItem({ label, value, link }) {
 EcommerceProductDetailsItem.propTypes = {
   label: PropTypes.string,
   value: PropTypes.any,
-  link: PropTypes.string,
 };

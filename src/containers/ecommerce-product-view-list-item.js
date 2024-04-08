@@ -12,7 +12,7 @@ import Image from 'src/components/image';
 import Label from 'src/components/label';
 import TextMaxLine from 'src/components/text-max-line';
 
-import ProductRating from '../../common/product-rating';
+import ProductRating from '../sections/_ecommerce/common/product-rating';
 
 // ----------------------------------------------------------------------
 

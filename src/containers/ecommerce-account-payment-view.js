@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 
 import { _mock } from 'src/_mock';
 
-import EcommerceAccountPaymentCard from '../account/ecommerce-account-payment-card';
-import EcommerceAccountNewCardForm from '../account/ecommerce-account-new-card-form';
+import EcommerceAccountPaymentCard from '../sections/_ecommerce/account/ecommerce-account-payment-card';
+import EcommerceAccountNewCardForm from '../sections/_ecommerce/account/ecommerce-account-new-card-form';
 
 // ----------------------------------------------------------------------
 

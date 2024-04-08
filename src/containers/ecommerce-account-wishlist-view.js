@@ -12,7 +12,7 @@ import { _products } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import EcommerceCartList from '../cart/ecommerce-cart-list';
+import EcommerceCartList from '../sections/_ecommerce/cart/ecommerce-cart-list';
 
 // ----------------------------------------------------------------------
 

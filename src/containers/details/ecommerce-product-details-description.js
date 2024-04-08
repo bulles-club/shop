@@ -14,7 +14,7 @@ export default function EcommerceProductDetailsDescription({ description }) {
         py: { xs: 5, md: 5 },
       }}
     >
-      <Stack spacing={2}>
+      <Stack>
         <Typography variant="h6"> Description </Typography>
         <BlocksRenderer content={description} />
       </Stack>

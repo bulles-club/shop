@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import { Link } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
@@ -14,8 +15,7 @@ import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
 import EcommerceProductDetailsItem from './ecommerce-product-details-item';
-
-// ----------------------------------------------------------------------
+import EcommerceProductDetailsAuthor from './ecommerce-product-details-author';
 
 // ----------------------------------------------------------------------
 
@@ -52,18 +52,20 @@ export default function EcommerceProductDetailsInfo({
       </Stack>
 
       <Stack spacing={2} sx={{ mb: 3 }}>
-        <EcommerceProductDetailsItem
-          label="Scénario"
-          value={scriptWriters.map((item) => item.name)}
-        />
-        <EcommerceProductDetailsItem
-          label="Illustration"
-          value={artists.map((item) => item.name)}
-        />
+        <EcommerceProductDetailsAuthor label="Scénario" authors={scriptWriters} />
+        <EcommerceProductDetailsAuthor label="Illustration" authors={artists} />
         <EcommerceProductDetailsItem
           label="Série"
-          value={series?.name}
-          link={`${paths.library.series}/${series?.id}`}
+          value={
+            <Link
+              component={RouterLink}
+              href={`${paths.library.series}/${series?.id}`}
+              color="inherit"
+              underline="always"
+            >
+              {series?.name}
+            </Link>
+          }
         />
         <EcommerceProductDetailsItem label="Volume" value={seriesVolume} />
         <EcommerceProductDetailsItem label="Type" value={type} />

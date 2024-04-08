@@ -3,8 +3,8 @@ import { Hits } from 'react-instantsearch';
 
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
-import EcommerceProductViewListItem from '../item/ecommerce-product-view-list-item';
-import EcommerceProductViewGridItem from '../item/ecommerce-product-view-grid-item';
+import EcommerceProductViewListItem from './ecommerce-product-view-list-item';
+import EcommerceProductViewGridItem from './ecommerce-product-view-grid-item';
 
 // ----------------------------------------------------------------------
 

@@ -24,10 +24,10 @@ import { _productsTable } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
-import { stableSort, getComparator } from '../account/utils';
-import EcommerceAccountOrdersTableRow from '../account/ecommerce-account-orders-table-row';
-import EcommerceAccountOrdersTableHead from '../account/ecommerce-account-orders-table-head';
-import EcommerceAccountOrdersTableToolbar from '../account/ecommerce-account-orders-table-toolbar';
+import { stableSort, getComparator } from '../sections/_ecommerce/account/utils';
+import EcommerceAccountOrdersTableRow from '../sections/_ecommerce/account/ecommerce-account-orders-table-row';
+import EcommerceAccountOrdersTableHead from '../sections/_ecommerce/account/ecommerce-account-orders-table-head';
+import EcommerceAccountOrdersTableToolbar from '../sections/_ecommerce/account/ecommerce-account-orders-table-toolbar';
 
 // ----------------------------------------------------------------------
 
