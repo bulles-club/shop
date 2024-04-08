@@ -88,6 +88,7 @@ export const paths = {
     root: '/bibliotheque',
     book: '/bibliotheque/livre',
     series: '/bibliotheque/serie',
+    author: '/bibliotheque/auteur',
   },
   // Others
   pages: '/pages',

@@ -159,3 +159,24 @@ export const SET_CART = gql`
     }
   }
 `;
+
+export const GET_AUTHOR = gql`
+  query GetAuthor($id: ID!) {
+    author(id: $id) {
+      data {
+        id
+        attributes {
+          Name
+          Bio
+          Photo {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

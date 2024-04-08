@@ -46,3 +46,14 @@ function transformAuthors(data) {
       }))
     : [];
 }
+
+export function transformAuthor(data) {
+  return data
+    ? {
+        id: data.author.data.id,
+        name: data.author.data.attributes.Name,
+        bio: data.author.data.attributes.Bio,
+        photoUrl: data.author.data.attributes.Photo.data.attributes.url,
+      }
+    : [];
+}
