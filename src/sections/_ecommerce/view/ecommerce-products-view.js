@@ -41,11 +41,13 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductsView({
+  title,
   header,
   productsViewMode = 'grid',
   facets = null,
   showViewAndSortOptions = false,
   filters = '',
+  paging,
 }) {
   const mobileOpen = useBoolean();
   const searchClient = useSearchClient();
@@ -82,8 +84,6 @@ export default function EcommerceProductsView({
             py: 5,
           }}
         >
-          <Typography variant="h3">{header}</Typography>
-
           {facets && (
             <Button
               color="inherit"
@@ -123,6 +123,14 @@ export default function EcommerceProductsView({
               width: { md: `calc(100% - ${280}px)` },
             }}
           >
+            {title && <Typography variant="h3">{title}</Typography>}
+
+            {header && (
+              <Stack spacing={2} sx={{ mt: 2, mb: 7 }}>
+                {header}
+              </Stack>
+            )}
+
             {showViewAndSortOptions && (
               <Stack
                 direction="row"
@@ -156,7 +164,7 @@ export default function EcommerceProductsView({
               </Stack>
             )}
 
-            <EcommerceProductList viewMode={viewMode} />
+            <EcommerceProductList viewMode={viewMode} paging={paging} />
           </Box>
         </Stack>
       </Container>
@@ -165,9 +173,11 @@ export default function EcommerceProductsView({
 }
 
 EcommerceProductsView.propTypes = {
-  header: PropTypes.string,
+  title: PropTypes.string,
+  header: PropTypes.node,
   facets: PropTypes.array,
   showViewAndSortOptions: PropTypes.bool,
   productsViewMode: PropTypes.string,
   filters: PropTypes.array,
+  paging: PropTypes.bool,
 };

@@ -49,7 +49,7 @@ export default function useLocalStorageState(key, initialValue) {
           setLocalStorageItem(key, nextState);
         }
       } catch (e) {
-        console.log(e);
+        console.error('error setting local storage state', e);
       }
     },
     [key, store, initialValue]

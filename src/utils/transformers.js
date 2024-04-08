@@ -3,14 +3,8 @@ export function transformBook(data) {
     ? {
         id: data.book.data.id,
         name: data.book.data.attributes.Title,
-        scriptWriters: data.book.data.attributes.ScriptWriters.data.map((item) => ({
-          id: item.id,
-          name: item.attributes.Name,
-        })),
-        artists: data.book.data.attributes.Artists.data.map((item) => ({
-          id: item.id,
-          name: item.attributes.Name,
-        })),
+        scriptWriters: transformAuthors(data.book.data.attributes.ScriptWriters),
+        artists: transformAuthors(data.book.data.attributes.Artists),
         series: {
           id: data.book.data.attributes.Series.data.id,
           name: data.book.data.attributes.Series.data.attributes.Name,
@@ -36,6 +30,19 @@ export function transformSerie(data) {
     ? {
         id: data.serie.data.id,
         name: data.serie.data.attributes.Name,
+        ended: data.serie.data.attributes.Ended,
+        firstPublicationYear: data.serie.data.attributes.FirstPublicationYear,
+        creators: transformAuthors(data.serie.data.attributes.Creators),
+        description: data.serie.data.attributes.Description,
       }
     : null;
+}
+
+function transformAuthors(data) {
+  return data
+    ? data.data.map((author) => ({
+        id: author.id,
+        name: author.attributes.Name,
+      }))
+    : [];
 }

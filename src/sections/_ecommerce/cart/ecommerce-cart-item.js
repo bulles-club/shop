@@ -34,6 +34,19 @@ export default function EcommerceCartItem({ id, coverUrl, name, author, wishlist
         />
 
         <Stack spacing={0.5} sx={{ p: 2 }}>
+          {/* <Link component={RouterLink} href={`${paths.library.book}/${id}`} color="inherit">
+            <TextMaxLine variant="h6" line={1}>
+              {name}
+            </TextMaxLine>
+          </Link>
+          <Link
+            component={RouterLink}
+            href={`${paths.library.book}/${id}`}
+            // color="inherit"
+            underline="none"
+          >
+            <Typography variant="subtitle2">{name}</Typography>
+          </Link> */}
           <Typography variant="subtitle2">{name}</Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             {author}

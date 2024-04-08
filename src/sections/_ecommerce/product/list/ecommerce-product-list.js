@@ -8,7 +8,7 @@ import EcommerceProductViewGridItem from '../item/ecommerce-product-view-grid-it
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductList({ loading, viewMode }) {
+export default function EcommerceProductList({ loading, viewMode, paging = true }) {
   return (
     <>
       {viewMode === 'grid' ? (
@@ -33,17 +33,19 @@ export default function EcommerceProductList({ loading, viewMode }) {
 
       {/* <Stack spacing={4}> */}
 
-      <Pagination
-        count={10}
-        color="primary"
-        sx={{
-          mt: 10,
-          mb: 5,
-          [`& .${paginationClasses.ul}`]: {
-            justifyContent: 'center',
-          },
-        }}
-      />
+      {paging && (
+        <Pagination
+          count={10}
+          color="primary"
+          sx={{
+            mt: 10,
+            mb: 5,
+            [`& .${paginationClasses.ul}`]: {
+              justifyContent: 'center',
+            },
+          }}
+        />
+      )}
     </>
   );
 }
@@ -51,4 +53,5 @@ export default function EcommerceProductList({ loading, viewMode }) {
 EcommerceProductList.propTypes = {
   loading: PropTypes.bool,
   viewMode: PropTypes.string,
+  paging: PropTypes.bool,
 };
