@@ -8,7 +8,6 @@ import EcommerceProductDetailsItem from './ecommerce-product-details-item';
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductDetailsSpecifications({
- 
   ageGroup,
   pageCount,
   publicationYear,
@@ -23,7 +22,6 @@ export default function EcommerceProductDetailsSpecifications({
       }}
     >
       <Typography variant="h6"> Spécifications </Typography>
-
       <EcommerceProductDetailsItem label="Age" value={ageGroup} />
       <EcommerceProductDetailsItem label="Nombre de pages" value={pageCount} />
       <EcommerceProductDetailsItem label="Publication" value={publicationYear} />

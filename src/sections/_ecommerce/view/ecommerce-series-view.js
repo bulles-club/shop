@@ -2,9 +2,7 @@
 
 import PropTypes from 'prop-types';
 
-import useStrapiQuery from 'src/hooks/use-strapi-query';
-
-import { GET_SERIES } from 'src/services/queries';
+import useSerie from 'src/hooks/use-serie';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
@@ -13,7 +11,7 @@ import EcommerceProductsView from './ecommerce-products-view';
 // ----------------------------------------------------------------------
 
 export default function EcommerceSeriesView({ id }) {
-  const { loading, data } = useStrapiQuery(GET_SERIES, { id });
+  const { loading, serie } = useSerie(id);
 
   if (loading) {
     return <SplashScreen />;
@@ -21,8 +19,8 @@ export default function EcommerceSeriesView({ id }) {
   return (
     <EcommerceProductsView
       productsViewMode="list"
-      header={data?.serie.data.attributes.Name}
-      filters={[`series:${data?.serie.data.attributes.Name}`]}
+      header={serie.name}
+      filters={[`series:${serie?.name}`]}
     />
   );
 }

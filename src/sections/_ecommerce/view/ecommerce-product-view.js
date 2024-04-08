@@ -6,11 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 
 import useCart from 'src/hooks/use-cart';
-import useStrapiQuery from 'src/hooks/use-strapi-query';
-
-import { transformBook } from 'src/utils/transformers';
-
-import { GET_BOOK } from 'src/services/queries';
+import useBook from 'src/hooks/use-book';
 
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
@@ -24,8 +20,7 @@ import EcommerceProductDetailsSpecifications from '../product/details/ecommerce-
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductView({ id }) {
-  const { loading, data } = useStrapiQuery(GET_BOOK, { id });
-  const book = data ? transformBook(data) : null;
+  const { loading, book } = useBook(id);
   const { addBook } = useCart();
 
   const handleAddToCart = () => {
@@ -74,9 +69,7 @@ export default function EcommerceProductView({ id }) {
 
         <Grid container columnSpacing={{ md: 8 }}>
           <Grid xs={12}>
-            <EcommerceProductDetailsDescription
-              description={data.book.data.attributes.Description}
-            />
+            <EcommerceProductDetailsDescription description={book.description} />
             <EcommerceProductDetailsSpecifications
               ageGroup={book.ageGroup}
               pageCount={book.pageCount}

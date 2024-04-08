@@ -16,7 +16,6 @@ export default function EcommerceProductDetailsDescription({ description }) {
     >
       <Stack spacing={2}>
         <Typography variant="h6"> Description </Typography>
-        {/* <Markdown content={description} /> */}
         <BlocksRenderer content={description} />
       </Stack>
     </Stack>
