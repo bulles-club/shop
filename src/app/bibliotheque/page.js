@@ -1,12 +1,12 @@
-'use client';
-
-import EcommerceProductsView from 'src/sections/_ecommerce/view/ecommerce-products-view';
+import EcommerceProductsView from 'src/containers/ecommerce-products-view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = {
-  title: 'Serie',
-};
+export async function generateMetadata({ params }) {
+  return {
+    title: 'Serie',
+  };
+}
 
 export const dynamic = 'force-dynamic';
 

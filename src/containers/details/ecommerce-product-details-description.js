@@ -16,7 +16,7 @@ export default function EcommerceProductDetailsDescription({ description }) {
     >
       <Stack>
         <Typography variant="h6"> Description </Typography>
-        <BlocksRenderer content={description} />
+        {description && <BlocksRenderer content={description} />}
       </Stack>
     </Stack>
   );

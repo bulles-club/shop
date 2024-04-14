@@ -12,9 +12,11 @@ import EcommerceLandingFeaturedProducts from 'src/sections/_ecommerce/landing/ec
 
 // ----------------------------------------------------------------------
 
-export const metadata = {
-  title: 'Cobulles',
-};
+export async function generateMetadata({ params }) {
+  return {
+    title: 'Cobulles',
+  };
+}
 
 export default function EcommerceLandingPage() {
   return (

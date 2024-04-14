@@ -37,10 +37,10 @@ export default function EcommerceProductView({ id }) {
         <CustomBreadcrumbs
           links={[
             {
-              name: book.name,
+              name: book?.name,
             },
             {
-              name: book.name,
+              name: book?.name,
             },
           ]}
           sx={{ my: 5 }}
@@ -48,20 +48,20 @@ export default function EcommerceProductView({ id }) {
 
         <Grid container spacing={{ xs: 5, md: 8 }}>
           <Grid xs={12} md={5} lg={5}>
-            <EcommerceProductDetailsCarousel images={book.images} />
+            <EcommerceProductDetailsCarousel images={book?.images} />
           </Grid>
 
           <Grid xs={12} md={7} lg={7}>
             <EcommerceProductDetailsInfo
-              name={book.name}
+              name={book?.name}
               // ratingNumber={_mockProduct.ratingNumber}
               // totalReviews={_mockProduct.totalReviews}
-              scriptWriters={book.scriptWriters}
-              artists={book.artists}
-              series={book.series}
-              seriesVolume={book.seriesVolume}
-              type={book.type}
-              genre={book.genre}
+              scriptWriters={book?.scriptWriters}
+              artists={book?.artists}
+              series={book?.series}
+              seriesVolume={book?.seriesVolume}
+              type={book?.type}
+              genre={book?.genre}
               onAddToCart={handleAddToCart}
             />
           </Grid>
@@ -69,13 +69,13 @@ export default function EcommerceProductView({ id }) {
 
         <Grid container columnSpacing={{ md: 8 }}>
           <Grid xs={12}>
-            <EcommerceProductDetailsDescription description={book.description} />
+            <EcommerceProductDetailsDescription description={book?.description} />
             <EcommerceProductDetailsSpecifications
-              ageGroup={book.ageGroup}
-              pageCount={book.pageCount}
-              publicationYear={book.publicationYear}
-              isbn10={book.isbn10}
-              isbn13={book.isbn13}
+              ageGroup={book?.ageGroup}
+              pageCount={book?.pageCount}
+              publicationYear={book?.publicationYear}
+              isbn10={book?.isbn10}
+              isbn13={book?.isbn13}
             />
           </Grid>
         </Grid>
