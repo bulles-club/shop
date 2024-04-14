@@ -1,4 +1,4 @@
-import EcommerceAccountAddressesView from 'src/sections/_ecommerce/view/ecommerce-account-addresses-view';
+import EcommerceAccountAddressesView from 'src/containers/ecommerce-account-addresses-view';
 
 // ----------------------------------------------------------------------
 
