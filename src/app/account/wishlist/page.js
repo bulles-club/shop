@@ -1,4 +1,4 @@
-import EcommerceAccountWishlistView from 'src/containers/ecommerce-account-wishlist-view';
+import EcommerceAccountWishlistView from 'src/containers/account/ecommerce-account-wishlist-view';
 
 // ----------------------------------------------------------------------
 

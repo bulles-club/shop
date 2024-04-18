@@ -1,4 +1,4 @@
-import EcommerceAccountOrdersView from 'src/containers/ecommerce-account-orders-view';
+import EcommerceAccountOrdersView from 'src/containers/account/ecommerce-account-orders-view';
 
 // ----------------------------------------------------------------------
 

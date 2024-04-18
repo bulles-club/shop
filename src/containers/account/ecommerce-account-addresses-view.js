@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 
 import { _mock } from 'src/_mock';
 
-import EcommerceAccountAddress from '../sections/_ecommerce/account/ecommerce-account-address';
-import EcommerceAccountNewAddressForm from '../sections/_ecommerce/account/ecommerce-account-new-address-form';
+import EcommerceAccountAddress from '../../sections/_ecommerce/account/ecommerce-account-address';
+import EcommerceAccountNewAddressForm from '../../sections/_ecommerce/account/ecommerce-account-new-address-form';
 
 // ----------------------------------------------------------------------
 

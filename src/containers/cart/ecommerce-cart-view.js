@@ -12,7 +12,7 @@ import useCart from 'src/hooks/use-cart';
 
 import Iconify from 'src/components/iconify';
 
-import EcommerceCartList from '../sections/_ecommerce/cart/ecommerce-cart-list';
+import EcommerceCartList from '../../sections/_ecommerce/cart/ecommerce-cart-list';
 
 // ----------------------------------------------------------------------
 

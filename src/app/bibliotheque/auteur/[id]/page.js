@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import AuthorView from 'src/containers/author-view';
+import AuthorView from 'src/containers/author/author-view';
 
 // ----------------------------------------------------------------------
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import SeriesView from 'src/containers/series-view';
+import SeriesView from 'src/containers/series/series-view';
 
 // ----------------------------------------------------------------------
 

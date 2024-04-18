@@ -13,10 +13,13 @@ import { STRAPI_URL } from 'src/config-global';
 import Image from 'src/components/image';
 import { SplashScreen } from 'src/components/loading-screen';
 
+import BookShelf from '../book-shelf';
+
 // ----------------------------------------------------------------------
 
 export default function AuthorView({ id }) {
   const { loading, author } = useAuthor(id);
+  console.log(author);
 
   if (loading) {
     return <SplashScreen />;
@@ -32,7 +35,6 @@ export default function AuthorView({ id }) {
       >
         <Typography variant="h3">{author.name}</Typography>
 
-        {/* <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 7 }}> */}
         <Grid
           container
           flexWrap="nowrap"
@@ -65,12 +67,14 @@ export default function AuthorView({ id }) {
           </Grid>
         </Grid>
 
-        {/* </Stack> */}
+        {author.series.map((series) => (
+          <BookShelf key={series.id} title={series.name} books={series.books} />
+        ))}
       </Box>
     </Container>
   );
 }
 
 AuthorView.propTypes = {
-  id: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
 };

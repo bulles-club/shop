@@ -14,7 +14,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import { _mock } from 'src/_mock';
 
-import EcommerceAccountVoucherItem from '../sections/_ecommerce/account/ecommerce-account-voucher-item';
+import EcommerceAccountVoucherItem from '../../sections/_ecommerce/account/ecommerce-account-voucher-item';
 
 // ----------------------------------------------------------------------
 

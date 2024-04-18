@@ -54,6 +54,15 @@ export function transformAuthor(data) {
         name: data.author.data.attributes.Name,
         bio: data.author.data.attributes.Bio,
         photoUrl: data.author.data.attributes.Photo.data.attributes.url,
+        series: data.author.data.attributes.series.data.map((serie) => ({
+          id: serie.id,
+          name: serie.attributes.Name,
+          books: serie.attributes.Books.data.map((book) => ({
+            id: book.id,
+            title: book.attributes.Title,
+            coverUrl: book.attributes.Images.data[0].attributes.url,
+          })),
+        })),
       }
     : [];
 }

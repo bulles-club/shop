@@ -175,6 +175,29 @@ export const GET_AUTHOR = gql`
               }
             }
           }
+          series {
+            data {
+              id
+              attributes {
+                Name
+                Books(sort: "SeriesVolume") {
+                  data {
+                    id
+                    attributes {
+                      Title
+                      Images {
+                        data {
+                          attributes {
+                            url
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
