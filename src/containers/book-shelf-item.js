@@ -12,12 +12,13 @@ import { STRAPI_URL } from 'src/config-global';
 
 import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
+import { buildLinkBook } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
 export default function BookShelfItem({ book }) {
   return (
-    <Link component={RouterLink} href={paths.eCommerce.product} color="inherit" underline="none">
+    <Link component={RouterLink} href={buildLinkBook(book.slug)} color="inherit" underline="none">
       <Stack>
         <Image
           src={`${STRAPI_URL}${book.coverUrl}`}
@@ -41,5 +42,6 @@ BookShelfItem.propTypes = {
     id: PropTypes.string,
     coverUrl: PropTypes.string,
     title: PropTypes.string,
+    slug: PropTypes.string,
   }),
 };
