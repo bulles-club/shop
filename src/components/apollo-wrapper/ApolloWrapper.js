@@ -29,7 +29,19 @@ function makeClient() {
 
   return new NextSSRApolloClient({
     // use the `NextSSRInMemoryCache`, not the normal `InMemoryCache`
-    cache: new NextSSRInMemoryCache(),
+    cache: new NextSSRInMemoryCache({
+      typePolicies: {
+        Author: {
+          keyFields: ['Slug'],
+        },
+        Book: {
+          keyFields: ['Slug'],
+        },
+        Serie: {
+          keyFields: ['Slug'],
+        },
+      },
+    }),
     connectToDevTools: true,
     link:
       typeof window === 'undefined'
