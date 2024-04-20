@@ -18,7 +18,7 @@ import ProductRating from '../sections/_ecommerce/common/product-rating';
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductViewGridItem({ product, sx, ...other }) {
-  const pathToProduct = `${paths.library.book}/${product.objectID}`;
+  const pathToProduct = `${paths.library.book}/${product.slug}`;
   return (
     <Stack
       sx={{
@@ -66,12 +66,7 @@ export default function EcommerceProductViewGridItem({ product, sx, ...other }) 
             {product.title}
           </TextMaxLine>
 
-          {/* <ProductPrice price={product.price} priceSale={product.priceSale} /> */}
-
-          <ProductRating
-            ratingNumber={product.ratingNumber}
-            // label={`${product.sold} sold`}
-          />
+          <ProductRating ratingNumber={product.ratingNumber} />
         </Stack>
       </Link>
     </Stack>
@@ -80,18 +75,13 @@ export default function EcommerceProductViewGridItem({ product, sx, ...other }) 
 
 EcommerceProductViewGridItem.propTypes = {
   product: PropTypes.shape({
-    name: PropTypes.string,
-    sold: PropTypes.number,
+    slug: PropTypes.string,
     label: PropTypes.string,
-    price: PropTypes.number,
     category: PropTypes.string,
-    coverUrl: PropTypes.string,
     priceSale: PropTypes.number,
     ratingNumber: PropTypes.number,
     objectID: PropTypes.string,
-    images: PropTypes.array,
     title: PropTypes.string,
-    description: PropTypes.string,
   }),
   sx: PropTypes.object,
 };

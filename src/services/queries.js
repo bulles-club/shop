@@ -3,8 +3,8 @@ const { gql } = require('@apollo/client');
 // ----------------------------------------------------------------------
 
 export const GET_BOOK = gql`
-  query GetBook($id: ID!) {
-    book(id: $id) {
+  query GetBook($slug: String!) {
+    books(filters: { Slug: { eq: $slug } }) {
       data {
         id
         attributes {

@@ -17,7 +17,7 @@ import ProductRating from '../sections/_ecommerce/common/product-rating';
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductViewListItem({ product, ...other }) {
-  const pathToProduct = `${paths.library.book}/${product.objectID}`;
+  const pathToProduct = `${paths.library.book}/${product.slug}`;
   return (
     <Stack
       direction="row"
@@ -70,10 +70,7 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
           </Link>
         </Stack>
 
-        <ProductRating
-          ratingNumber={product.ratingNumber}
-          // label={`${product.sold} sold`}
-        />
+        <ProductRating ratingNumber={product.ratingNumber} />
 
         <TextMaxLine variant="body2" line={3} sx={{ color: 'text.secondary' }}>
           {product.description}
@@ -85,16 +82,9 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
 
 EcommerceProductViewListItem.propTypes = {
   product: PropTypes.shape({
-    caption: PropTypes.string,
     category: PropTypes.string,
-    coverUrl: PropTypes.string,
-    label: PropTypes.string,
-    name: PropTypes.string,
-    price: PropTypes.number,
-    priceSale: PropTypes.number,
-    sold: PropTypes.number,
     ratingNumber: PropTypes.number,
-    objectID: PropTypes.string,
+    slug: PropTypes.string,
     images: PropTypes.array,
     title: PropTypes.string,
     description: PropTypes.string,

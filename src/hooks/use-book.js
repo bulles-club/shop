@@ -8,7 +8,7 @@ import useStrapiQuery from './use-strapi-query';
 
 // ----------------------------------------------------------------------
 
-export default function useBook(bookId) {
-  const { loading, data, error } = useStrapiQuery(GET_BOOK, { id: bookId });
-  return { book: transformBook(data?.book.data), loading, error };
+export default function useBook(slug) {
+  const { loading, data, error } = useStrapiQuery(GET_BOOK, { slug: slug });
+  return { book: transformBook(data?.books.data[0]), loading, error };
 }

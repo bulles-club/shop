@@ -19,8 +19,8 @@ import EcommerceProductDetailsSpecifications from './details/ecommerce-product-d
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductView({ id }) {
-  const { loading, book } = useBook(id);
+export default function EcommerceProductView({ slug }) {
+  const { loading, book } = useBook(slug);
   const { addBook } = useCart();
 
   const handleAddToCart = () => {
@@ -87,5 +87,5 @@ export default function EcommerceProductView({ id }) {
 }
 
 EcommerceProductView.propTypes = {
-  id: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 };

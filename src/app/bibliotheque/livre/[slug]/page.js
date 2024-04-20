@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default function BookPage({ params }) {
-  return <EcommerceProductView id={params.id} />;
+  return <EcommerceProductView slug={params.slug} />;
 }
 
 BookPage.propTypes = {
