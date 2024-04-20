@@ -6,7 +6,7 @@ export default [
       es2021: true,
     },
     plugins: ['perfectionist', 'unused-imports', 'prettier'],
-    extends: ['prettier', 'plugin:@next/next/recommended'],
+    extends: ['airbnb', 'airbnb/hooks', 'prettier', 'plugin:@next/next/recommended'],
     parserOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
