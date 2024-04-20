@@ -9,6 +9,7 @@ export const GET_BOOK = gql`
         id
         attributes {
           Title
+          Slug
           Description
           SeriesVolume
           PageCount
@@ -28,6 +29,7 @@ export const GET_BOOK = gql`
             data {
               attributes {
                 Name
+                Slug
               }
               id
             }
@@ -53,6 +55,7 @@ export const GET_BOOK = gql`
               id
               attributes {
                 Name
+                Slug
               }
             }
           }
@@ -61,6 +64,7 @@ export const GET_BOOK = gql`
               id
               attributes {
                 Name
+                Slug
               }
             }
           }
@@ -77,6 +81,7 @@ export const GET_SERIES = gql`
         id
         attributes {
           Name
+          Slug
           Ended
           FirstPublicationYear
           Description
@@ -84,6 +89,7 @@ export const GET_SERIES = gql`
             data {
               attributes {
                 Name
+                Slug
               }
               id
             }
@@ -167,6 +173,7 @@ export const GET_AUTHOR = gql`
         id
         attributes {
           Name
+          Slug
           Bio
           Photo {
             data {
@@ -180,11 +187,13 @@ export const GET_AUTHOR = gql`
               id
               attributes {
                 Name
+                Slug
                 Books(sort: "SeriesVolume") {
                   data {
                     id
                     attributes {
                       Title
+                      Slug
                       Images {
                         data {
                           attributes {

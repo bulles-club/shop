@@ -1,68 +1,57 @@
-export function transformBook(data) {
-  return data
+export function transformBook(book) {
+  return book
     ? {
-        id: data.book.data.id,
-        name: data.book.data.attributes.Title,
-        scriptWriters: transformAuthors(data.book.data.attributes.ScriptWriters),
-        artists: transformAuthors(data.book.data.attributes.Artists),
-        series: {
-          id: data.book.data.attributes.Series.data.id,
-          name: data.book.data.attributes.Series.data.attributes.Name,
-        },
-        seriesVolume: data.book.data.attributes.SeriesVolume,
-        type: data.book.data.attributes.Type,
-        genre: data.book.data.attributes.Genre.data.attributes.Title,
-        images: data.book.data.attributes.Images.data.map((item) => ({
+        id: book.id,
+        name: book.attributes.Title,
+        slug: book.attributes.Slug,
+        scriptWriters: transformAuthors(book.attributes.ScriptWriters),
+        artists: transformAuthors(book.attributes.Artists),
+        series: transformSerie(book.attributes.Series?.data),
+        seriesVolume: book.attributes.SeriesVolume,
+        type: book.attributes.Type,
+        genre: book.attributes.Genre?.data.attributes.Title,
+        images: book.attributes.Images.data.map((item) => ({
           ...item.attributes,
         })),
-        ageGroup: data.book.data.attributes.AgeGroup,
-        pageCount: data.book.data.attributes.PageCount,
-        publicationYear: data.book.data.attributes.PublicationYear,
-        isbn10: data.book.data.attributes.ISBN10,
-        isbn13: data.book.data.attributes.ISBN13,
-        description: data.book.data.attributes.Description,
+        coverUrl: book.attributes.Images.data[0].attributes.url,
+        ageGroup: book.attributes.AgeGroup,
+        pageCount: book.attributes.PageCount,
+        publicationYear: book.attributes.PublicationYear,
+        isbn10: book.attributes.ISBN10,
+        isbn13: book.attributes.ISBN13,
+        description: book.attributes.Description,
       }
     : null;
 }
 
-export function transformSerie(data) {
-  return data
+export function transformSerie(serie) {
+  return serie
     ? {
-        id: data.serie.data.id,
-        name: data.serie.data.attributes.Name,
-        ended: data.serie.data.attributes.Ended,
-        firstPublicationYear: data.serie.data.attributes.FirstPublicationYear,
-        creators: transformAuthors(data.serie.data.attributes.Creators),
-        description: data.serie.data.attributes.Description,
+        id: serie.id,
+        name: serie.attributes.Name,
+        slug: serie.attributes.Slug,
+        ended: serie.attributes.Ended,
+        firstPublicationYear: serie.attributes.FirstPublicationYear,
+        creators: transformAuthors(serie.attributes.Creators),
+        description: serie.attributes.Description,
+        books: serie.attributes.Books?.data.map((book) => transformBook(book)),
       }
     : null;
 }
 
 function transformAuthors(data) {
-  return data
-    ? data.data.map((author) => ({
-        id: author.id,
-        name: author.attributes.Name,
-      }))
-    : [];
+  return data ? data.data.map((author) => transformAuthor(author)) : [];
 }
 
-export function transformAuthor(data) {
-  return data
+export function transformAuthor(author) {
+  return author
     ? {
-        id: data.author.data.id,
-        name: data.author.data.attributes.Name,
-        bio: data.author.data.attributes.Bio,
-        photoUrl: data.author.data.attributes.Photo.data.attributes.url,
-        series: data.author.data.attributes.series.data.map((serie) => ({
-          id: serie.id,
-          name: serie.attributes.Name,
-          books: serie.attributes.Books.data.map((book) => ({
-            id: book.id,
-            title: book.attributes.Title,
-            coverUrl: book.attributes.Images.data[0].attributes.url,
-          })),
-        })),
+        id: author.id,
+        name: author.attributes.Name,
+        slug: author.attributes.Slug,
+        bio: author.attributes.Bio,
+        photoUrl: author.attributes.Photo?.data.attributes.url,
+        series: author.attributes.series?.data.map((serie) => transformSerie(serie)),
       }
     : [];
 }
