@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { STRAPI_URL } from 'src/config-global';
@@ -14,11 +13,12 @@ import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
 
 import ProductRating from '../sections/_ecommerce/common/product-rating';
+import { buildLinkBook } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductViewGridItem({ product, sx, ...other }) {
-  const pathToProduct = `${paths.library.book}/${product.slug}`;
+  const pathToProduct = buildLinkBook(product.slug);
   return (
     <Stack
       sx={{
