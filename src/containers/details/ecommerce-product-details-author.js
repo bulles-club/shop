@@ -6,6 +6,7 @@ import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import EcommerceProductDetailsItem from './ecommerce-product-details-item';
+import { buildLinkAuthor } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +18,7 @@ export default function EcommerceProductDetailsAuthor({ label, authors }) {
         <div key={author.id}>
           <Link
             component={RouterLink}
-            href={`${paths.library.author}/${author.slug}`}
+            href={buildLinkAuthor(author.slug)}
             color="inherit"
             underline="always"
           >
