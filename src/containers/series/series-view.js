@@ -14,8 +14,8 @@ import { SplashScreen } from 'src/components/loading-screen';
 
 // ----------------------------------------------------------------------
 
-export default function SeriesView({ id }) {
-  const { loading, serie } = useSerie(id);
+export default function SeriesView({ slug }) {
+  const { loading, serie } = useSerie(slug);
 
   if (loading) {
     return <SplashScreen />;
@@ -44,7 +44,7 @@ export default function SeriesView({ id }) {
               )
             }
           />
-          <BlocksRenderer content={serie.description} />
+          <BlocksRenderer content={serie? .description} />
         </>
       }
       filters={[`series:${serie?.name}`]}
@@ -54,5 +54,5 @@ export default function SeriesView({ id }) {
 }
 
 SeriesView.propTypes = {
-  id: PropTypes.object.isRequired,
+  slug: PropTypes.object.isRequired,
 };

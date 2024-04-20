@@ -75,8 +75,8 @@ export const GET_BOOK = gql`
 `;
 
 export const GET_SERIES = gql`
-  query GetSeries($id: ID!) {
-    serie(id: $id) {
+  query GetSeries($slug: String!) {
+    series(filters: { Slug: { eq: $slug } }) {
       data {
         id
         attributes {
@@ -167,8 +167,8 @@ export const SET_CART = gql`
 `;
 
 export const GET_AUTHOR = gql`
-  query GetAuthor($id: ID!) {
-    author(id: $id) {
+  query GetAuthor($slug: String!) {
+    author(filters: { Slug: { eq: $slug } }) {
       data {
         id
         attributes {

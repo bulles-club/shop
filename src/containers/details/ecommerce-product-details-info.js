@@ -61,7 +61,7 @@ export default function EcommerceProductDetailsInfo({
           value={
             <Link
               component={RouterLink}
-              href={`${paths.library.series}/${series?.id}`}
+              href={`${paths.library.series}/${series?.slug}`}
               color="inherit"
               underline="always"
             >

@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default function SeriesPage({ params }) {
-  return <SeriesView id={params.id} />;
+  return <SeriesView slug={params.slug} />;
 }
 
 SeriesPage.propTypes = {
