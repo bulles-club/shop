@@ -14,7 +14,7 @@ export default function EcommerceProductDetailsAuthor({ label, authors }) {
     <EcommerceProductDetailsItem
       label={label}
       value={authors?.map((author) => (
-        <>
+        <div key={author.id}>
           <Link
             component={RouterLink}
             href={`${paths.library.author}/${author.id}`}
@@ -24,7 +24,7 @@ export default function EcommerceProductDetailsAuthor({ label, authors }) {
             {author.name}
           </Link>
           &nbsp;
-        </>
+        </div>
       ))}
     />
   );
