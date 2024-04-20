@@ -18,6 +18,7 @@ import Iconify from 'src/components/iconify';
 
 import EcommerceProductDetailsItem from './ecommerce-product-details-item';
 import EcommerceProductDetailsAuthor from './ecommerce-product-details-author';
+import { buildLinkSeries } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
@@ -61,7 +62,7 @@ export default function EcommerceProductDetailsInfo({
           value={
             <Link
               component={RouterLink}
-              href={`${paths.library.series}/${series?.slug}`}
+              href={buildLinkSeries(series?.slug)}
               color="inherit"
               underline="always"
             >
