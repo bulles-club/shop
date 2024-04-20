@@ -87,7 +87,7 @@ export default function BookShelf({ title, books }) {
         }}
       >
         <Typography
-          variant="h3"
+          variant="h4"
           sx={{
             textAlign: { xs: 'center', md: 'unset' },
           }}
