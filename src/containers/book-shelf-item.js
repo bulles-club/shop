@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { STRAPI_URL } from 'src/config-global';
@@ -30,7 +29,7 @@ export default function BookShelfItem({ book }) {
           }}
         />
         <TextMaxLine variant="body2" line={2} sx={{ fontWeight: 'fontWeightMedium' }}>
-          {book.title}
+          {book.name}
         </TextMaxLine>
       </Stack>
     </Link>
@@ -41,7 +40,7 @@ BookShelfItem.propTypes = {
   book: PropTypes.shape({
     id: PropTypes.string,
     coverUrl: PropTypes.string,
-    title: PropTypes.string,
+    name: PropTypes.string,
     slug: PropTypes.string,
   }),
 };
