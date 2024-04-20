@@ -17,8 +17,8 @@ import BookShelf from '../book-shelf';
 
 // ----------------------------------------------------------------------
 
-export default function AuthorView({ id }) {
-  const { loading, author } = useAuthor(id);
+export default function AuthorView({ slug }) {
+  const { loading, author } = useAuthor(slug);
   console.log(author);
 
   if (loading) {

@@ -6,7 +6,7 @@ import useStrapiQuery from './use-strapi-query';
 
 // ----------------------------------------------------------------------
 
-export default function useAuthor(authorId) {
-  const { loading, data, error } = useStrapiQuery(GET_AUTHOR, { id: authorId });
-  return { author: transformAuthor(data?.author.data), loading, error };
+export default function useAuthor(slug) {
+  const { loading, data, error } = useStrapiQuery(GET_AUTHOR, { slug });
+  return { author: transformAuthor(data?.authors?.data[0]), loading, error };
 }

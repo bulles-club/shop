@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default function AuthorPage({ params }) {
-  return <AuthorView id={params.id} />;
+  return <AuthorView slug={params.slug} />;
 }
 
 AuthorPage.propTypes = {

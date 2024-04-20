@@ -168,7 +168,7 @@ export const SET_CART = gql`
 
 export const GET_AUTHOR = gql`
   query GetAuthor($slug: String!) {
-    author(filters: { Slug: { eq: $slug } }) {
+    authors(filters: { Slug: { eq: $slug } }) {
       data {
         id
         attributes {

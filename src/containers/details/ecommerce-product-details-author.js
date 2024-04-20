@@ -17,7 +17,7 @@ export default function EcommerceProductDetailsAuthor({ label, authors }) {
         <div key={author.id}>
           <Link
             component={RouterLink}
-            href={`${paths.library.author}/${author.id}`}
+            href={`${paths.library.author}/${author.slug}`}
             color="inherit"
             underline="always"
           >
