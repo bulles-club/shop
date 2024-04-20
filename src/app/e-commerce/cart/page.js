@@ -1,4 +1,4 @@
-import EcommerceCartView from 'src/containers/ecommerce-cart-view';
+import EcommerceCartView from 'src/containers/cart/ecommerce-cart-view';
 
 // ----------------------------------------------------------------------
 

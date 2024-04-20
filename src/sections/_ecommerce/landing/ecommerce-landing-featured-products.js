@@ -1,7 +1,4 @@
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
+import { Box, Grid, Container, Typography } from '@mui/material';
 
 import { _products } from 'src/_mock';
 
