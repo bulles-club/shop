@@ -8,8 +8,6 @@ import { Grid, Typography } from '@mui/material';
 
 import useAuthor from 'src/hooks/use-author';
 
-import { STRAPI_URL } from 'src/config-global';
-
 import Image from 'src/components/image';
 import { SplashScreen } from 'src/components/loading-screen';
 
@@ -58,7 +56,7 @@ export default function AuthorView({ slug }) {
                   overflow: 'hidden',
                 }}
                 alt={author.name}
-                src={STRAPI_URL + author.photoUrl}
+                src={author.photoUrl}
               />
             </Box>
           </Grid>
@@ -76,5 +74,5 @@ export default function AuthorView({ slug }) {
 }
 
 AuthorView.propTypes = {
-  id: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 };

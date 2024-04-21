@@ -1,6 +1,5 @@
-import { transformAuthor } from 'src/services/transformers';
-
 import { GET_AUTHOR } from 'src/services/queries';
+import { transformAuthor } from 'src/services/transformers';
 
 import useStrapiQuery from './use-strapi-query';
 

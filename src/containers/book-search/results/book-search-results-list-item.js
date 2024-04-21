@@ -5,19 +5,15 @@ import Stack from '@mui/material/Stack';
 
 import { RouterLink } from 'src/routes/components';
 
-import { STRAPI_URL } from 'src/config-global';
+import { buildUrlImage, buildUrlBookPage } from 'src/utils/url-builder';
 
 import Image from 'src/components/image';
-import Label from 'src/components/label';
 import TextMaxLine from 'src/components/text-max-line';
-
-import ProductRating from '../../../sections/_ecommerce/common/product-rating';
-import { buildLinkBook } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
-export default function BookSearchResultsListItem({ product, ...other }) {
-  const pathToProduct = buildLinkBook(product.slug);
+export default function BookSearchResultsListItem({ book, ...other }) {
+  const pathToProduct = buildUrlBookPage(book.slug);
   return (
     <Stack
       direction="row"
@@ -29,21 +25,9 @@ export default function BookSearchResultsListItem({ product, ...other }) {
       }}
       {...other}
     >
-      {product.label === 'new' && (
-        <Label color="info" sx={{ position: 'absolute', m: 1, top: 0, left: 0, zIndex: 9 }}>
-          NEW
-        </Label>
-      )}
-
-      {product.label === 'sale' && (
-        <Label color="error" sx={{ position: 'absolute', m: 1, top: 0, left: 0, zIndex: 9 }}>
-          SALE
-        </Label>
-      )}
-
       <Link component={RouterLink} href={pathToProduct} color="inherit">
         <Image
-          src={`${STRAPI_URL}${product.images[0]}`}
+          src={buildUrlImage(book.images[0])}
           sx={{
             mr: 2,
             flexShrink: 0,
@@ -58,22 +42,14 @@ export default function BookSearchResultsListItem({ product, ...other }) {
       </Link>
 
       <Stack spacing={1}>
-        <Stack spacing={0.5}>
-          <TextMaxLine variant="caption" line={1} sx={{ color: 'text.disabled' }}>
-            {product.category}
+        <Link component={RouterLink} href={pathToProduct} color="inherit">
+          <TextMaxLine variant="h6" line={1}>
+            {book.title}
           </TextMaxLine>
-
-          <Link component={RouterLink} href={pathToProduct} color="inherit">
-            <TextMaxLine variant="h6" line={1}>
-              {product.title}
-            </TextMaxLine>
-          </Link>
-        </Stack>
-
-        <ProductRating ratingNumber={product.ratingNumber} />
+        </Link>
 
         <TextMaxLine variant="body2" line={3} sx={{ color: 'text.secondary' }}>
-          {product.description}
+          {book.description}
         </TextMaxLine>
       </Stack>
     </Stack>
@@ -81,11 +57,9 @@ export default function BookSearchResultsListItem({ product, ...other }) {
 }
 
 BookSearchResultsListItem.propTypes = {
-  product: PropTypes.shape({
-    category: PropTypes.string,
-    ratingNumber: PropTypes.number,
+  book: PropTypes.shape({
     slug: PropTypes.string,
-    images: PropTypes.array,
+    images: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
   }),

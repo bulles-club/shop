@@ -8,12 +8,12 @@ import BookSearchResultsGridItem from './book-search-results-grid-item';
 
 // ----------------------------------------------------------------------
 
-export default function BookSearchResults({ loading, viewMode, paging = true }) {
+export default function BookSearchResults({ viewMode, paging = true }) {
   return (
     <>
       {viewMode === 'grid' ? (
         <Hits
-          hitComponent={({ hit }) => <BookSearchResultsGridItem product={hit} />}
+          hitComponent={({ hit }) => <BookSearchResultsGridItem book={hit} />}
           classNames={{
             root: 'hits-gridview',
             list: 'hits-gridview-list',
@@ -22,7 +22,7 @@ export default function BookSearchResults({ loading, viewMode, paging = true }) 
         />
       ) : (
         <Hits
-          hitComponent={({ hit }) => <BookSearchResultsListItem product={hit} />}
+          hitComponent={({ hit }) => <BookSearchResultsListItem book={hit} />}
           classNames={{
             root: 'hits-listview',
             list: 'hits-listview-list',
@@ -51,7 +51,6 @@ export default function BookSearchResults({ loading, viewMode, paging = true }) 
 }
 
 BookSearchResults.propTypes = {
-  loading: PropTypes.bool,
   viewMode: PropTypes.string,
   paging: PropTypes.bool,
 };

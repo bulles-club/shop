@@ -13,12 +13,13 @@ import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
+import { buildUrlSeriesPage } from 'src/utils/url-builder';
+
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
 import BookDetailsItem from './book-details-item';
 import EcommerceProductDetailsAuthor from './ecommerce-product-details-author';
-import { buildLinkSeries } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
@@ -62,7 +63,7 @@ export default function EcommerceProductDetailsInfo({
           value={
             <Link
               component={RouterLink}
-              href={buildLinkSeries(series?.slug)}
+              href={buildUrlSeriesPage(series?.slug)}
               color="inherit"
               underline="always"
             >

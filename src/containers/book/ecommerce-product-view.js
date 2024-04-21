@@ -11,8 +11,8 @@ import useBook from 'src/hooks/use-book';
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
-import ReviewEcommerce from '../../sections/review/ecommerce/review-ecommerce';
 import EcommerceProductDetailsInfo from './ecommerce-product-details-info';
+import ReviewEcommerce from '../../sections/review/ecommerce/review-ecommerce';
 import EcommerceProductDetailsCarousel from './ecommerce-product-details-carousel';
 import EcommerceProductDetailsDescription from './ecommerce-product-details-description';
 import EcommerceProductDetailsSpecifications from './ecommerce-product-details-specifications';

@@ -5,8 +5,8 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 
 import useSerie from 'src/hooks/use-serie';
 
-import BookSearchView from 'src/containers/book-search/book-search-view';
 import BookDetailsItem from 'src/containers/book/book-details-item';
+import BookSearchView from 'src/containers/book-search/book-search-view';
 import EcommerceProductDetailsAuthor from 'src/containers/book/ecommerce-product-details-author';
 
 import Label from 'src/components/label';
@@ -30,10 +30,7 @@ export default function SeriesView({ slug }) {
             label={serie?.creators.length > 1 ? 'Créateur(s)' : 'Créateur'}
             authors={serie?.creators}
           />
-          <BookDetailsItem
-            label="Première publication"
-            value={serie?.firstPublicationYear}
-          />
+          <BookDetailsItem label="Première publication" value={serie?.firstPublicationYear} />
           <BookDetailsItem
             label="Statut"
             value={
@@ -44,7 +41,7 @@ export default function SeriesView({ slug }) {
               )
             }
           />
-          <BlocksRenderer content={serie? .description} />
+          <BlocksRenderer content={serie?.description} />
         </>
       }
       filters={[`series:${serie?.name}`]}

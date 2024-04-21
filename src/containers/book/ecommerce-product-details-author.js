@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 
 import { Link } from '@mui/material';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { buildUrlAuthorPage } from 'src/utils/url-builder';
+
 import BookDetailsItem from './book-details-item';
-import { buildLinkAuthor } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ export default function EcommerceProductDetailsAuthor({ label, authors }) {
         <div key={author.id}>
           <Link
             component={RouterLink}
-            href={buildLinkAuthor(author.slug)}
+            href={buildUrlAuthorPage(author.slug)}
             color="inherit"
             underline="always"
           >

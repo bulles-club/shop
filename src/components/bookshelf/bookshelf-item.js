@@ -7,20 +7,24 @@ import Stack from '@mui/material/Stack';
 
 import { RouterLink } from 'src/routes/components';
 
-import { STRAPI_URL } from 'src/config-global';
+import { buildUrlBookPage } from 'src/utils/url-builder';
 
 import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
-import { buildLinkBook } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
 export default function BookshelfItem({ book }) {
   return (
-    <Link component={RouterLink} href={buildLinkBook(book.slug)} color="inherit" underline="none">
+    <Link
+      component={RouterLink}
+      href={buildUrlBookPage(book.slug)}
+      color="inherit"
+      underline="none"
+    >
       <Stack>
         <Image
-          src={`${STRAPI_URL}${book.coverUrl}`}
+          src={book.coverUrl}
           sx={{
             mb: 2,
             borderRadius: 1.5,

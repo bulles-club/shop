@@ -1,8 +1,7 @@
 'use client';
 
-import { transformBook } from 'src/services/transformers';
-
 import { GET_BOOK } from 'src/services/queries';
+import { transformBook } from 'src/services/transformers';
 
 import useStrapiQuery from './use-strapi-query';
 

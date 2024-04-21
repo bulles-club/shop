@@ -1,3 +1,5 @@
+import { buildUrlImage } from 'src/utils/url-builder';
+
 export function transformBook(book) {
   return book
     ? {
@@ -12,8 +14,9 @@ export function transformBook(book) {
         genre: book.attributes.Genre?.data.attributes.Title,
         images: book.attributes.Images.data.map((item) => ({
           ...item.attributes,
+          url: buildUrlImage(item.attributes.url),
         })),
-        coverUrl: book.attributes.Images.data[0].attributes.url,
+        coverUrl: buildUrlImage(book.attributes.Images.data[0].attributes.url),
         ageGroup: book.attributes.AgeGroup,
         pageCount: book.attributes.PageCount,
         publicationYear: book.attributes.PublicationYear,
@@ -50,7 +53,7 @@ export function transformAuthor(author) {
         name: author.attributes.Name,
         slug: author.attributes.Slug,
         bio: author.attributes.Bio,
-        photoUrl: author.attributes.Photo?.data.attributes.url,
+        photoUrl: buildUrlImage(author.attributes.Photo?.data.attributes.url),
         series: author.attributes.series?.data.map((serie) => transformSerie(serie)),
       }
     : [];

@@ -1,6 +1,5 @@
-import { transformSerie } from 'src/services/transformers';
-
 import { GET_SERIES } from 'src/services/queries';
+import { transformSerie } from 'src/services/transformers';
 
 import useStrapiQuery from './use-strapi-query';
 

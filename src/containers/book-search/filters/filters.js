@@ -13,8 +13,6 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-import FilterStock from './filter-stock';
-import FilterRating from './filter-rating';
 
 // ----------------------------------------------------------------------
 

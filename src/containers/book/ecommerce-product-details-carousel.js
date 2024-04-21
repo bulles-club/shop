@@ -8,7 +8,6 @@ import Avatar from '@mui/material/Avatar';
 import { alpha, styled, useTheme } from '@mui/material/styles';
 
 import { bgGradient } from 'src/theme/css';
-import { STRAPI_URL } from 'src/config-global';
 
 import Image from 'src/components/image';
 import Lightbox, { useLightbox } from 'src/components/lightbox';
@@ -68,7 +67,7 @@ export default function EcommerceProductDetailsCarousel({ images }) {
   const theme = useTheme();
 
   const slides = images?.map((slide) => ({
-    src: STRAPI_URL + slide.url,
+    src: slide.url,
   }));
 
   const lightbox = useLightbox(slides);
