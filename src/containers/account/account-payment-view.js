@@ -45,7 +45,7 @@ const CARD_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceAccountPaymentView() {
+export default function AccountPaymentView() {
   return (
     <Stack spacing={5}>
       <Stack spacing={3}>

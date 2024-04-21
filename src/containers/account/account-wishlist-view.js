@@ -12,18 +12,18 @@ import { _products } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import EcommerceCartList from '../../sections/_ecommerce/cart/ecommerce-cart-list';
+import CartList from '../cart/cart-list';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceAccountWishlistView() {
+export default function AccountWishlistView() {
   return (
     <>
       <Typography variant="h5" sx={{ mb: 3 }}>
         Wishlist
       </Typography>
 
-      <EcommerceCartList wishlist products={_products.slice(0, 4)} />
+      <CartList wishlist products={_products.slice(0, 4)} />
 
       <Stack alignItems={{ sm: 'flex-end' }} sx={{ mt: 3 }}>
         <Stack spacing={3} sx={{ minWidth: 240 }}>

@@ -24,7 +24,7 @@ const defaultValues = {
   filterTag: [],
 };
 
-export default function EcommerceFilters({ open, onClose, facets }) {
+export default function Filters({ open, onClose, facets }) {
   const mdUp = useResponsive('up', 'md');
 
   const [filters, setFilters] = useState(defaultValues);
@@ -68,16 +68,6 @@ export default function EcommerceFilters({ open, onClose, facets }) {
         </Block>
       ))}
 
-      <Block title="Ratings">
-        <FilterRating
-          filterRating={filters.filterRating}
-          onChangeRating={handleChangeRating}
-          sx={{ mt: 2 }}
-        />
-      </Block>
-
-      <FilterStock filterStock={filters.filterStock} onChangeStock={handleChangeStock} />
-
       <Button
         fullWidth
         color="inherit"
@@ -115,7 +105,7 @@ export default function EcommerceFilters({ open, onClose, facets }) {
   );
 }
 
-EcommerceFilters.propTypes = {
+Filters.propTypes = {
   facets: PropTypes.array,
   onClose: PropTypes.func,
   open: PropTypes.bool,

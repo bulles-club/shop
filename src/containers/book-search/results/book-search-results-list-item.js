@@ -11,12 +11,12 @@ import Image from 'src/components/image';
 import Label from 'src/components/label';
 import TextMaxLine from 'src/components/text-max-line';
 
-import ProductRating from '../sections/_ecommerce/common/product-rating';
+import ProductRating from '../../../sections/_ecommerce/common/product-rating';
 import { buildLinkBook } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductViewListItem({ product, ...other }) {
+export default function BookSearchResultsListItem({ product, ...other }) {
   const pathToProduct = buildLinkBook(product.slug);
   return (
     <Stack
@@ -80,7 +80,7 @@ export default function EcommerceProductViewListItem({ product, ...other }) {
   );
 }
 
-EcommerceProductViewListItem.propTypes = {
+BookSearchResultsListItem.propTypes = {
   product: PropTypes.shape({
     category: PropTypes.string,
     ratingNumber: PropTypes.number,

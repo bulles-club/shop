@@ -4,11 +4,11 @@ import Stack from '@mui/material/Stack';
 
 import Scrollbar from 'src/components/scrollbar';
 
-import EcommerceCartItem from './ecommerce-cart-item';
+import CartItem from './cart-item';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceCartList({ id, products, wishlist = false, onRemoveItem }) {
+export default function CartList({ id, products, wishlist = false, onRemoveItem }) {
   return (
     <Scrollbar>
       <Stack
@@ -25,7 +25,7 @@ export default function EcommerceCartList({ id, products, wishlist = false, onRe
       </Stack>
 
       {products?.map((product) => (
-        <EcommerceCartItem
+        <CartItem
           key={product.id}
           id={product.id}
           coverUrl={product.coverUrl}
@@ -39,7 +39,7 @@ export default function EcommerceCartList({ id, products, wishlist = false, onRe
   );
 }
 
-EcommerceCartList.propTypes = {
+CartList.propTypes = {
   id: PropTypes.string,
   products: PropTypes.array,
   wishlist: PropTypes.bool,

@@ -1,4 +1,4 @@
-import EcommerceCartView from 'src/containers/cart/ecommerce-cart-view';
+import CartView from 'src/containers/cart/cart-view';
 
 // ----------------------------------------------------------------------
 
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function EcommerceCartPage() {
-  return <EcommerceCartView />;
+  return <CartView />;
 }

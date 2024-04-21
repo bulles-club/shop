@@ -1,4 +1,4 @@
-import { transformSerie } from 'src/utils/transformers';
+import { transformSerie } from 'src/services/transformers';
 
 import { GET_SERIES } from 'src/services/queries';
 

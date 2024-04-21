@@ -1,4 +1,4 @@
-import EcommerceProductsView from 'src/containers/ecommerce-products-view';
+import BookSearchView from 'src/containers/book-search/book-search-view';
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 
 export default function LibraryPage() {
   return (
-    <EcommerceProductsView
+    <BookSearchView
       showViewAndSortOptions
       facets={[
         { label: 'Genre', name: 'genre' },

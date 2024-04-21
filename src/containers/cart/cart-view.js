@@ -12,11 +12,11 @@ import useCart from 'src/hooks/use-cart';
 
 import Iconify from 'src/components/iconify';
 
-import EcommerceCartList from '../../sections/_ecommerce/cart/ecommerce-cart-list';
+import CartList from './cart-list';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceCartView() {
+export default function CartView() {
   const { books, removeBook } = useCart();
 
   const handleRemoveFromCart = (id) => {
@@ -37,7 +37,7 @@ export default function EcommerceCartView() {
 
       <Grid container spacing={{ xs: 5, md: 8 }}>
         <Grid xs={12} md={8}>
-          <EcommerceCartList products={books} onRemoveItem={handleRemoveFromCart} />
+          <CartList products={books} onRemoveItem={handleRemoveFromCart} />
         </Grid>
 
         <Grid xs={12} md={4}>

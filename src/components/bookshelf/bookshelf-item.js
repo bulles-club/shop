@@ -15,7 +15,7 @@ import { buildLinkBook } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
-export default function BookShelfItem({ book }) {
+export default function BookshelfItem({ book }) {
   return (
     <Link component={RouterLink} href={buildLinkBook(book.slug)} color="inherit" underline="none">
       <Stack>
@@ -36,7 +36,7 @@ export default function BookShelfItem({ book }) {
   );
 }
 
-BookShelfItem.propTypes = {
+BookshelfItem.propTypes = {
   book: PropTypes.shape({
     id: PropTypes.string,
     coverUrl: PropTypes.string,

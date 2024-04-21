@@ -11,11 +11,11 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Carousel, { useCarousel, CarouselDots, CarouselArrows } from 'src/components/carousel';
 
-import BookShelfItem from './book-shelf-item';
+import BookshelfItem from './bookshelf-item';
 
 // ----------------------------------------------------------------------
 
-export default function BookShelf({ title, books }) {
+export default function Bookshelf({ title, books }) {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
@@ -108,14 +108,14 @@ export default function BookShelf({ title, books }) {
 
       <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
         {books.map((book) => (
-          <BookShelfItem key={book.id} book={book} />
+          <BookshelfItem key={book.id} book={book} />
         ))}
       </Carousel>
     </Container>
   );
 }
 
-BookShelf.propTypes = {
+Bookshelf.propTypes = {
   title: PropTypes.string,
   books: PropTypes.array,
 };

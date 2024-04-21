@@ -38,7 +38,7 @@ const ADDRESSES = [
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceAccountAddressesView() {
+export default function AccountAddressesView() {
   return (
     <Stack spacing={5}>
       <Stack spacing={3}>

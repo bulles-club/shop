@@ -13,6 +13,6 @@
 @import 'yet-another-react-lightbox/plugins/captions.css';
 @import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
-@import "./containers/filters/ecommerce-filters.css";
-@import "src/containers/ecommerce-product-view-grid-item.css";
-@import "src/containers/ecommerce-product-view-list-item.css";
+@import "./containers/book-search/filters/filters.css";
+@import "src/containers/book-search/results/book-search-results-grid-item.css";
+@import "src/containers/book-search/results/book-search-results-list-item.css";

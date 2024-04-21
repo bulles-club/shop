@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsItem({ label, value }) {
+export default function BookDetailsItem({ label, value }) {
   return (
     <>
       {value && (
@@ -27,7 +27,7 @@ export default function EcommerceProductDetailsItem({ label, value }) {
   );
 }
 
-EcommerceProductDetailsItem.propTypes = {
+BookDetailsItem.propTypes = {
   label: PropTypes.string,
   value: PropTypes.any,
 };

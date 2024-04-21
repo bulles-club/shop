@@ -12,12 +12,12 @@ import Label from 'src/components/label';
 import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
 
-import ProductRating from '../sections/_ecommerce/common/product-rating';
+import ProductRating from 'src/sections/_ecommerce/common/product-rating';
 import { buildLinkBook } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductViewGridItem({ product, sx, ...other }) {
+export default function BookSearchResultsGridItem({ product, sx, ...other }) {
   const pathToProduct = buildLinkBook(product.slug);
   return (
     <Stack
@@ -73,7 +73,7 @@ export default function EcommerceProductViewGridItem({ product, sx, ...other }) 
   );
 }
 
-EcommerceProductViewGridItem.propTypes = {
+BookSearchResultsGridItem.propTypes = {
   product: PropTypes.shape({
     slug: PropTypes.string,
     label: PropTypes.string,

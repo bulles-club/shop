@@ -13,7 +13,7 @@ import { STRAPI_URL } from 'src/config-global';
 import Image from 'src/components/image';
 import { SplashScreen } from 'src/components/loading-screen';
 
-import BookShelf from '../book-shelf';
+import Bookshelf from '../../components/bookshelf/bookshelf';
 
 // ----------------------------------------------------------------------
 
@@ -68,7 +68,7 @@ export default function AuthorView({ slug }) {
         </Grid>
 
         {author.series.map((series) => (
-          <BookShelf key={series.id} title={series.name} books={series.books} />
+          <Bookshelf key={series.id} title={series.name} books={series.books} />
         ))}
       </Box>
     </Container>

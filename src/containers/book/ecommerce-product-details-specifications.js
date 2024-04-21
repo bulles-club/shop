@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import EcommerceProductDetailsItem from './ecommerce-product-details-item';
+import BookDetailsItem from './book-details-item';
 
 // ----------------------------------------------------------------------
 
@@ -22,11 +22,11 @@ export default function EcommerceProductDetailsSpecifications({
       }}
     >
       <Typography variant="h6"> Spécifications </Typography>
-      <EcommerceProductDetailsItem label="Age" value={ageGroup} />
-      <EcommerceProductDetailsItem label="Nombre de pages" value={pageCount} />
-      <EcommerceProductDetailsItem label="Publication" value={publicationYear} />
-      <EcommerceProductDetailsItem label="ISBN 10" value={isbn10} />
-      <EcommerceProductDetailsItem label="ISBN 13" value={isbn13} />
+      <BookDetailsItem label="Age" value={ageGroup} />
+      <BookDetailsItem label="Nombre de pages" value={pageCount} />
+      <BookDetailsItem label="Publication" value={publicationYear} />
+      <BookDetailsItem label="ISBN 10" value={isbn10} />
+      <BookDetailsItem label="ISBN 13" value={isbn13} />
     </Stack>
   );
 }

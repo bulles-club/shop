@@ -11,11 +11,11 @@ import useBook from 'src/hooks/use-book';
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
-import ReviewEcommerce from '../sections/review/ecommerce/review-ecommerce';
-import EcommerceProductDetailsInfo from './details/ecommerce-product-details-info';
-import EcommerceProductDetailsCarousel from './details/ecommerce-product-details-carousel';
-import EcommerceProductDetailsDescription from './details/ecommerce-product-details-description';
-import EcommerceProductDetailsSpecifications from './details/ecommerce-product-details-specifications';
+import ReviewEcommerce from '../../sections/review/ecommerce/review-ecommerce';
+import EcommerceProductDetailsInfo from './ecommerce-product-details-info';
+import EcommerceProductDetailsCarousel from './ecommerce-product-details-carousel';
+import EcommerceProductDetailsDescription from './ecommerce-product-details-description';
+import EcommerceProductDetailsSpecifications from './ecommerce-product-details-specifications';
 
 // ----------------------------------------------------------------------
 

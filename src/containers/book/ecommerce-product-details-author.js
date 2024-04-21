@@ -5,14 +5,14 @@ import { Link } from '@mui/material';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import EcommerceProductDetailsItem from './ecommerce-product-details-item';
+import BookDetailsItem from './book-details-item';
 import { buildLinkAuthor } from 'src/utils/link-builder';
 
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductDetailsAuthor({ label, authors }) {
   return (
-    <EcommerceProductDetailsItem
+    <BookDetailsItem
       label={label}
       value={authors?.map((author) => (
         <div key={author.id}>

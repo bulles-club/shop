@@ -22,8 +22,8 @@ import { useSearchClient } from 'src/hooks/use-search-client';
 
 import Iconify from 'src/components/iconify';
 
-import EcommerceFilters from './filters/ecommerce-filters';
-import EcommerceProductList from './ecommerce-product-list';
+import Filters from './filters/filters';
+import BookSearchResults from './results/book-search-results';
 
 // ----------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ const SORT_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductsView({
+export default function BookSearchView({
   title,
   header,
   productsViewMode = 'grid',
@@ -108,11 +108,7 @@ export default function EcommerceProductsView({
         >
           {facets && (
             <Stack spacing={5} divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
-              <EcommerceFilters
-                open={mobileOpen.value}
-                onClose={mobileOpen.onFalse}
-                facets={facets}
-              />
+              <Filters open={mobileOpen.value} onClose={mobileOpen.onFalse} facets={facets} />
             </Stack>
           )}
 
@@ -164,7 +160,7 @@ export default function EcommerceProductsView({
               </Stack>
             )}
 
-            <EcommerceProductList viewMode={viewMode} paging={paging} />
+            <BookSearchResults viewMode={viewMode} paging={paging} />
           </Box>
         </Stack>
       </Container>
@@ -172,7 +168,7 @@ export default function EcommerceProductsView({
   );
 }
 
-EcommerceProductsView.propTypes = {
+BookSearchView.propTypes = {
   title: PropTypes.string,
   header: PropTypes.node,
   facets: PropTypes.array,

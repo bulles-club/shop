@@ -44,7 +44,7 @@ export const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceAccountOrdersPage() {
+export default function AccountOrdersPage() {
   const [tab, setTab] = useState('All Orders');
 
   const [order, setOrder] = useState('asc');

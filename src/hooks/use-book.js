@@ -1,6 +1,6 @@
 'use client';
 
-import { transformBook } from 'src/utils/transformers';
+import { transformBook } from 'src/services/transformers';
 
 import { GET_BOOK } from 'src/services/queries';
 

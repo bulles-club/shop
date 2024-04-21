@@ -5,9 +5,9 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 
 import useSerie from 'src/hooks/use-serie';
 
-import EcommerceProductsView from 'src/containers/ecommerce-products-view';
-import EcommerceProductDetailsItem from 'src/containers/details/ecommerce-product-details-item';
-import EcommerceProductDetailsAuthor from 'src/containers/details/ecommerce-product-details-author';
+import BookSearchView from 'src/containers/book-search/book-search-view';
+import BookDetailsItem from 'src/containers/book/book-details-item';
+import EcommerceProductDetailsAuthor from 'src/containers/book/ecommerce-product-details-author';
 
 import Label from 'src/components/label';
 import { SplashScreen } from 'src/components/loading-screen';
@@ -21,7 +21,7 @@ export default function SeriesView({ slug }) {
     return <SplashScreen />;
   }
   return (
-    <EcommerceProductsView
+    <BookSearchView
       productsViewMode="list"
       title={serie?.name}
       header={
@@ -30,11 +30,11 @@ export default function SeriesView({ slug }) {
             label={serie?.creators.length > 1 ? 'Créateur(s)' : 'Créateur'}
             authors={serie?.creators}
           />
-          <EcommerceProductDetailsItem
+          <BookDetailsItem
             label="Première publication"
             value={serie?.firstPublicationYear}
           />
-          <EcommerceProductDetailsItem
+          <BookDetailsItem
             label="Statut"
             value={
               serie?.ended ? (

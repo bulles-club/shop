@@ -81,7 +81,7 @@ const VOUCHERS = [
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceAccountVouchersView() {
+export default function AccountVouchersView() {
   const [tab, setTab] = useState('All Vouchers');
 
   const handleChangeTab = useCallback((event, newValue) => {

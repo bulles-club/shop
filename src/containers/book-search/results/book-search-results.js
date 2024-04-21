@@ -3,17 +3,17 @@ import { Hits } from 'react-instantsearch';
 
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
-import EcommerceProductViewListItem from './ecommerce-product-view-list-item';
-import EcommerceProductViewGridItem from './ecommerce-product-view-grid-item';
+import BookSearchResultsListItem from './book-search-results-list-item';
+import BookSearchResultsGridItem from './book-search-results-grid-item';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductList({ loading, viewMode, paging = true }) {
+export default function BookSearchResults({ loading, viewMode, paging = true }) {
   return (
     <>
       {viewMode === 'grid' ? (
         <Hits
-          hitComponent={({ hit }) => <EcommerceProductViewGridItem product={hit} />}
+          hitComponent={({ hit }) => <BookSearchResultsGridItem product={hit} />}
           classNames={{
             root: 'hits-gridview',
             list: 'hits-gridview-list',
@@ -22,7 +22,7 @@ export default function EcommerceProductList({ loading, viewMode, paging = true 
         />
       ) : (
         <Hits
-          hitComponent={({ hit }) => <EcommerceProductViewListItem product={hit} />}
+          hitComponent={({ hit }) => <BookSearchResultsListItem product={hit} />}
           classNames={{
             root: 'hits-listview',
             list: 'hits-listview-list',
@@ -50,7 +50,7 @@ export default function EcommerceProductList({ loading, viewMode, paging = true 
   );
 }
 
-EcommerceProductList.propTypes = {
+BookSearchResults.propTypes = {
   loading: PropTypes.bool,
   viewMode: PropTypes.string,
   paging: PropTypes.bool,

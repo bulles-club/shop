@@ -11,7 +11,7 @@ import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceCartItem({ id, coverUrl, name, author, wishlist, onRemoveItem }) {
+export default function CartItem({ id, coverUrl, name, author, wishlist, onRemoveItem }) {
   return (
     <Stack
       direction="row"
@@ -67,7 +67,7 @@ export default function EcommerceCartItem({ id, coverUrl, name, author, wishlist
   );
 }
 
-EcommerceCartItem.propTypes = {
+CartItem.propTypes = {
   id: PropTypes.string,
   coverUrl: PropTypes.string,
   name: PropTypes.string,

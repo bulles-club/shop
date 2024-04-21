@@ -16,7 +16,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
-import EcommerceProductDetailsItem from './ecommerce-product-details-item';
+import BookDetailsItem from './book-details-item';
 import EcommerceProductDetailsAuthor from './ecommerce-product-details-author';
 import { buildLinkSeries } from 'src/utils/link-builder';
 
@@ -57,7 +57,7 @@ export default function EcommerceProductDetailsInfo({
       <Stack spacing={2} sx={{ mb: 3 }}>
         <EcommerceProductDetailsAuthor label="Scénario" authors={scriptWriters} />
         <EcommerceProductDetailsAuthor label="Illustration" authors={artists} />
-        <EcommerceProductDetailsItem
+        <BookDetailsItem
           label="Série"
           value={
             <Link
@@ -70,9 +70,9 @@ export default function EcommerceProductDetailsInfo({
             </Link>
           }
         />
-        <EcommerceProductDetailsItem label="Volume" value={seriesVolume} />
-        <EcommerceProductDetailsItem label="Type" value={type} />
-        <EcommerceProductDetailsItem label="Genre" value={genre} />
+        <BookDetailsItem label="Volume" value={seriesVolume} />
+        <BookDetailsItem label="Type" value={type} />
+        <BookDetailsItem label="Genre" value={genre} />
       </Stack>
 
       <Stack spacing={2} direction={{ xs: 'column', md: 'row' }} alignItems={{ md: 'center' }}>

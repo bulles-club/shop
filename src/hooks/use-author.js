@@ -1,4 +1,4 @@
-import { transformAuthor } from 'src/utils/transformers';
+import { transformAuthor } from 'src/services/transformers';
 
 import { GET_AUTHOR } from 'src/services/queries';
 

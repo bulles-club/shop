@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import EcommerceProductView from 'src/containers/ecommerce-product-view';
+import EcommerceProductView from 'src/containers/book/ecommerce-product-view';
 
 // ----------------------------------------------------------------------
 

@@ -13,7 +13,7 @@ import { _products } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import EcommerceCartList from '../cart/ecommerce-cart-list';
+import CartList from '../../../containers/cart/cart-list';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ export default function EcommerceWishlistView() {
         Wishlist
       </Typography>
 
-      <EcommerceCartList wishlist products={_products.slice(0, 4)} />
+      <CartList wishlist products={_products.slice(0, 4)} />
 
       <Stack
         direction={{ xs: 'column-reverse', sm: 'row' }}
