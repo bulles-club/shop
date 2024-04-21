@@ -49,7 +49,7 @@ export const paths = {
     root: '/e-commerce',
     products: '/e-commerce/products',
     product: `/e-commerce/product`,
-    cart: '/e-commerce/cart',
+    cart: '/panier',
     checkout: `/e-commerce/checkout`,
     orderCompleted: '/e-commerce/order-completed',
     wishlist: `/e-commerce/wishlist`,
