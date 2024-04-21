@@ -4,8 +4,6 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { STRAPI_URL } from 'src/config-global';
-
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 
@@ -23,7 +21,7 @@ export default function CartItem({ id, coverUrl, name, author, wishlist, onRemov
     >
       <Stack direction="row" alignItems="center" flexGrow={1}>
         <Image
-          src={`${STRAPI_URL}${coverUrl}`}
+          src={coverUrl}
           sx={{
             width: 80,
             height: 80,
