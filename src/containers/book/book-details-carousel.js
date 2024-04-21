@@ -63,7 +63,7 @@ const StyledThumbnailsContainer = styled('div')(({ length, theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsCarousel({ images }) {
+export default function BookDetailsCarousel({ images }) {
   const theme = useTheme();
 
   const slides = images?.map((slide) => ({
@@ -186,6 +186,6 @@ export default function EcommerceProductDetailsCarousel({ images }) {
   );
 }
 
-EcommerceProductDetailsCarousel.propTypes = {
+BookDetailsCarousel.propTypes = {
   images: PropTypes.array,
 };

@@ -6,7 +6,7 @@ import SeriesView from 'src/containers/series/series-view';
 
 export async function generateMetadata({ params }) {
   return {
-    title: 'Sèrie',
+    title: 'Série',
   };
 }
 

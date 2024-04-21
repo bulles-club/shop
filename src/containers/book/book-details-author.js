@@ -10,7 +10,7 @@ import BookDetailsItem from './book-details-item';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsAuthor({ label, authors }) {
+export default function BookDetailsAuthor({ label, authors }) {
   return (
     <BookDetailsItem
       label={label}
@@ -31,7 +31,7 @@ export default function EcommerceProductDetailsAuthor({ label, authors }) {
   );
 }
 
-EcommerceProductDetailsAuthor.propTypes = {
+BookDetailsAuthor.propTypes = {
   label: PropTypes.string,
   authors: PropTypes.array,
 };

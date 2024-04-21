@@ -19,11 +19,11 @@ import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
 import BookDetailsItem from './book-details-item';
-import EcommerceProductDetailsAuthor from './ecommerce-product-details-author';
+import BookDetailsAuthor from './book-details-author';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsInfo({
+export default function BookDetailsInfo({
   name,
   ratingNumber,
   totalReviews,
@@ -56,8 +56,8 @@ export default function EcommerceProductDetailsInfo({
       </Stack>
 
       <Stack spacing={2} sx={{ mb: 3 }}>
-        <EcommerceProductDetailsAuthor label="Scénario" authors={scriptWriters} />
-        <EcommerceProductDetailsAuthor label="Illustration" authors={artists} />
+        <BookDetailsAuthor label="Scénario" authors={scriptWriters} />
+        <BookDetailsAuthor label="Illustration" authors={artists} />
         <BookDetailsItem
           label="Série"
           value={
@@ -110,7 +110,7 @@ export default function EcommerceProductDetailsInfo({
   );
 }
 
-EcommerceProductDetailsInfo.propTypes = {
+BookDetailsInfo.propTypes = {
   name: PropTypes.string,
   // price: PropTypes.number,
   // priceSale: PropTypes.number,

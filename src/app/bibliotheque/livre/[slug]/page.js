@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import EcommerceProductView from 'src/containers/book/ecommerce-product-view';
+import BookView from 'src/containers/book/book-view';
 
 // ----------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default function BookPage({ params }) {
-  return <EcommerceProductView slug={params.slug} />;
+  return <BookView slug={params.slug} />;
 }
 
 BookPage.propTypes = {

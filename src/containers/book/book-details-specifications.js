@@ -7,7 +7,7 @@ import BookDetailsItem from './book-details-item';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsSpecifications({
+export default function BookDetailsSpecifications({
   ageGroup,
   pageCount,
   publicationYear,
@@ -31,7 +31,7 @@ export default function EcommerceProductDetailsSpecifications({
   );
 }
 
-EcommerceProductDetailsSpecifications.propTypes = {
+BookDetailsSpecifications.propTypes = {
   ageGroup: PropTypes.string,
   pageCount: PropTypes.number,
   publicationYear: PropTypes.number,

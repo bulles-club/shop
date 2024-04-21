@@ -7,7 +7,7 @@ import useSerie from 'src/hooks/use-serie';
 
 import BookDetailsItem from 'src/containers/book/book-details-item';
 import BookSearchView from 'src/containers/book-search/book-search-view';
-import EcommerceProductDetailsAuthor from 'src/containers/book/ecommerce-product-details-author';
+import EcommerceProductDetailsAuthor from 'src/containers/book/book-details-author';
 
 import Label from 'src/components/label';
 import { SplashScreen } from 'src/components/loading-screen';

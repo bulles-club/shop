@@ -11,15 +11,15 @@ import useBook from 'src/hooks/use-book';
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
-import EcommerceProductDetailsInfo from './ecommerce-product-details-info';
+import BookDetailsInfo from './book-details-info';
+import BookDetailsCarousel from './book-details-carousel';
+import BookDetailsDescription from './book-details-description';
+import BookDetailsSpecifications from './book-details-specifications';
 import ReviewEcommerce from '../../sections/review/ecommerce/review-ecommerce';
-import EcommerceProductDetailsCarousel from './ecommerce-product-details-carousel';
-import EcommerceProductDetailsDescription from './ecommerce-product-details-description';
-import EcommerceProductDetailsSpecifications from './ecommerce-product-details-specifications';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductView({ slug }) {
+export default function BookView({ slug }) {
   const { loading, book } = useBook(slug);
   const { addBook } = useCart();
 
@@ -48,11 +48,11 @@ export default function EcommerceProductView({ slug }) {
 
         <Grid container spacing={{ xs: 5, md: 8 }}>
           <Grid xs={12} md={5} lg={5}>
-            <EcommerceProductDetailsCarousel images={book?.images} />
+            <BookDetailsCarousel images={book?.images} />
           </Grid>
 
           <Grid xs={12} md={7} lg={7}>
-            <EcommerceProductDetailsInfo
+            <BookDetailsInfo
               name={book?.name}
               // ratingNumber={_mockProduct.ratingNumber}
               // totalReviews={_mockProduct.totalReviews}
@@ -69,8 +69,8 @@ export default function EcommerceProductView({ slug }) {
 
         <Grid container columnSpacing={{ md: 8 }}>
           <Grid xs={12}>
-            <EcommerceProductDetailsDescription description={book?.description} />
-            <EcommerceProductDetailsSpecifications
+            <BookDetailsDescription description={book?.description} />
+            <BookDetailsSpecifications
               ageGroup={book?.ageGroup}
               pageCount={book?.pageCount}
               publicationYear={book?.publicationYear}
@@ -86,6 +86,6 @@ export default function EcommerceProductView({ slug }) {
   );
 }
 
-EcommerceProductView.propTypes = {
+BookView.propTypes = {
   slug: PropTypes.string.isRequired,
 };

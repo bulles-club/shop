@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetailsDescription({ description }) {
+export default function BookDetailsDescription({ description }) {
   return (
     <Stack
       spacing={4}
@@ -22,6 +22,6 @@ export default function EcommerceProductDetailsDescription({ description }) {
   );
 }
 
-EcommerceProductDetailsDescription.propTypes = {
+BookDetailsDescription.propTypes = {
   description: PropTypes.array,
 };
