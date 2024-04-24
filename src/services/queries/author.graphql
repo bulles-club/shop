@@ -1,0 +1,57 @@
+query GetAuthor($slug: String!) {
+  authors(filters: { Slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        Name
+        Slug
+        Bio
+        Photo {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        series {
+          data {
+            id
+            attributes {
+              Name
+              Slug
+              Books(sort: "SeriesVolume") {
+                data {
+                  id
+                  attributes {
+                    Title
+                    Slug
+                    Images {
+                      data {
+                        attributes {
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query GetAuthorMetadata($slug: String!) {
+  authors(filters: { Slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        Name
+        Slug
+        Bio
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+query GetBook($slug: String!) {
+  books(filters: { Slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        Title
+        Slug
+        Description
+        SeriesVolume
+        PageCount
+        ISBN10
+        ISBN13
+        AgeGroup
+        Type
+        PublicationYear
+        Images {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        Artists {
+          data {
+            attributes {
+              Name
+              Slug
+            }
+            id
+          }
+        }
+        Genre {
+          data {
+            attributes {
+              Title
+            }
+          }
+        }
+        Publisher {
+          data {
+            attributes {
+              Name
+              Country
+            }
+            id
+          }
+        }
+        Series {
+          data {
+            id
+            attributes {
+              Name
+              Slug
+            }
+          }
+        }
+        ScriptWriters {
+          data {
+            id
+            attributes {
+              Name
+              Slug
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query GetBookMetadata($slug: String!) {
+  books(filters: { Slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        Title
+        Slug
+        Description
+      }
+    }
+  }
+}

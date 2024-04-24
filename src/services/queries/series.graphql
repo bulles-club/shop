@@ -1,0 +1,36 @@
+query GetSeries($slug: String!) {
+  series(filters: { Slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        Name
+        Slug
+        Ended
+        FirstPublicationYear
+        Description
+        Creators {
+          data {
+            attributes {
+              Name
+              Slug
+            }
+            id
+          }
+        }
+      }
+    }
+  }
+}
+
+query GetSeriesMetadata($slug: String!) {
+  series(filters: { Slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        Name
+        Slug
+        Description
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+query GetCart($id: ID!) {
+  cart(id: $id) {
+    data {
+      attributes {
+        books {
+          data {
+            id
+            attributes {
+              Title
+              Images {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              ScriptWriters {
+                data {
+                  attributes {
+                    Name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      id
+    }
+  }
+}
+
+mutation UpdateCart($id: ID!, $books: [ID!]!) {
+  updateCart(data: { books: $books }, id: $id) {
+    data {
+      id
+    }
+  }
+}

@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 
+import { getBookMetadata } from 'src/services/seo';
 import BookView from 'src/containers/book/book-view';
 
 // ----------------------------------------------------------------------
 
 export async function generateMetadata({ params }) {
-  return {
-    title: 'Livre',
-  };
+  return getBookMetadata(params.slug);
 }
 
 export default function BookPage({ params }) {
