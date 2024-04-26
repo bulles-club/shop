@@ -17,7 +17,6 @@ import Bookshelf from '../../components/bookshelf/bookshelf';
 
 export default function AuthorView({ slug }) {
   const { loading, author } = useAuthor(slug);
-  console.log(author);
 
   if (loading) {
     return <SplashScreen />;
