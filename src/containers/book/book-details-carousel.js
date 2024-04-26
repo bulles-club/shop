@@ -99,6 +99,24 @@ export default function BookDetailsCarousel({ images }) {
     }
   }, [carouselLarge, lightbox.open, lightbox.selected]);
 
+  const carousel = (
+    <Carousel
+      {...carouselLarge.carouselSettings}
+      asNavFor={carouselThumb.nav}
+      ref={carouselLarge.carouselRef}
+    >
+      {slides?.map((slide) => (
+        <Image
+          key={slide.src}
+          alt="product"
+          src={slide.src}
+          ratio="1/1"
+          onClick={() => lightbox.onOpen(slide.src)}
+          sx={{ cursor: 'zoom-in' }}
+        />
+      ))}
+    </Carousel>
+  );
   const renderLargeImg = (
     <Box
       sx={{
@@ -109,24 +127,13 @@ export default function BookDetailsCarousel({ images }) {
         bgcolor: 'background.neutral',
       }}
     >
-      <CarouselArrows onNext={carouselThumb.onNext} onPrev={carouselThumb.onPrev}>
-        <Carousel
-          {...carouselLarge.carouselSettings}
-          asNavFor={carouselThumb.nav}
-          ref={carouselLarge.carouselRef}
-        >
-          {slides?.map((slide) => (
-            <Image
-              key={slide.src}
-              alt="product"
-              src={slide.src}
-              ratio="1/1"
-              onClick={() => lightbox.onOpen(slide.src)}
-              sx={{ cursor: 'zoom-in' }}
-            />
-          ))}
-        </Carousel>
-      </CarouselArrows>
+      {slides?.length > 1 ? (
+        <CarouselArrows onNext={carouselThumb.onNext} onPrev={carouselThumb.onPrev}>
+          {carousel}
+        </CarouselArrows>
+      ) : (
+        carousel
+      )}
     </Box>
   );
 
