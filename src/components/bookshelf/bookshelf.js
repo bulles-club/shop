@@ -27,7 +27,7 @@ export default function Bookshelf({ title, books, excludeBookId }) {
     dots: !mdUp,
     slidesToShow: PAGE_SIZES[0],
     slidesToScroll: PAGE_SIZES[0],
-    infinite: true,
+    infinite: false,
     ...CarouselDots({
       sx: {
         mt: 8,
