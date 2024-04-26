@@ -1,6 +1,7 @@
 import { buildUrlImage } from 'src/utils/url-builder';
 
 export function transformBook(book) {
+  console.log(book);
   return book
     ? {
         id: book.id,
@@ -20,9 +21,20 @@ export function transformBook(book) {
         ageGroup: book.attributes.AgeGroup,
         pageCount: book.attributes.PageCount,
         publicationYear: book.attributes.PublicationYear,
-        isbn10: book.attributes.ISBN10,
         isbn13: book.attributes.ISBN13,
         description: book.attributes.Description,
+        isOneShot: book.attributes.Series?.data === null,
+        publisher: transformPublisher(book.attributes.Publisher?.data),
+      }
+    : null;
+}
+
+export function transformPublisher(publisher) {
+  return publisher
+    ? {
+        id: publisher.id,
+        name: publisher.attributes.Name,
+        country: publisher.attributes.Country,
       }
     : null;
 }
@@ -55,6 +67,7 @@ export function transformAuthor(author) {
         bio: author.attributes.Bio,
         photoUrl: buildUrlImage(author.attributes.Photo?.data.attributes.url),
         series: author.attributes.series?.data.map((serie) => transformSerie(serie)),
+        scripts: author.attributes.scripts?.data.map((book) => transformBook(book)),
       }
     : [];
 }

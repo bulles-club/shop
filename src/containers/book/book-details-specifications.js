@@ -7,13 +7,7 @@ import BookDetailsItem from './book-details-item';
 
 // ----------------------------------------------------------------------
 
-export default function BookDetailsSpecifications({
-  ageGroup,
-  pageCount,
-  publicationYear,
-  isbn10,
-  isbn13,
-}) {
+export default function BookDetailsSpecifications({ book }) {
   return (
     <Stack
       spacing={2}
@@ -22,19 +16,19 @@ export default function BookDetailsSpecifications({
       }}
     >
       <Typography variant="h6"> Spécifications </Typography>
-      <BookDetailsItem label="Age" value={ageGroup} />
-      <BookDetailsItem label="Nombre de pages" value={pageCount} />
-      <BookDetailsItem label="Publication" value={publicationYear} />
-      <BookDetailsItem label="ISBN 10" value={isbn10} />
-      <BookDetailsItem label="ISBN 13" value={isbn13} />
+      <BookDetailsItem label="Age" value={book.ageGroup} />
+      <BookDetailsItem label="Nombre de pages" value={book.pageCount} />
+      <BookDetailsItem label="Publication" value={book.publicationYear} />
+      <BookDetailsItem label="ISBN 13" value={book.isbn13} />
     </Stack>
   );
 }
 
 BookDetailsSpecifications.propTypes = {
-  ageGroup: PropTypes.string,
-  pageCount: PropTypes.number,
-  publicationYear: PropTypes.number,
-  isbn10: PropTypes.string,
-  isbn13: PropTypes.string,
+  book: PropTypes.shape({
+    ageGroup: PropTypes.string,
+    pageCount: PropTypes.number,
+    publicationYear: PropTypes.number,
+    isbn13: PropTypes.string,
+  }),
 };

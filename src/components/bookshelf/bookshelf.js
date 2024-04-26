@@ -15,15 +15,18 @@ import BookshelfItem from './bookshelf-item';
 
 // ----------------------------------------------------------------------
 
-export default function Bookshelf({ title, books }) {
+const PAGE_SIZES = [6, 3, 2];
+
+// ----------------------------------------------------------------------
+
+export default function Bookshelf({ title, books, excludeBookId }) {
+  books = books?.filter((book) => book.id !== excludeBookId);
   const theme = useTheme();
-
   const mdUp = useResponsive('up', 'md');
-
   const carousel = useCarousel({
     dots: !mdUp,
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: PAGE_SIZES[0],
+    slidesToScroll: PAGE_SIZES[0],
     infinite: false,
     ...CarouselDots({
       sx: {
@@ -34,17 +37,19 @@ export default function Bookshelf({ title, books }) {
       {
         // Down md
         breakpoint: theme.breakpoints.values.md,
-        settings: { slidesToShow: 3, slidesToScroll: 3 },
+        settings: { slidesToShow: PAGE_SIZES[1], slidesToScroll: PAGE_SIZES[1] },
       },
       {
         // Down sm
         breakpoint: theme.breakpoints.values.sm,
-        settings: { slidesToShow: 2, slidesToScroll: 2 },
+        settings: { slidesToShow: PAGE_SIZES[2], slidesToScroll: PAGE_SIZES[2] },
       },
     ],
   });
 
-  return (
+  return !books || books.length === 0 ? (
+    <></>
+  ) : (
     <Container
       sx={{
         pl: '0px !important',
@@ -95,7 +100,7 @@ export default function Bookshelf({ title, books }) {
           {title}
         </Typography>
 
-        {mdUp && (
+        {mdUp && books?.length > PAGE_SIZES[0] && (
           <CarouselArrows
             onNext={carousel.onNext}
             onPrev={carousel.onPrev}
@@ -118,4 +123,5 @@ export default function Bookshelf({ title, books }) {
 Bookshelf.propTypes = {
   title: PropTypes.string,
   books: PropTypes.array,
+  excludeBookId: PropTypes.string,
 };

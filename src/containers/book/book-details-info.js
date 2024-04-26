@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import { Link } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
@@ -23,18 +22,7 @@ import BookDetailsAuthor from './book-details-author';
 
 // ----------------------------------------------------------------------
 
-export default function BookDetailsInfo({
-  name,
-  ratingNumber,
-  totalReviews,
-  scriptWriters,
-  artists,
-  series,
-  seriesVolume,
-  type,
-  genre,
-  onAddToCart,
-}) {
+export default function BookDetailsInfo({ book, onAddToCart }) {
   const mdUp = useResponsive('up', 'md');
 
   return (
@@ -44,43 +32,39 @@ export default function BookDetailsInfo({
       </Label>
 
       <Stack spacing={1} sx={{ mb: 2 }}>
-        <Typography variant="h4"> {name} </Typography>
-
-        <Stack spacing={0.5} direction="row" alignItems="center">
-          <Rating size="small" value={ratingNumber} readOnly precision={0.5} />
-
-          <Typography variant="caption" sx={{ color: 'text.disabled' }}>
-            ({totalReviews} reviews)
-          </Typography>
-        </Stack>
+        <Typography variant="h4"> {book.name} </Typography>
       </Stack>
 
       <Stack spacing={2} sx={{ mb: 3 }}>
-        <BookDetailsAuthor label="Scénario" authors={scriptWriters} />
-        <BookDetailsAuthor label="Illustration" authors={artists} />
-        <BookDetailsItem
-          label="Série"
-          value={
-            <Link
-              component={RouterLink}
-              href={buildUrlSeriesPage(series?.slug)}
-              color="inherit"
-              underline="always"
-            >
-              {series?.name}
-            </Link>
-          }
-        />
-        <BookDetailsItem label="Volume" value={seriesVolume} />
-        <BookDetailsItem label="Type" value={type} />
-        <BookDetailsItem label="Genre" value={genre} />
+        <BookDetailsItem label="Editeur" value={book.publisher.name} />
+        <BookDetailsAuthor label="Scénario" authors={book.scriptWriters} />
+        <BookDetailsAuthor label="Illustration" authors={book.artists} />
+        {!book.isOneShot && (
+          <>
+            <BookDetailsItem
+              label="Série"
+              value={
+                <Link
+                  component={RouterLink}
+                  href={buildUrlSeriesPage(book.series.slug)}
+                  color="inherit"
+                  underline="always"
+                >
+                  {book.series.name}
+                </Link>
+              }
+            />
+            <BookDetailsItem label="Volume" value={book.seriesVolume} />
+          </>
+        )}
+
+        <BookDetailsItem label="Type" value={book.type} />
+        <BookDetailsItem label="Genre" value={book.genre} />
       </Stack>
 
       <Stack spacing={2} direction={{ xs: 'column', md: 'row' }} alignItems={{ md: 'center' }}>
         <Stack direction="row" spacing={2}>
           <Button
-            // component={RouterLink}
-            // href={paths.eCommerce.cart}
             fullWidth={!mdUp}
             size="large"
             color="primary"
@@ -111,16 +95,16 @@ export default function BookDetailsInfo({
 }
 
 BookDetailsInfo.propTypes = {
-  name: PropTypes.string,
-  // price: PropTypes.number,
-  // priceSale: PropTypes.number,
-  ratingNumber: PropTypes.number,
-  totalReviews: PropTypes.number,
-  scriptWriters: PropTypes.array,
-  artists: PropTypes.array,
-  series: PropTypes.object,
-  seriesVolume: PropTypes.number,
-  type: PropTypes.string,
-  genre: PropTypes.string,
+  book: PropTypes.shape({
+    name: PropTypes.string,
+    scriptWriters: PropTypes.array,
+    artists: PropTypes.array,
+    isOneShot: PropTypes.bool,
+    series: PropTypes.object,
+    seriesVolume: PropTypes.number,
+    type: PropTypes.string,
+    genre: PropTypes.string,
+    publisher: PropTypes.object,
+  }),
   onAddToCart: PropTypes.func,
 };

@@ -48,7 +48,7 @@ export default function BookSearchResultsListItem({ book, ...other }) {
           </TextMaxLine>
         </Link>
 
-        <TextMaxLine variant="body2" line={3} sx={{ color: 'text.secondary' }}>
+        <TextMaxLine variant="body2" line={4} sx={{ color: 'text.secondary' }}>
           {book.description}
         </TextMaxLine>
       </Stack>

@@ -8,7 +8,6 @@ query GetBook($slug: String!) {
         Description
         SeriesVolume
         PageCount
-        ISBN10
         ISBN13
         AgeGroup
         Type
@@ -51,6 +50,22 @@ query GetBook($slug: String!) {
             attributes {
               Name
               Slug
+              Books {
+                data {
+                  id
+                  attributes {
+                    Title
+                    Images {
+                      data {
+                        attributes {
+                          url
+                        }
+                      }
+                    }
+                    Slug
+                  }
+                }
+              }
             }
           }
         }
@@ -60,6 +75,22 @@ query GetBook($slug: String!) {
             attributes {
               Name
               Slug
+              scripts {
+                data {
+                  attributes {
+                    Title
+                    Images {
+                      data {
+                        attributes {
+                          url
+                        }
+                      }
+                    }
+                    Slug
+                  }
+                  id
+                }
+              }
             }
           }
         }

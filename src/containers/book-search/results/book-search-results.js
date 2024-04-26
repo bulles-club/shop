@@ -31,8 +31,6 @@ export default function BookSearchResults({ viewMode, paging = true }) {
         />
       )}
 
-      {/* <Stack spacing={4}> */}
-
       {paging && (
         <Pagination
           count={10}
