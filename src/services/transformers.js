@@ -1,14 +1,16 @@
 import { buildUrlImage } from 'src/utils/url-builder';
 
 export function transformBook(book) {
-  console.log(book);
+  const scriptWriters = transformAuthors(book?.attributes.ScriptWriters);
+  const artists = transformAuthors(book?.attributes.Artists);
   return book
     ? {
         id: book.id,
         name: book.attributes.Title,
         slug: book.attributes.Slug,
-        scriptWriters: transformAuthors(book.attributes.ScriptWriters),
-        artists: transformAuthors(book.attributes.Artists),
+        scriptWriters,
+        artists,
+        authors: merge(scriptWriters, artists),
         series: transformSerie(book.attributes.Series?.data),
         seriesVolume: book.attributes.SeriesVolume,
         type: book.attributes.Type,
@@ -43,13 +45,15 @@ export function transformSerie(serie) {
   return serie
     ? {
         id: serie.id,
-        name: serie.attributes.Name,
-        slug: serie.attributes.Slug,
-        ended: serie.attributes.Ended,
-        firstPublicationYear: serie.attributes.FirstPublicationYear,
-        creators: transformAuthors(serie.attributes.Creators),
-        description: serie.attributes.Description,
-        books: serie.attributes.Books?.data.map((book) => transformBook(book)),
+        name: serie.attributes?.Name,
+        slug: serie.attributes?.Slug,
+        ended: serie.attributes?.Ended,
+        firstPublicationYear: serie.attributes?.FirstPublicationYear,
+        creators: transformAuthors(serie.attributes?.Creators),
+        description: serie.attributes?.Description,
+        books: serie.attributes?.Books?.data
+          .map((book) => transformBook(book))
+          .sort((a, b) => a.seriesVolume - b.seriesVolume),
       }
     : null;
 }
@@ -59,6 +63,15 @@ function transformAuthors(data) {
 }
 
 export function transformAuthor(author) {
+  const scripts =
+    author && author.attributes.scripts
+      ? author.attributes.scripts?.data.map((book) => transformBook(book))
+      : [];
+  const arts =
+    author && author.attributes.arts
+      ? author.attributes.arts?.data.map((book) => transformBook(book))
+      : [];
+  const books = merge(scripts, arts);
   return author
     ? {
         id: author.id,
@@ -67,7 +80,18 @@ export function transformAuthor(author) {
         bio: author.attributes.Bio,
         photoUrl: buildUrlImage(author.attributes.Photo?.data.attributes.url),
         series: author.attributes.series?.data.map((serie) => transformSerie(serie)),
-        scripts: author.attributes.scripts?.data.map((book) => transformBook(book)),
+        scripts,
+        arts,
+        books,
+        oneShots: books.filter((book) => book.isOneShot),
       }
     : [];
+}
+
+function merge(array1, array2) {
+  return array1
+    .concat(array2)
+    .sort((a, b) => a.id - b.id)
+    .filter((item, pos, ary) => !pos || item.id !== ary[pos - 1].id)
+    .sort((a, b) => a.name.localeCompare(b.name));
 }

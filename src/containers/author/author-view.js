@@ -22,6 +22,7 @@ export default function AuthorView({ slug }) {
   if (loading) {
     return <SplashScreen />;
   }
+
   return (
     <Container>
       <Box
@@ -64,6 +65,8 @@ export default function AuthorView({ slug }) {
             <BlocksRenderer content={author.bio} />
           </Grid>
         </Grid>
+
+        <Bookshelf title="Hors série" books={author.oneShots} />
 
         {author.series.map((series) => (
           <Bookshelf key={series.id} title={series.name} books={series.books} />

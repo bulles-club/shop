@@ -4,8 +4,8 @@ query GetAuthor($slug: String!) {
       id
       attributes {
         Name
-        Slug
         Bio
+        Slug
         Photo {
           data {
             attributes {
@@ -33,6 +33,48 @@ query GetAuthor($slug: String!) {
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+        scripts {
+          data {
+            id
+            attributes {
+              Title
+              Images {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              Slug
+              Series {
+                data {
+                  id
+                }
+              }
+            }
+          }
+        }
+        arts {
+          data {
+            id
+            attributes {
+              Title
+              Images {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              Slug
+              Series {
+                data {
+                  id
                 }
               }
             }

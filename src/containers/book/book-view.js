@@ -21,9 +21,8 @@ import BookDetailsSpecifications from './book-details-specifications';
 
 export default function BookView({ slug }) {
   const { loading, book } = useBook(slug);
+  console.log(book);
   const { addBook } = useCart();
-
-  const authors = book ? [...new Set([...book.scriptWriters, ...book.artists])] : [];
 
   const handleAddToCart = () => {
     addBook(book.id, book.name, book.images[0].url, book.scriptWriters[0].name);
@@ -65,13 +64,19 @@ export default function BookView({ slug }) {
       </Grid>
 
       {book?.series && (
-        <Bookshelf title="Dans la même série" books={book.series.books} excludeBookId={book.id} />
+        <Bookshelf
+          key={book.series.id}
+          title="Dans la même série"
+          books={book.series.books}
+          excludeBookId={book.id}
+        />
       )}
 
-      {authors.map((author) => (
+      {book?.authors.map((author) => (
         <Bookshelf
+          key={author.id}
           title={`Autres albums de ${author.name}`}
-          books={author.scripts}
+          books={author.books}
           excludeBookId={book.id}
         />
       ))}
