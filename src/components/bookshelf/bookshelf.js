@@ -27,7 +27,7 @@ export default function Bookshelf({ title, books, excludeBookId }) {
     dots: !mdUp,
     slidesToShow: PAGE_SIZES[0],
     slidesToScroll: PAGE_SIZES[0],
-    infinite: false,
+    infinite: true,
     ...CarouselDots({
       sx: {
         mt: 8,
@@ -57,7 +57,9 @@ export default function Bookshelf({ title, books, excludeBookId }) {
         mt: 7,
         mb: 10,
         '& .slick-track': {
-          transform: 'translate3d(0, 0, 0) !important',
+          ...(books?.length <= PAGE_SIZES[0] && {
+            transform: 'translate3d(0, 0, 0) !important',
+          }),
           minWidth: '100%',
           display: 'flex !important',
           // columnGap: 10,
