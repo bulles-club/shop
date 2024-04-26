@@ -8,6 +8,8 @@ import Container from '@mui/material/Container';
 import useCart from 'src/hooks/use-cart';
 import useBook from 'src/hooks/use-book';
 
+import { buildUrlSeriesPage } from 'src/utils/url-builder';
+
 import Bookshelf from 'src/components/bookshelf/bookshelf';
 import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
@@ -21,7 +23,6 @@ import BookDetailsSpecifications from './book-details-specifications';
 
 export default function BookView({ slug }) {
   const { loading, book } = useBook(slug);
-  console.log(book);
   const { addBook } = useCart();
 
   const handleAddToCart = () => {
@@ -32,19 +33,21 @@ export default function BookView({ slug }) {
     return <SplashScreen />;
   }
 
+  const breadcrumbs = [
+    {
+      name: book?.genre,
+    },
+  ];
+  if (!book?.isOneShot)
+    breadcrumbs.push({
+      name: book?.series.name,
+      href: buildUrlSeriesPage(book?.series.slug),
+    });
+  breadcrumbs.push({ name: book?.name });
+
   return (
     <Container sx={{ overflow: 'hidden' }}>
-      <CustomBreadcrumbs
-        links={[
-          {
-            name: book?.name,
-          },
-          {
-            name: book?.name,
-          },
-        ]}
-        sx={{ my: 5 }}
-      />
+      <CustomBreadcrumbs links={breadcrumbs} sx={{ my: 5 }} />
 
       <Grid container spacing={{ xs: 5, md: 8 }}>
         <Grid xs={12} md={5} lg={5}>
