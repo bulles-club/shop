@@ -33,7 +33,7 @@ export default function BookshelfItem({ book }) {
           }}
         />
         <TextMaxLine variant="body2" line={2} sx={{ fontWeight: 'fontWeightMedium' }}>
-          {book.name}
+          {book.title}
         </TextMaxLine>
       </Stack>
     </Link>
@@ -44,7 +44,7 @@ BookshelfItem.propTypes = {
   book: PropTypes.shape({
     id: PropTypes.string,
     coverUrl: PropTypes.string,
-    name: PropTypes.string,
+    title: PropTypes.string,
     slug: PropTypes.string,
   }),
 };

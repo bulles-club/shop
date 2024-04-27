@@ -32,7 +32,7 @@ export default function BookDetailsInfo({ book, onAddToCart }) {
       </Label>
 
       <Stack spacing={1} sx={{ mb: 2 }}>
-        <Typography variant="h4"> {book.name} </Typography>
+        <Typography variant="h4"> {book.title} </Typography>
       </Stack>
 
       <Stack spacing={2} sx={{ mb: 3 }}>
@@ -96,7 +96,7 @@ export default function BookDetailsInfo({ book, onAddToCart }) {
 
 BookDetailsInfo.propTypes = {
   book: PropTypes.shape({
-    name: PropTypes.string,
+    title: PropTypes.string,
     scriptWriters: PropTypes.array,
     artists: PropTypes.array,
     isOneShot: PropTypes.bool,

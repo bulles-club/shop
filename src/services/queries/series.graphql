@@ -4,7 +4,6 @@ query GetSeries($slug: String!) {
       id
       attributes {
         Name
-        Slug
         Ended
         FirstPublicationYear
         Description
@@ -17,6 +16,25 @@ query GetSeries($slug: String!) {
             id
           }
         }
+        Books(sort: "SeriesVolume") {
+          data {
+            id
+            attributes {
+              Title
+              SeriesVolume
+              Images {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              Slug
+              Description
+            }
+          }
+        }
+        Slug
       }
     }
   }

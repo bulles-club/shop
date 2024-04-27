@@ -6,7 +6,7 @@ export function transformBook(book) {
   return book
     ? {
         id: book.id,
-        name: book.attributes.Title,
+        title: book.attributes.Title,
         slug: book.attributes.Slug,
         scriptWriters,
         artists,
@@ -25,6 +25,12 @@ export function transformBook(book) {
         publicationYear: book.attributes.PublicationYear,
         isbn13: book.attributes.ISBN13,
         description: book.attributes.Description,
+        descriptionText: book.attributes.Description?.filter(
+          (item) => item.type === 'paragraph'
+        ).reduce(
+          (desc, item) => desc + item.children.reduce((text, item) => `${text} ${item.text}`, ''),
+          ''
+        ),
         isOneShot: book.attributes.Series?.data === null,
         publisher: transformPublisher(book.attributes.Publisher?.data),
       }
@@ -63,6 +69,7 @@ function transformAuthors(data) {
 }
 
 export function transformAuthor(author) {
+  console.log(author);
   const scripts =
     author && author.attributes.scripts
       ? author.attributes.scripts?.data.map((book) => transformBook(book))
@@ -93,5 +100,5 @@ function merge(array1, array2) {
     .concat(array2)
     .sort((a, b) => a.id - b.id)
     .filter((item, pos, ary) => !pos || item.id !== ary[pos - 1].id)
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => a.title.localeCompare(b.title));
 }

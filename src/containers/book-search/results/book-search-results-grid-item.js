@@ -26,7 +26,7 @@ export default function BookSearchResultsGridItem({ book, sx, ...other }) {
       <Link component={RouterLink} href={pathToProduct} color="inherit">
         <Box sx={{ position: 'relative', mb: 2 }}>
           <Image
-            src={buildUrlImage(book.images[0])}
+            src={buildUrlImage(book.coverUrl)}
             sx={{
               flexShrink: 0,
               borderRadius: 1.5,
@@ -54,7 +54,7 @@ BookSearchResultsGridItem.propTypes = {
     slug: PropTypes.string,
     category: PropTypes.string,
     title: PropTypes.string,
-    images: PropTypes.string,
+    coverUrl: PropTypes.string,
   }),
   sx: PropTypes.object,
 };

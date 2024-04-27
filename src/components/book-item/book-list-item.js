@@ -5,29 +5,20 @@ import Stack from '@mui/material/Stack';
 
 import { RouterLink } from 'src/routes/components';
 
-import { buildUrlImage, buildUrlBookPage } from 'src/utils/url-builder';
+import { buildUrlBookPage } from 'src/utils/url-builder';
 
 import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
 
 // ----------------------------------------------------------------------
 
-export default function BookSearchResultsListItem({ book, ...other }) {
-  const pathToProduct = buildUrlBookPage(book.slug);
+export default function BookListItem({ slug, coverUrl, title, description }) {
+  const pathToProduct = buildUrlBookPage(slug);
   return (
-    <Stack
-      direction="row"
-      sx={{
-        position: 'relative',
-        '&:hover .add-to-cart': {
-          opacity: 1,
-        },
-      }}
-      {...other}
-    >
+    <Stack direction="row" sx={{ position: 'relative' }}>
       <Link component={RouterLink} href={pathToProduct} color="inherit">
         <Image
-          src={buildUrlImage(book.images[0])}
+          src={coverUrl}
           sx={{
             mr: 2,
             flexShrink: 0,
@@ -40,27 +31,25 @@ export default function BookSearchResultsListItem({ book, ...other }) {
           }}
         />
       </Link>
-
       <Stack spacing={1}>
         <Link component={RouterLink} href={pathToProduct} color="inherit">
           <TextMaxLine variant="h6" line={1}>
-            {book.title}
+            {title}
           </TextMaxLine>
         </Link>
-
-        <TextMaxLine variant="body2" line={4} sx={{ color: 'text.secondary' }}>
-          {book.description}
-        </TextMaxLine>
+        <Link component={RouterLink} href={pathToProduct} color="inherit">
+          <TextMaxLine variant="body2" line={4} sx={{ color: 'text.secondary' }}>
+            {description}
+          </TextMaxLine>
+        </Link>
       </Stack>
     </Stack>
   );
 }
 
-BookSearchResultsListItem.propTypes = {
-  book: PropTypes.shape({
-    slug: PropTypes.string,
-    images: PropTypes.string,
-    title: PropTypes.string,
-    description: PropTypes.string,
-  }),
+BookListItem.propTypes = {
+  slug: PropTypes.string,
+  coverUrl: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
 };

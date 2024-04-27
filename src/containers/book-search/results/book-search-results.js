@@ -3,7 +3,10 @@ import { Hits } from 'react-instantsearch';
 
 import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
-import BookSearchResultsListItem from './book-search-results-list-item';
+import { buildUrlImage } from 'src/utils/url-builder';
+
+import BookListItem from 'src/components/book-item/book-list-item';
+
 import BookSearchResultsGridItem from './book-search-results-grid-item';
 
 // ----------------------------------------------------------------------
@@ -22,7 +25,14 @@ export default function BookSearchResults({ viewMode, paging = true }) {
         />
       ) : (
         <Hits
-          hitComponent={({ hit }) => <BookSearchResultsListItem book={hit} />}
+          hitComponent={({ hit }) => (
+            <BookListItem
+              slug={hit.slug}
+              coverUrl={buildUrlImage(hit.coverUrl)}
+              title={hit.title}
+              description={hit.description}
+            />
+          )}
           classNames={{
             root: 'hits-listview',
             list: 'hits-listview-list',
