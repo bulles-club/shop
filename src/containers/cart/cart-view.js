@@ -58,7 +58,7 @@ export default function CartView() {
 
       <Button
         component={RouterLink}
-        href={paths.library.root}
+        href={paths.library.books}
         color="inherit"
         startIcon={<Iconify icon="carbon:chevron-left" />}
         sx={{ mt: 3 }}

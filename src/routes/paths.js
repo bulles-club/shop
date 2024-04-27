@@ -85,10 +85,10 @@ export const paths = {
     root: '/actualites',
   },
   library: {
-    root: '/bibliotheque',
-    book: '/bibliotheque/livre',
-    series: '/bibliotheque/serie',
-    author: '/bibliotheque/auteur',
+    books: '/albums',
+    book: '/album',
+    series: '/serie',
+    author: '/auteur',
   },
   // Others
   pages: '/pages',
