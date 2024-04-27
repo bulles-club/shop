@@ -26,9 +26,10 @@ export function transformBook(book) {
         isbn13: book.attributes.ISBN13,
         description: book.attributes.Description,
         descriptionText: book.attributes.Description?.filter(
-          (item) => item.type === 'paragraph'
+          (block) => block.type === 'paragraph'
         ).reduce(
-          (desc, item) => desc + item.children.reduce((text, item) => `${text} ${item.text}`, ''),
+          (desc, paragraph) =>
+            desc + paragraph.children.reduce((text, item) => `${text} ${item.text}`, ''),
           ''
         ),
         isOneShot: book.attributes.Series?.data === null,
