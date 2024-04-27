@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
-import { Configure } from 'react-instantsearch';
+import { SortBy, Configure } from 'react-instantsearch';
 import { InstantSearchNext } from 'react-instantsearch-nextjs';
 
 import Box from '@mui/material/Box';
@@ -69,7 +69,7 @@ export default function BookSearchView({
   return (
     <InstantSearchNext
       searchClient={searchClient}
-      indexName="books"
+      indexName="books_latest"
       future={{
         preserveSharedStateOnUnmount: true,
       }}
@@ -147,6 +147,13 @@ export default function BookSearchView({
                     </ToggleButton>
                   ))}
                 </ToggleButtonGroup>
+
+                <SortBy
+                  items={[
+                    { label: 'Oldest', value: 'books_oldest' },
+                    { label: 'Latest', value: 'books_latest' },
+                  ]}
+                />
 
                 <FormControl size="small" hiddenLabel sx={{ width: 120 }}>
                   <Select value={sort} onChange={handleChangeSort}>
