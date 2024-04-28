@@ -1,4 +1,4 @@
-import BookSearchView from 'src/views/book-search/book-search-view';
+import BooksView from 'src/views/books/books-view';
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 
 export default function LibraryPage() {
   return (
-    <BookSearchView
+    <BooksView
       showViewAndSortOptions
       facets={[
         { label: 'Genre', name: 'genre' },
