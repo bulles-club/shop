@@ -1,4 +1,4 @@
-import BookSearchView from 'src/containers/book-search/book-search-view';
+import BookSearchView from 'src/views/book-search/book-search-view';
 
 // ----------------------------------------------------------------------
 

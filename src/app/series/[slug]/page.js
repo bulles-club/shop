@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { getSeriesMetadata } from 'src/services/seo';
-import SeriesView from 'src/containers/series/series-view';
+import SeriesView from 'src/views/series/series-view';
 
 // ----------------------------------------------------------------------
 

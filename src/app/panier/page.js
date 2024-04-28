@@ -1,4 +1,4 @@
-import CartView from 'src/containers/cart/cart-view';
+import CartView from 'src/views/cart/cart-view';
 
 // ----------------------------------------------------------------------
 

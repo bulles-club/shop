@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { getBookMetadata } from 'src/services/seo';
-import BookView from 'src/containers/book/book-view';
+import BookView from 'src/views/book/book-view';
 
 // ----------------------------------------------------------------------
 

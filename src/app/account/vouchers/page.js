@@ -1,4 +1,4 @@
-import AccountVouchersView from 'src/containers/account/account-vouchers-view';
+import AccountVouchersView from 'src/views/account/account-vouchers-view';
 
 // ----------------------------------------------------------------------
 

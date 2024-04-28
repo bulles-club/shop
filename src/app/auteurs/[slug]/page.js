@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { getAuthorMetadata } from 'src/services/seo';
-import AuthorView from 'src/containers/author/author-view';
+import AuthorView from 'src/views/author/author-view';
 
 // ----------------------------------------------------------------------
 

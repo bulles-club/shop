@@ -13,7 +13,7 @@ import { _products } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
-import CartList from '../../../containers/cart/cart-list';
+import CartList from '../../../views/cart/cart-list';
 
 // ----------------------------------------------------------------------
 

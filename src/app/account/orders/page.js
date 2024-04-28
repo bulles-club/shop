@@ -1,4 +1,4 @@
-import AccountOrdersView from 'src/containers/account/account-orders-view';
+import AccountOrdersView from 'src/views/account/account-orders-view';
 
 // ----------------------------------------------------------------------
 

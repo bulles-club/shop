@@ -1,4 +1,4 @@
-import AccountWishlistView from 'src/containers/account/account-wishlist-view';
+import AccountWishlistView from 'src/views/account/account-wishlist-view';
 
 // ----------------------------------------------------------------------
 

@@ -1,4 +1,4 @@
-import AccountPersonalView from 'src/containers/account/account-personal-view';
+import AccountPersonalView from 'src/views/account/account-personal-view';
 
 // ----------------------------------------------------------------------
 

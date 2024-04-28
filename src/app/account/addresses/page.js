@@ -1,4 +1,4 @@
-import AccountAddressesView from 'src/containers/account/account-addresses-view';
+import AccountAddressesView from 'src/views/account/account-addresses-view';
 
 // ----------------------------------------------------------------------
 

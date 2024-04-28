@@ -1,4 +1,4 @@
-import AccountPaymentView from 'src/containers/account/account-payment-view';
+import AccountPaymentView from 'src/views/account/account-payment-view';
 
 // ----------------------------------------------------------------------
 

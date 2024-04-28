@@ -8,8 +8,8 @@ import { Box, Stack, Container } from '@mui/system';
 
 import useSerie from 'src/hooks/use-serie';
 
-import BookDetailsItem from 'src/containers/book/book-details-item';
-import EcommerceProductDetailsAuthor from 'src/containers/book/book-details-author';
+import BookDetailsItem from 'src/views/book/book-details-item';
+import EcommerceProductDetailsAuthor from 'src/views/book/book-details-author';
 
 import Label from 'src/components/label';
 import { SplashScreen } from 'src/components/loading-screen';
