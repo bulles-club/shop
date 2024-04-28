@@ -7,13 +7,10 @@ import { InstantSearchNext } from 'react-instantsearch-nextjs';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import MenuItem from '@mui/material/MenuItem';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import FormControl from '@mui/material/FormControl';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
@@ -76,22 +73,6 @@ export default function BookSearchView({
     >
       <Configure analytics={false} facetFilters={filters} hitsPerPage={16} />
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          {facets && (
-            <Button
-              color="inherit"
-              variant="contained"
-              startIcon={<Iconify icon="carbon:filter" width={18} />}
-              onClick={mobileOpen.onTrue}
-              sx={{
-                display: { md: 'none' },
-              }}
-            >
-              Filters
-            </Button>
-          )}
-        </Stack>
-
         <Stack
           direction={{
             xs: 'column-reverse',
@@ -143,20 +124,29 @@ export default function BookSearchView({
 
                 <SortBy
                   items={[
-                    { label: 'Oldest', value: 'books_oldest' },
-                    { label: 'Latest', value: 'books_latest' },
+                    { label: 'Publication (croissant)', value: 'books_oldest' },
+                    { label: 'Publication (décroissant)', value: 'books_latest' },
                   ]}
+                  classNames={{
+                    root: 'sortby-root',
+                    select: 'sortby-select',
+                    option: 'sortby-option',
+                  }}
                 />
 
-                <FormControl size="small" hiddenLabel sx={{ width: 120 }}>
-                  <Select value={sort} onChange={handleChangeSort}>
-                    {SORT_OPTIONS.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+                {facets && (
+                  <Button
+                    color="inherit"
+                    variant="contained"
+                    startIcon={<Iconify icon="carbon:filter" width={18} />}
+                    onClick={mobileOpen.onTrue}
+                    sx={{
+                      display: { md: 'none' },
+                    }}
+                  >
+                    Filtres
+                  </Button>
+                )}
               </Stack>
             )}
 
