@@ -3,7 +3,7 @@
 .hits-listview-list {
   list-style: none;
   display: grid;
-  row-gap: 30px;
+  row-gap: 20px;
   padding: 0px;
   columns: 1;
 }

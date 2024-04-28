@@ -30,6 +30,7 @@ const Image = forwardRef(
       wrapperClassName,
       useIntersectionObserver,
       sx,
+      objectFit = 'contain',
       ...other
     },
     ref
@@ -71,7 +72,8 @@ const Image = forwardRef(
         sx={{
           width: 1,
           height: 1,
-          objectFit: 'contain',
+          borderRadius: 1,
+          objectFit,
           verticalAlign: 'bottom',
           ...(!!ratio && {
             top: 0,
@@ -134,6 +136,7 @@ Image.propTypes = {
   visibleByDefault: PropTypes.bool,
   wrapperClassName: PropTypes.string,
   wrapperProps: PropTypes.object,
+  objectFit: PropTypes.string,
 };
 
 export default Image;

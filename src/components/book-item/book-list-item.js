@@ -7,28 +7,17 @@ import { RouterLink } from 'src/routes/components';
 
 import { buildUrlBookPage } from 'src/utils/url-builder';
 
-import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
+
+import BookCover from '../book-cover/book-cover';
 
 // ----------------------------------------------------------------------
 
 export default function BookListItem({ slug, coverUrl, title, description }) {
   return (
     <Link component={RouterLink} href={buildUrlBookPage(slug)} color="inherit" underline="none">
-      <Stack direction="row" sx={{ position: 'relative' }}>
-        <Image
-          src={coverUrl}
-          sx={{
-            mr: 2,
-            flexShrink: 0,
-            borderRadius: 1.5,
-            bgcolor: 'background.neutral',
-            float: 'left',
-            width: 160,
-            height: 200,
-            objectFit: 'cover',
-          }}
-        />
+      <Stack direction="row" sx={{ position: 'relative' }} spacing={2}>
+        <BookCover coverUrl={coverUrl} />
         <Stack spacing={1}>
           <TextMaxLine variant="h6" line={1}>
             {title}
