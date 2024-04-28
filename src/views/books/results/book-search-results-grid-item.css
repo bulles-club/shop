@@ -6,8 +6,9 @@
   row-gap: 30px;
   column-gap: 50px;
   padding: 0px;
-  justify-items: start;
+  justify-items: stretch;
   align-items: start;
+  justify-content: space-evenly;
 }
 
 @media (min-width: 0px) {

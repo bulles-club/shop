@@ -14,5 +14,5 @@
 @import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 @import "./containers/book-search/filters/filters.css";
-@import "src/containers/book-search/results/book-search-results-grid-item.css";
-@import "src/containers/book-search/results/book-search-results-list-item.css";
+@import "src/views/books/results/book-search-results-grid-item.css";
+@import "src/views/books/results/book-search-results-list-item.css";
