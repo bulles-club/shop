@@ -11,7 +11,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Carousel, { useCarousel, CarouselDots, CarouselArrows } from 'src/components/carousel';
 
-import BookshelfItem from './bookshelf-item';
+import BookGridItem from '../book-item/book-grid-item';
 
 // ----------------------------------------------------------------------
 
@@ -115,7 +115,12 @@ export default function Bookshelf({ title, books, excludeBookId }) {
 
       <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
         {books.map((book) => (
-          <BookshelfItem key={book.id} book={book} />
+          <BookGridItem
+            key={book.id}
+            slug={book.slug}
+            coverUrl={book.coverUrl}
+            title={book.title}
+          />
         ))}
       </Carousel>
     </Container>

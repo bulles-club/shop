@@ -14,17 +14,12 @@ import TextMaxLine from 'src/components/text-max-line';
 
 // ----------------------------------------------------------------------
 
-export default function BookshelfItem({ book }) {
+export default function BookGridItem({ coverUrl, title, slug }) {
   return (
-    <Link
-      component={RouterLink}
-      href={buildUrlBookPage(book.slug)}
-      color="inherit"
-      underline="none"
-    >
+    <Link component={RouterLink} href={buildUrlBookPage(slug)} color="inherit" underline="none">
       <Stack>
         <Image
-          src={book.coverUrl}
+          src={coverUrl}
           sx={{
             mb: 2,
             borderRadius: 1.5,
@@ -33,18 +28,15 @@ export default function BookshelfItem({ book }) {
           }}
         />
         <TextMaxLine variant="body2" line={2} sx={{ fontWeight: 'fontWeightMedium' }}>
-          {book.title}
+          {title}
         </TextMaxLine>
       </Stack>
     </Link>
   );
 }
 
-BookshelfItem.propTypes = {
-  book: PropTypes.shape({
-    id: PropTypes.string,
-    coverUrl: PropTypes.string,
-    title: PropTypes.string,
-    slug: PropTypes.string,
-  }),
+BookGridItem.propTypes = {
+  coverUrl: PropTypes.string,
+  title: PropTypes.string,
+  slug: PropTypes.string,
 };

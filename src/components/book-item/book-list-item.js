@@ -13,10 +13,9 @@ import TextMaxLine from 'src/components/text-max-line';
 // ----------------------------------------------------------------------
 
 export default function BookListItem({ slug, coverUrl, title, description }) {
-  const pathToProduct = buildUrlBookPage(slug);
   return (
-    <Stack direction="row" sx={{ position: 'relative' }}>
-      <Link component={RouterLink} href={pathToProduct} color="inherit">
+    <Link component={RouterLink} href={buildUrlBookPage(slug)} color="inherit" underline="none">
+      <Stack direction="row" sx={{ position: 'relative' }}>
         <Image
           src={coverUrl}
           sx={{
@@ -30,20 +29,16 @@ export default function BookListItem({ slug, coverUrl, title, description }) {
             objectFit: 'cover',
           }}
         />
-      </Link>
-      <Stack spacing={1}>
-        <Link component={RouterLink} href={pathToProduct} color="inherit">
+        <Stack spacing={1}>
           <TextMaxLine variant="h6" line={1}>
             {title}
           </TextMaxLine>
-        </Link>
-        <Link component={RouterLink} href={pathToProduct} color="inherit">
           <TextMaxLine variant="body2" line={4} sx={{ color: 'text.secondary' }}>
             {description}
           </TextMaxLine>
-        </Link>
+        </Stack>
       </Stack>
-    </Stack>
+    </Link>
   );
 }
 

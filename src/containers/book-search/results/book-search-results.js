@@ -6,8 +6,7 @@ import Pagination, { paginationClasses } from '@mui/material/Pagination';
 import { buildUrlImage } from 'src/utils/url-builder';
 
 import BookListItem from 'src/components/book-item/book-list-item';
-
-import BookSearchResultsGridItem from './book-search-results-grid-item';
+import BookGridItem from 'src/components/book-item/book-grid-item';
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +15,13 @@ export default function BookSearchResults({ viewMode, paging = true }) {
     <>
       {viewMode === 'grid' ? (
         <Hits
-          hitComponent={({ hit }) => <BookSearchResultsGridItem book={hit} />}
+          hitComponent={({ hit }) => (
+            <BookGridItem
+              slug={hit.slug}
+              coverUrl={buildUrlImage(hit.coverUrl)}
+              title={hit.title}
+            />
+          )}
           classNames={{
             root: 'hits-gridview',
             list: 'hits-gridview-list',
