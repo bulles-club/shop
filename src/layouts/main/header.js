@@ -58,17 +58,11 @@ export default function Header({ headerOnDark }) {
       </>
 
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end">
-        <Stack spacing={1} direction="row" alignItems="center">
-          <Searchbar />
-        </Stack>
+        <Stack spacing={1} direction="row" alignItems="center" />
       </Stack>
 
-      <Stack spacing={3} direction="row" alignItems="center" flexGrow={1} justifyContent="flex-end">
-        {!mdUp && (
-          <IconButton size="small" color="inherit" sx={{ p: 0 }}>
-            <Iconify icon="carbon:search" width={24} />
-          </IconButton>
-        )}
+      <Stack spacing={2} direction="row" alignItems="center" flexGrow={1} justifyContent="flex-end">
+        <Searchbar />
 
         <Badge badgeContent={2} color="info">
           <IconButton

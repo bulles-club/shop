@@ -70,7 +70,6 @@ function transformAuthors(data) {
 }
 
 export function transformAuthor(author) {
-  console.log(author);
   const scripts =
     author && author.attributes.scripts
       ? author.attributes.scripts?.data.map((book) => transformBook(book))

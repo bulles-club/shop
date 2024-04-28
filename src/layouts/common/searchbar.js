@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types';
-
 import Slide from '@mui/material/Slide';
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import { IconButton } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -38,14 +36,14 @@ const StyledSearchbar = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Searchbar({ sx }) {
+export default function Searchbar() {
   const searchOpen = useBoolean();
 
   return (
     <ClickAwayListener onClickAway={searchOpen.onFalse}>
       <div>
-        <IconButton color="inherit" aria-label="search" onClick={searchOpen.onTrue} sx={sx}>
-          <Iconify icon="carbon:search" />
+        <IconButton size="small" color="inherit" sx={{ p: 0 }} onClick={searchOpen.onTrue}>
+          <Iconify icon="carbon:search" width={24} />
         </IconButton>
 
         <Slide direction="down" in={searchOpen.value} mountOnEnter unmountOnExit>
@@ -72,6 +70,4 @@ export default function Searchbar({ sx }) {
   );
 }
 
-Searchbar.propTypes = {
-  sx: PropTypes.object,
-};
+Searchbar.propTypes = {};
