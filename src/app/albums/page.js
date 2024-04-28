@@ -4,7 +4,7 @@ import BookSearchView from 'src/views/book-search/book-search-view';
 
 export async function generateMetadata({ params }) {
   return {
-    title: 'Bibliotheque',
+    title: 'Albums',
   };
 }
 

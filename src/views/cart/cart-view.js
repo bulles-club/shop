@@ -63,7 +63,7 @@ export default function CartView() {
         startIcon={<Iconify icon="carbon:chevron-left" />}
         sx={{ mt: 3 }}
       >
-        Bibliothèque
+        Albums
       </Button>
     </Container>
   );

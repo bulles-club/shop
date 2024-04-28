@@ -108,9 +108,9 @@ export const pageLinks = [
 ];
 
 export const navConfig = [
-  { title: 'Accueil', path: '/' },
-  { title: 'Actualités', path: paths.news.root },
-  { title: 'Blibliothèque', path: paths.library.books },
-  { title: 'Qui sommes nous', path: paths.corporate },
-  { title: 'Abonnements', path: paths.subscriptions },
+  // { title: 'Accueil', path: '/' },
+  // { title: 'Actualités', path: paths.news.root },
+  { title: 'Albums', path: paths.library.books },
+  // { title: 'Qui sommes nous', path: paths.corporate },
+  // { title: 'Abonnements', path: paths.subscriptions },
 ];
