@@ -86,9 +86,9 @@ export const paths = {
   },
   library: {
     books: '/albums',
-    book: '/album',
-    series: '/serie',
-    author: '/auteur',
+    book: '/albums',
+    series: '/series',
+    author: '/auteurs',
   },
   // Others
   pages: '/pages',
