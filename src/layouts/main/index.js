@@ -32,6 +32,7 @@ export default function MainLayout({
           <Box
             sx={{
               height: { xs: HEADER.H_MOBILE, md: HEADER.H_DESKTOP },
+              mt: 3,
             }}
           />
         )}

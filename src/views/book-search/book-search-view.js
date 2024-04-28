@@ -76,14 +76,7 @@ export default function BookSearchView({
     >
       <Configure analytics={false} facetFilters={filters} hitsPerPage={16} />
       <Container>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{
-            py: 5,
-          }}
-        >
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
           {facets && (
             <Button
               color="inherit"

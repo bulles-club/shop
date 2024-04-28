@@ -43,11 +43,11 @@ export default function BookView({ slug }) {
       name: book?.series.name,
       href: buildUrlSeriesPage(book?.series.slug),
     });
-  breadcrumbs.push({ name: book?.name });
+  breadcrumbs.push({ name: book?.title });
 
   return (
     <Container sx={{ overflow: 'hidden' }}>
-      <CustomBreadcrumbs links={breadcrumbs} sx={{ my: 5 }} />
+      <CustomBreadcrumbs links={breadcrumbs} sx={{ mb: 5 }} />
 
       <Grid container spacing={{ xs: 5, md: 8 }}>
         <Grid xs={12} md={5} lg={5}>

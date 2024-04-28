@@ -24,13 +24,7 @@ export default function AuthorView({ slug }) {
 
   return (
     <Container>
-      <Box
-        sx={{
-          flexGrow: 1,
-          pl: { md: 8 },
-          mt: 10,
-        }}
-      >
+      <Box sx={{ flexGrow: 1 }}>
         <Typography variant="h3">{author.name}</Typography>
 
         <Grid

@@ -26,14 +26,7 @@ export default function SeriesView({ slug }) {
 
   return (
     <Container>
-      <Box
-        sx={{
-          flexGrow: 1,
-          pl: { md: 8 },
-          mt: 10,
-          mb: 8,
-        }}
-      >
+      <Box sx={{ flexGrow: 1, mb: 8 }}>
         <Box sx={{ flexGrow: 1 }}>
           <Typography variant="h3">{serie.name}</Typography>
           <Stack spacing={2} sx={{ mt: 2, mb: 7 }}>
