@@ -3,8 +3,8 @@
 .hits-gridview-list {
   list-style: none;
   display: grid;
-  row-gap: 30px;
-  column-gap: 50px;
+  row-gap: 20px;
+  column-gap: 20px;
   padding: 0px;
   justify-items: stretch;
   align-items: start;
@@ -13,19 +13,19 @@
 
 @media (min-width: 0px) {
   .hits-gridview-list {
-    grid-template-columns: repeat(2, 160px);
+    grid-template-columns: repeat(2, 180px);
   }
 }
 
 @media (min-width: 600px) {
   .hits-gridview-list {
-    grid-template-columns: repeat(3, 160px);
+    grid-template-columns: repeat(3, 180px);
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .hits-gridview-list {
-    grid-template-columns: repeat(4, 160px);
+    grid-template-columns: repeat(4, 180px);
   }
 }
 

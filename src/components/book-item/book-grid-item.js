@@ -20,9 +20,21 @@ export default function BookGridItem({ coverUrl, title, slug }) {
   return (
     <Link component={RouterLink} href={buildUrlBookPage(slug)} color="inherit" underline="none">
       <Tooltip title={title}>
-        <Stack>
+        <Stack
+          sx={{
+            padding: 1,
+            borderRadius: 2,
+            border: 1,
+            borderColor: 'rgba(145, 158, 171, 0.16)',
+            bgcolor: 'background.default',
+            '&:hover': {
+              bgcolor: 'background.neutral',
+            },
+            alignItems: 'center',
+          }}
+        >
           <BookCover coverUrl={coverUrl} />
-          <TextMaxLine variant="body2" line={2} sx={{ fontWeight: 'fontWeightMedium' }}>
+          <TextMaxLine variant="body2" line={1} sx={{ fontWeight: 'fontWeightMedium' }}>
             {title}
           </TextMaxLine>
         </Stack>

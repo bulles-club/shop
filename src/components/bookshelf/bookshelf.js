@@ -62,27 +62,17 @@ export default function Bookshelf({ title, books, excludeBookId }) {
           }),
           minWidth: '100%',
           display: 'flex !important',
-          // columnGap: 10,
           alignItems: 'stretch',
           gap: 2,
           ml: -2,
           mr: -2,
         },
         '& .slick-slide': {
-          padding: 2,
-          height: 'auto',
-          borderRadius: 2,
-          border: 1,
-          borderColor: 'rgba(145, 158, 171, 0.16)',
-          bgcolor: 'background.default',
           transition: (th) =>
             th.transitions.create('background-color', {
               easing: th.transitions.easing.easeIn,
               duration: th.transitions.duration.shortest,
             }),
-          '&:hover': {
-            bgcolor: 'background.neutral',
-          },
         },
       }}
     >

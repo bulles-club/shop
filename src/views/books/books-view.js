@@ -29,12 +29,6 @@ const VIEW_OPTIONS = [
   { value: 'grid', icon: <Iconify icon="carbon:grid" /> },
 ];
 
-const SORT_OPTIONS = [
-  { value: 'latest', label: 'Latest' },
-  { value: 'oldest', label: 'Oldest' },
-  { value: 'popular', label: 'Popular' },
-];
-
 // ----------------------------------------------------------------------
 
 export default function BookSearchView({
@@ -73,6 +67,21 @@ export default function BookSearchView({
     >
       <Configure analytics={false} facetFilters={filters} hitsPerPage={16} />
       <Container>
+        <Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ pb: 2 }}>
+          {facets && (
+            <Button
+              color="inherit"
+              variant="contained"
+              startIcon={<Iconify icon="carbon:filter" width={18} />}
+              onClick={mobileOpen.onTrue}
+              sx={{
+                display: { md: 'none' },
+              }}
+            >
+              Filtres
+            </Button>
+          )}
+        </Stack>
         <Stack
           direction={{
             xs: 'column-reverse',
@@ -133,20 +142,6 @@ export default function BookSearchView({
                     option: 'sortby-option',
                   }}
                 />
-
-                {facets && (
-                  <Button
-                    color="inherit"
-                    variant="contained"
-                    startIcon={<Iconify icon="carbon:filter" width={18} />}
-                    onClick={mobileOpen.onTrue}
-                    sx={{
-                      display: { md: 'none' },
-                    }}
-                  >
-                    Filtres
-                  </Button>
-                )}
               </Stack>
             )}
 
