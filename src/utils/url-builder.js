@@ -6,3 +6,4 @@ export const buildUrlBookPage = (slug) => `${paths.library.book}/${slug}`;
 export const buildUrlAuthorPage = (slug) => `${paths.library.author}/${slug}`;
 export const buildUrlSeriesPage = (slug) => `${paths.library.series}/${slug}`;
 export const buildUrlImage = (url) => `${STRAPI_URL}${url}`;
+export const buildUrlGenrePage = (slug) => `${paths.library.genres}/${slug}`;

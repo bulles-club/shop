@@ -1,0 +1,23 @@
+query GetGenre($slug: String!) {
+  genres(filters: { Slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        Title
+        Slug
+      }
+    }
+  }
+}
+
+query GetGenreMetadata($slug: String!) {
+  genres(filters: { Slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        Title
+        Slug
+      }
+    }
+  }
+}

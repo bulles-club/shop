@@ -1,10 +1,11 @@
+import { TITLE_SUFFIX } from 'src/services/seo';
 import BooksView from 'src/views/books/books-view';
 
 // ----------------------------------------------------------------------
 
 export async function generateMetadata({ params }) {
   return {
-    title: 'Albums',
+    title: `Albums${TITLE_SUFFIX}`,
   };
 }
 
@@ -16,7 +17,6 @@ export default function LibraryPage() {
       showViewAndSortOptions
       facets={[
         { label: 'Genre', name: 'genre' },
-        { label: 'Type', name: 'type' },
         { label: 'Age', name: 'ageGroup' },
         { label: 'Editeur', name: 'publisher' },
       ]}

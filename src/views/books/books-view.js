@@ -31,7 +31,7 @@ const VIEW_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function BookSearchView({
+export default function BookView({
   title,
   header,
   productsViewMode = 'grid',
@@ -65,8 +65,13 @@ export default function BookSearchView({
         preserveSharedStateOnUnmount: true,
       }}
     >
-      <Configure analytics={false} facetFilters={filters} hitsPerPage={16} />
+      <Configure analytics={false} facetFilters={filters} hitsPerPage={8} />
       <Container>
+        {title && (
+          <Typography variant="h3" sx={{ mb: 2 }}>
+            {title}
+          </Typography>
+        )}
         <Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ pb: 2 }}>
           {facets && (
             <Button
@@ -102,8 +107,6 @@ export default function BookSearchView({
               width: { md: `calc(100% - ${280}px)` },
             }}
           >
-            {title && <Typography variant="h3">{title}</Typography>}
-
             {header && (
               <Stack spacing={2} sx={{ mt: 2, mb: 7 }}>
                 {header}
@@ -153,7 +156,7 @@ export default function BookSearchView({
   );
 }
 
-BookSearchView.propTypes = {
+BookView.propTypes = {
   title: PropTypes.string,
   header: PropTypes.node,
   facets: PropTypes.array,

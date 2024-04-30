@@ -12,7 +12,7 @@ import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { buildUrlSeriesPage } from 'src/utils/url-builder';
+import { buildUrlGenrePage, buildUrlSeriesPage } from 'src/utils/url-builder';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
@@ -59,7 +59,19 @@ export default function BookDetailsInfo({ book, onAddToCart }) {
         )}
 
         <BookDetailsItem label="Type" value={book.type} />
-        <BookDetailsItem label="Genre" value={book.genre} />
+        <BookDetailsItem
+          label="Genre"
+          value={
+            <Link
+              component={RouterLink}
+              href={buildUrlGenrePage(book.genre.slug)}
+              color="inherit"
+              underline="always"
+            >
+              {book.genre.title}
+            </Link>
+          }
+        />
       </Stack>
 
       <Stack spacing={2} direction={{ xs: 'column', md: 'row' }} alignItems={{ md: 'center' }}>

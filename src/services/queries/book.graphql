@@ -30,8 +30,10 @@ query GetBook($slug: String!) {
         }
         Genre {
           data {
+            id
             attributes {
               Title
+              Slug
             }
           }
         }

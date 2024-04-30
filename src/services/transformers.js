@@ -14,7 +14,7 @@ export function transformBook(book) {
         series: transformSerie(book.attributes.Series?.data),
         seriesVolume: book.attributes.SeriesVolume,
         type: book.attributes.Type,
-        genre: book.attributes.Genre?.data.attributes.Title,
+        genre: transformGenre(book.attributes.Genre?.data),
         images: book.attributes.Images.data.map((item) => ({
           ...item.attributes,
           url: buildUrlImage(item.attributes.url),
@@ -101,4 +101,15 @@ function merge(array1, array2) {
     .sort((a, b) => a.id - b.id)
     .filter((item, pos, ary) => !pos || item.id !== ary[pos - 1].id)
     .sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export function transformGenre(genre) {
+  console.log(genre);
+  return genre
+    ? {
+        id: genre.id,
+        title: genre.attributes?.Title,
+        slug: genre.attributes?.Slug,
+      }
+    : null;
 }

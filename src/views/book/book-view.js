@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 import useCart from 'src/hooks/use-cart';
 import useBook from 'src/hooks/use-book';
 
-import { buildUrlSeriesPage } from 'src/utils/url-builder';
+import { buildUrlGenrePage, buildUrlSeriesPage } from 'src/utils/url-builder';
 
 import Bookshelf from 'src/components/bookshelf/bookshelf';
 import { SplashScreen } from 'src/components/loading-screen';
@@ -25,6 +25,8 @@ export default function BookView({ slug }) {
   const { loading, book } = useBook(slug);
   const { addBook } = useCart();
 
+  console.log(book);
+
   const handleAddToCart = () => {
     addBook(book.id, book.name, book.images[0].url, book.scriptWriters[0].name);
   };
@@ -35,7 +37,8 @@ export default function BookView({ slug }) {
 
   const breadcrumbs = [
     {
-      name: book?.genre,
+      name: book?.genre.title,
+      href: buildUrlGenrePage(book?.genre.slug),
     },
   ];
   if (!book?.isOneShot)

@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
-import { useState, useCallback } from 'react';
 import { RefinementList } from 'react-instantsearch';
 
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 
@@ -13,43 +11,10 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
 
-
 // ----------------------------------------------------------------------
-
-const defaultValues = {
-  filterRating: null,
-  filterStock: false,
-  filterTag: [],
-};
 
 export default function Filters({ open, onClose, facets }) {
   const mdUp = useResponsive('up', 'md');
-
-  const [filters, setFilters] = useState(defaultValues);
-
-  const handleChangeRating = useCallback(
-    (event) => {
-      setFilters({
-        ...filters,
-        filterRating: event.target.value,
-      });
-    },
-    [filters]
-  );
-
-  const handleChangeStock = useCallback(
-    (event) => {
-      setFilters({
-        ...filters,
-        filterStock: event.target.checked,
-      });
-    },
-    [filters]
-  );
-
-  const handleClearAll = useCallback(() => {
-    setFilters(defaultValues);
-  }, []);
 
   const renderContent = (
     <Stack
@@ -65,17 +30,6 @@ export default function Filters({ open, onClose, facets }) {
           <RefinementList attribute={facet.name} classNames={{ root: 'checkbox-wrapper-13' }} />
         </Block>
       ))}
-
-      <Button
-        fullWidth
-        color="inherit"
-        size="large"
-        variant="contained"
-        startIcon={<Iconify icon="carbon:trash-can" />}
-        onClick={handleClearAll}
-      >
-        Clear All
-      </Button>
     </Stack>
   );
 
