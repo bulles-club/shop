@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-import { Hits } from 'react-instantsearch';
-
-import Pagination, { paginationClasses } from '@mui/material/Pagination';
+import { Hits, Pagination } from 'react-instantsearch';
 
 import { buildUrlImage } from 'src/utils/url-builder';
 
@@ -47,17 +45,22 @@ export default function BookSearchResults({ viewMode, paging = true }) {
       )}
 
       {paging && (
-        <Pagination
-          count={10}
-          color="primary"
-          sx={{
-            mt: 10,
-            mb: 5,
-            [`& .${paginationClasses.ul}`]: {
-              justifyContent: 'center',
-            },
-          }}
-        />
+        <nav>
+          <Pagination
+            classNames={{
+              root: 'pagination-root',
+              list: 'pagination-list',
+              item: 'pagination-item',
+              selectedItem: 'pagination-selectedItem',
+              firstPageItem: 'pagination-pagingItem',
+              previousPageItem: 'pagination-pagingItem',
+              nextPageItem: 'pagination-pagingItem',
+              lastPageItem: 'pagination-pagingItem',
+              link: 'pagination-link',
+              disabledItem: 'pagination-pagingItem-disabled',
+            }}
+          />
+        </nav>
       )}
     </>
   );

@@ -65,7 +65,7 @@ export default function BookView({
         preserveSharedStateOnUnmount: true,
       }}
     >
-      <Configure analytics={false} facetFilters={filters} hitsPerPage={8} />
+      <Configure analytics={false} facetFilters={filters} hitsPerPage={12} />
       <Container>
         {title && (
           <Typography variant="h3" sx={{ mb: 2 }}>
