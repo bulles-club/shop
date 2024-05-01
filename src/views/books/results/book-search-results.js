@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
-import { Hits, Pagination } from 'react-instantsearch';
+import { Hits } from 'react-instantsearch';
 
 import { buildUrlImage } from 'src/utils/url-builder';
 
 import BookListItem from 'src/components/book-item/book-list-item';
 import BookGridItem from 'src/components/book-item/book-grid-item';
 
+import Pagination from '../pagination/pagination';
+
 // ----------------------------------------------------------------------
 
 export default function BookSearchResults({ viewMode, paging = true }) {
   return (
     <>
+      <Pagination paging={paging} />
+
       {viewMode === 'grid' ? (
         <Hits
           hitComponent={({ hit }) => (
@@ -44,24 +48,7 @@ export default function BookSearchResults({ viewMode, paging = true }) {
         />
       )}
 
-      {paging && (
-        <nav>
-          <Pagination
-            classNames={{
-              root: 'pagination-root',
-              list: 'pagination-list',
-              item: 'pagination-item',
-              selectedItem: 'pagination-selectedItem',
-              firstPageItem: 'pagination-pagingItem',
-              previousPageItem: 'pagination-pagingItem',
-              nextPageItem: 'pagination-pagingItem',
-              lastPageItem: 'pagination-pagingItem',
-              link: 'pagination-link',
-              disabledItem: 'pagination-pagingItem-disabled',
-            }}
-          />
-        </nav>
-      )}
+      <Pagination paging={paging} />
     </>
   );
 }

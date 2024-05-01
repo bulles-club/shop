@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { RefinementList } from 'react-instantsearch';
+import { SearchBox, RefinementList } from 'react-instantsearch';
 
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
@@ -23,8 +23,11 @@ export default function Filters({ open, onClose, facets }) {
       sx={{
         flexShrink: 0,
         width: { xs: 1, md: 280 },
+        position: 'sticky',
+        top: 80,
       }}
     >
+      <SearchBox />
       {facets.map((facet) => (
         <Block title={facet.label} key={facet.name}>
           <RefinementList attribute={facet.name} classNames={{ root: 'checkbox-wrapper-13' }} />

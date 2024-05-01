@@ -118,7 +118,7 @@ export default function BookView({
                 direction="row"
                 alignItems="center"
                 justifyContent="space-between"
-                sx={{ mb: 5 }}
+                sx={{ mb: 2 }}
               >
                 <ToggleButtonGroup
                   exclusive

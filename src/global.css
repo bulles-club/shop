@@ -17,4 +17,4 @@
 @import "src/views/books/results/grid-item.css";
 @import "src/views/books/results/list-item.css";
 @import "src/views/books/books-view-sortby.css";
-@import "src/views/books/results/pagination.css";
+@import "src/views/books/pagination/pagination.css";
