@@ -18,6 +18,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { useSearchClient } from 'src/hooks/use-search-client';
 
 import Iconify from 'src/components/iconify';
+import { useSettingsContext } from 'src/components/settings';
 
 import Filters from './filters/filters';
 import BookSearchResults from './results/book-search-results';
@@ -42,14 +43,13 @@ export default function BookView({
 }) {
   const mobileOpen = useBoolean();
   const searchClient = useSearchClient();
+  const settings = useSettingsContext();
 
   const [sort, setSort] = useState('latest');
 
-  const [viewMode, setViewMode] = useState(productsViewMode);
-
   const handleChangeViewMode = useCallback((event, newAlignment) => {
     if (newAlignment !== null) {
-      setViewMode(newAlignment);
+      settings.onChangeBookSearchViewMode(newAlignment);
     }
   }, []);
 
@@ -123,7 +123,7 @@ export default function BookView({
                 <ToggleButtonGroup
                   exclusive
                   size="small"
-                  value={viewMode}
+                  value={settings.bookSearchViewMode}
                   onChange={handleChangeViewMode}
                   sx={{ borderColor: 'transparent' }}
                 >
@@ -148,7 +148,7 @@ export default function BookView({
               </Stack>
             )}
 
-            <BookSearchResults viewMode={viewMode} paging={paging} />
+            <BookSearchResults viewMode={settings.bookSearchViewMode} paging={paging} />
           </Box>
         </Stack>
       </Container>

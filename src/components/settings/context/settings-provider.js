@@ -16,6 +16,7 @@ export function SettingsProvider({ children, defaultSettings }) {
   const { state, update, reset } = useLocalStorage(STORAGE_KEY, defaultSettings);
 
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [bookSearchViewMode, setbookSearchViewMode] = useState('grid');
 
   // Drawer
   const onToggleDrawer = useCallback(() => {
@@ -24,6 +25,11 @@ export function SettingsProvider({ children, defaultSettings }) {
 
   const onCloseDrawer = useCallback(() => {
     setOpenDrawer(false);
+  }, []);
+
+  // Books search
+  const onChangeBookSearchViewMode = useCallback((mode) => {
+    setbookSearchViewMode(mode);
   }, []);
 
   const canReset = !isEqual(state, defaultSettings);
@@ -39,8 +45,11 @@ export function SettingsProvider({ children, defaultSettings }) {
       open: openDrawer,
       onToggle: onToggleDrawer,
       onClose: onCloseDrawer,
+      // Books search
+      bookSearchViewMode,
+      onChangeBookSearchViewMode,
     }),
-    [canReset, onCloseDrawer, onToggleDrawer, openDrawer, reset, state, update]
+    [bookSearchViewMode, canReset, onChangeBookSearchViewMode, onCloseDrawer, onToggleDrawer, openDrawer, reset, state, update]
   );
 
   return <SettingsContext.Provider value={memoizedValue}>{children}</SettingsContext.Provider>;
