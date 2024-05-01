@@ -47,11 +47,14 @@ export default function BookView({
 
   const [sort, setSort] = useState('latest');
 
-  const handleChangeViewMode = useCallback((event, newAlignment) => {
-    if (newAlignment !== null) {
-      settings.onChangeBookSearchViewMode(newAlignment);
-    }
-  }, []);
+  const handleChangeViewMode = useCallback(
+    (event, newAlignment) => {
+      if (newAlignment !== null) {
+        settings.onChangeBookSearchViewMode(newAlignment);
+      }
+    },
+    [settings]
+  );
 
   const handleChangeSort = useCallback((event) => {
     setSort(event.target.value);
