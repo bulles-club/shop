@@ -27,12 +27,21 @@ export default function Filters({ open, onClose, facets }) {
         top: 80,
       }}
     >
-      <SearchBox />
       {facets.map((facet) => (
         <Block title={facet.label} key={facet.name}>
           <RefinementList attribute={facet.name} classNames={{ root: 'checkbox-wrapper-13' }} />
         </Block>
       ))}
+
+      <SearchBox
+        classNames={{
+          root: 'searchbox-root',
+          form: 'searchbox-form',
+          input: 'searchbox-input',
+          submit: 'searchbox-submit',
+          reset: 'searchbox-reset',
+        }}
+      />
     </Stack>
   );
 

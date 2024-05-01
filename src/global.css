@@ -14,6 +14,7 @@
 @import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 @import "src/views/books/filters/filters.css";
+@import "src/views/books/filters/search-box.css";
 @import "src/views/books/results/grid-item.css";
 @import "src/views/books/results/list-item.css";
 @import "src/views/books/books-view-sortby.css";

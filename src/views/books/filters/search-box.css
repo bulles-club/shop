@@ -1,0 +1,23 @@
+.searchbox-root {
+    height: 3em;
+}
+
+.searchbox-form {
+    height: 3em;
+}
+
+.searchbox-input,
+.searchbox-submit,
+.searchbox-reset {
+    border: 0;
+    border-radius: 8px;
+    outline: none;
+    background-color: rgb(246, 247, 248);
+    height: 38px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.searchbox-reset {
+    display: none;
+}
