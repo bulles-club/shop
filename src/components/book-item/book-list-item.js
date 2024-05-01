@@ -13,14 +13,17 @@ import BookCover from '../book-cover/book-cover';
 
 // ----------------------------------------------------------------------
 
-export default function BookListItem({ slug, coverUrl, title, description }) {
+export default function BookListItem({ slug, authors, coverUrl, title, description }) {
   return (
     <Link component={RouterLink} href={buildUrlBookPage(slug)} color="inherit" underline="none">
       <Stack direction="row" sx={{ position: 'relative' }} spacing={2}>
         <BookCover coverUrl={coverUrl} />
-        <Stack spacing={1}>
+        <Stack spacing={1} sx={{ my: 1 }}>
           <TextMaxLine variant="h6" line={1}>
             {title}
+          </TextMaxLine>
+          <TextMaxLine variant="body1" line={1}>
+            {authors}
           </TextMaxLine>
           <TextMaxLine variant="body2" line={4} sx={{ color: 'text.secondary' }}>
             {description}
@@ -36,4 +39,5 @@ BookListItem.propTypes = {
   coverUrl: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
+  authors: PropTypes.array,
 };

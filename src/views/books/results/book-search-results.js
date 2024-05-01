@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Hits } from 'react-instantsearch';
 
+import { merge } from 'src/utils/arrays';
 import { buildUrlImage } from 'src/utils/url-builder';
 
 import BookListItem from 'src/components/book-item/book-list-item';
@@ -38,6 +39,7 @@ export default function BookSearchResults({ viewMode, paging = true }) {
               coverUrl={buildUrlImage(hit.coverUrl)}
               title={hit.title}
               description={hit.description}
+              authors={merge(hit.scriptWriters, hit.artists)}
             />
           )}
           classNames={{

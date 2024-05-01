@@ -10,7 +10,7 @@ export function transformBook(book) {
         slug: book.attributes.Slug,
         scriptWriters,
         artists,
-        authors: merge(scriptWriters, artists),
+        authors: mergeById(scriptWriters, artists),
         series: transformSerie(book.attributes.Series?.data),
         seriesVolume: book.attributes.SeriesVolume,
         type: book.attributes.Type,
@@ -78,7 +78,7 @@ export function transformAuthor(author) {
     author && author.attributes.arts
       ? author.attributes.arts?.data.map((book) => transformBook(book))
       : [];
-  const books = merge(scripts, arts);
+  const books = mergeById(scripts, arts);
   return author
     ? {
         id: author.id,
@@ -95,7 +95,7 @@ export function transformAuthor(author) {
     : [];
 }
 
-function merge(array1, array2) {
+function mergeById(array1, array2) {
   return array1
     .concat(array2)
     .sort((a, b) => a.id - b.id)
